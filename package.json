@@ -1,0 +1,42 @@
+{
+  "name": "i18next-json-sync",
+  "version": "1.0.0",
+  "description": "keep i18next json resource files in sync",
+  "main": "dist/sync.js",
+  "typings": "dist/sync.d.ts",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "build": "rimraf dist && tsc",
+    "build:watch": "rimraf dist && tsc --watch",
+    "lint": "tslint src/**/*.ts",
+    "test": "ts-node src/testRunner.ts",
+    "typings": "typings install"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jwbay/i18next-json-sync.git"
+  },
+  "keywords": [
+    "i18next",
+    "json",
+    "sync"
+  ],
+  "author": "justin.bay@outlook.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jwbay/i18next-json-sync/issues"
+  },
+  "homepage": "https://github.com/jwbay/i18next-json-sync#readme",
+  "devDependencies": {
+    "rimraf": "^2.5.4",
+    "shelljs": "^0.7.3",
+    "ts-node": "^1.2.2",
+    "tslint": "^3.14.0",
+    "tslint-microsoft-contrib": "^2.0.9",
+    "tslint-misc-rules": "^2.6.0",
+    "typescript": "^1.8.10",
+    "typings": "^1.3.2"
+  }
+}

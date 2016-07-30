@@ -1,0 +1,4 @@
+node_modules
+typings/globals/
+typings/modules/
+dist

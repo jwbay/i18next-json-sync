@@ -1,0 +1,14 @@
+{
+    "compilerOptions": {
+        "forceConsistentCasingInFileNames": true,
+        "declaration": true,
+        "inlineSourceMap": true,
+        "inlineSources": true,
+        "module": "commonjs",
+        "moduleResolution": "node",
+        "noEmitOnError": true,
+        "outDir": "dist",
+        "pretty": true,
+        "target": "es5"
+    }
+}
