@@ -2,3 +2,4 @@ node_modules
 typings/globals/
 typings/modules/
 dist
+test/**/actual/

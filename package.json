@@ -8,10 +8,12 @@
     "test": "test"
   },
   "scripts": {
-    "build": "rimraf dist && tsc",
+    "ci": "npm run lint && npm run test",
+    "build": "rimraf dist && tsc --pretty",
     "build:watch": "rimraf dist && tsc --watch",
     "lint": "tslint src/**/*.ts",
-    "test": "ts-node src/testRunner.ts",
+    "pretest": "npm run build",
+    "test": "node dist/testRunner",
     "typings": "typings install"
   },
   "repository": {
@@ -30,6 +32,8 @@
   },
   "homepage": "https://github.com/jwbay/i18next-json-sync#readme",
   "devDependencies": {
+    "chalk": "^1.1.3",
+    "json-stable-stringify": "^1.0.1",
     "rimraf": "^2.5.4",
     "shelljs": "^0.7.3",
     "ts-node": "^1.2.2",
@@ -38,5 +42,8 @@
     "tslint-misc-rules": "^2.6.0",
     "typescript": "^1.8.10",
     "typings": "^1.3.2"
+  },
+  "dependencies": {
+    "glob": "^7.0.5"
   }
 }

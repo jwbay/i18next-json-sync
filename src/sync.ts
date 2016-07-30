@@ -3,11 +3,14 @@ export interface IOptions {
 	check?: boolean;
 	/** Glob pattern for the resource JSON files */
 	files?: string;
+	/** Primary localization language. Other language files will be changed to match */
+	primary?: string;
 }
 
 export default function sync({
 	check = false,
-	files = '**/locales/*.json'
+	files = '**/locales/*.json',
+	primary = 'en'
 }: IOptions) {
 
 }

@@ -1,0 +1,14 @@
+{
+    "remove": {
+        "nested": {
+            "key": "key"
+        }
+    },
+    "outer": {
+        "inner": {
+            "keep": "changed",
+            "remove": "remove",
+            "keep2": "changed2"
+        }
+    }
+}
