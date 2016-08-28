@@ -1,0 +1,2 @@
+Pushed keys to actual/locales/pt-BR.json: add, add2, qwer
+Removed keys from actual/locales/pt-BR.json: remove, key

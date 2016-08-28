@@ -1,9 +1,12 @@
 import chalk = require('chalk');
 import diff = require('diff');
+import fs = require('fs');
 import glob = require('glob');
 import os = require('os');
+import path = require('path');
 import sh = require('shelljs');
 import sync from './sync';
+import util = require('util');
 
 let failures = 0;
 
@@ -30,15 +33,43 @@ function prepare(testCase: string) {
 }
 
 function run(testCase: string) {
-	sync({ files: `actual/locales/**.json` });
+	withCapturedConsole('log', 'stdout.txt', () => {
+		withCapturedConsole('error', 'stderr.txt', () => {
+			try {
+				sync({ files: `actual/locales/**.json` });
+			} catch (err) {
+				if (err && err.stack) {
+					writeStacktrace(err);
+				} else {
+					console.error(err);
+				}
+			}
+		});
+	});
+}
+
+function withCapturedConsole(type: string, outFile: string, action: Function) {
+	let captured = '';
+	const original = console[type];
+	console[type] = (...args: any[]) => captured += util.format.apply(null, args) + '\n';
+	action();
+	console[type] = original;
+	fs.writeFileSync(`actual/${outFile}`, captured, { encoding: 'utf8' });
+}
+
+function writeStacktrace(err: Error) {
+	const backslashes = /\\/g;
+	const slashesFixed = err.stack.replace(backslashes, '/');
+	const cwd = path.join(process.cwd(), '../../').replace(backslashes, '/');
+	console.log(slashesFixed.replace(new RegExp(cwd, 'g'), ''));
 }
 
 function assert(testCase: string) {
 	const name = testCase.toUpperCase();
 	console.log(name + ':');
 	console.log(name.replace(/./g, '-'));
-	const expected = buildFlatFileMapForDirectory('expected/**/*.json');
-	const actual = buildFlatFileMapForDirectory('actual/**/*.json');
+	const expected = buildFlatFileMapForDirectory('expected/**/*.*');
+	const actual = buildFlatFileMapForDirectory('actual/**/*.*');
 	let differentFiles = 0;
 
 	for (const filename of Object.keys(expected)) {
@@ -61,16 +92,20 @@ interface IFileMap { [filename: string]: string; }
 function buildFlatFileMapForDirectory(pattern: string) {
 	return glob.sync(pattern).reduce((fileMap, filename) => {
 		const contents = (sh.cat(filename) as any).stdout as string;
-		const cleanedObject = JSON.parse(contents, (k, v) => typeof v === 'object' ? v : '<value>');
 		const name = filename.slice(filename.indexOf('/') + 1);
-		fileMap[name] = JSON.stringify(cleanedObject, null, 2);
+		if (path.extname(filename) === '.json') {
+			const cleanedObject = JSON.parse(contents, (k, v) => typeof v === 'object' ? v : '<value>');
+			fileMap[name] = JSON.stringify(cleanedObject, null, 2);
+		} else {
+			fileMap[name] = contents;
+		}
 		return fileMap;
 	}, {} as IFileMap);
 }
 
 function compareFileContents(expected: string, actual: string) {
 	const chunks = diff.diffLines(expected, actual);
-	const filesHaveDifference = chunks.length > 1 || isChanged(chunks[0]);
+	const filesHaveDifference = chunks.some(isChanged);
 
 	if (filesHaveDifference) {
 		return () => logDifferences(chunks);

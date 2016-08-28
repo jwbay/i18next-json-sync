@@ -1,0 +1,4 @@
+Pushed keys to actual/locales/es.json: a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q
+Removed keys from actual/locales/es.json: insert_top, after_1, after_4, after_8, a, b, c, after_c, d, e, f, g, h, i, after_i, j, k, l, m, n, o, p, q
+Pushed keys to actual/locales/pt-BR.json: a, a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q
+Removed keys from actual/locales/pt-BR.json: b, c, d, f, g, h, i, j, k, l, m, n, o, p, q
