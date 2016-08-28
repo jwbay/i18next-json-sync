@@ -2,7 +2,6 @@ import chalk = require('chalk');
 import diff = require('diff');
 import glob = require('glob');
 import os = require('os');
-import path = require('path');
 import sh = require('shelljs');
 import sync from './sync';
 
@@ -43,10 +42,6 @@ function assert(testCase: string) {
 	let differentFiles = 0;
 
 	for (const filename of Object.keys(expected)) {
-		if (path.basename(filename) === 'en.json') {
-			continue;
-		}
-
 		const logDifferences = compareFileContents(expected[filename], actual[filename]);
 		if (logDifferences) {
 			console.log(filename + ' ' + chalk.bgRed('✘ Not OK'));

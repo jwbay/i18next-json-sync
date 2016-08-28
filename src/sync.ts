@@ -1,6 +1,7 @@
 import fs = require('fs');
 import glob = require('glob');
 import path = require('path');
+import stringify = require('json-stable-stringify');
 
 export interface IOptions {
 	/** If true, audit files in memory instead of changing them on the filesystem */
@@ -36,7 +37,7 @@ export default function sync({
 
 		public flushToDisk() {
 			Object.keys(this.files).forEach(name => {
-				const fileContent = JSON.stringify(this.files[name], null, 2);
+				const fileContent = stringify(this.files[name], { space: 4 });
 				fs.writeFileSync(name, fileContent, { encoding: 'utf8' });
 				this.files[name] = null;
 			});
@@ -56,10 +57,8 @@ export default function sync({
 			return this.files[name];
 		}
 
-		public getTargetFileNames() {
-			return Object.keys(this.files).filter(name => {
-				return path.basename(name, '.json') !== primary;
-			});
+		public getFilenames() {
+			return Object.keys(this.files);
 		}
 	}
 
@@ -137,9 +136,9 @@ export default function sync({
 			continue;
 		}
 
-		for (const targetFile of folder.getTargetFileNames()) {
-			record = new ActionRecorder(targetFile);
-			syncObjects(sourceObject, folder.getTargetObject(targetFile));
+		for (const filename of folder.getFilenames()) {
+			record = new ActionRecorder(filename);
+			syncObjects(sourceObject, folder.getTargetObject(filename));
 			record.flushToConsole();
 		}
 

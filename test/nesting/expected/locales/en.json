@@ -1,15 +1,15 @@
 {
-    "outer": {
-        "inner": {
-            "keep": "keep",
-            "add": "add",
-            "keep2": "keep2"
-        },
-        "add2": "add2"
-    },
     "new_structure": {
         "asdf": {
             "qwer": "qwer"
+        }
+    },
+    "outer": {
+        "add2": "add2",
+        "inner": {
+            "add": "add",
+            "keep": "keep",
+            "keep2": "keep2"
         }
     }
 }
