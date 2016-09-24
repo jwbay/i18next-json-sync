@@ -10,7 +10,7 @@ sh.config.silent = true;
 sh.pushd(__dirname);
 
 let options: IOptions = {
-	files: 'actual/locales/**.json'
+	files: 'actual/**/locales/*.json'
 };
 try {
 	options = Object.assign(options, require('./options'));

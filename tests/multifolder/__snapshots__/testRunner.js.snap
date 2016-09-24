@@ -1,0 +1,53 @@
+exports[`test multifolder:one/locales/en.json 1`] = `
+"{
+    add_me: add,
+    keep_me: keep
+}"
+`;
+
+exports[`test multifolder:one/locales/pt-BR.json 1`] = `
+"{
+    add_me: add,
+    keep_me: don\'t change
+}"
+`;
+
+exports[`test multifolder:stderr.txt 1`] = `""`;
+
+exports[`test multifolder:stdout.txt 1`] = `
+"Pushed keys to actual/one/locales/pt-BR.json: add_me
+Removed keys from actual/one/locales/pt-BR.json: remove_me
+Pushed keys to actual/two/locales/pt-BR.json: add_me
+Removed keys from actual/two/locales/pt-BR.json: remove_me
+Pushed keys to actual/two/three/locales/pt-BR.json: add_me
+Removed keys from actual/two/three/locales/pt-BR.json: remove_me
+"
+`;
+
+exports[`test multifolder:two/locales/en.json 1`] = `
+"{
+    add_me: add,
+    keep_me: keep
+}"
+`;
+
+exports[`test multifolder:two/locales/pt-BR.json 1`] = `
+"{
+    add_me: add,
+    keep_me: don\'t change
+}"
+`;
+
+exports[`test multifolder:two/three/locales/en.json 1`] = `
+"{
+    add_me: add,
+    keep_me: keep
+}"
+`;
+
+exports[`test multifolder:two/three/locales/pt-BR.json 1`] = `
+"{
+    add_me: add,
+    keep_me: don\'t change
+}"
+`;
