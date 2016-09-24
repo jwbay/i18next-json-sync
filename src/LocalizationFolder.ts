@@ -31,10 +31,10 @@ export default class LocalizationFolder {
 		}
 	}
 
-	public flushToDisk() {
+	public flushToDisk(space: string | number) {
 		Object.keys(this.files).forEach(name => {
 			if (!this.isReportMode) {
-				const fileContent = stringify(this.files[name], { space: 4 });
+				const fileContent = stringify(this.files[name], { space });
 				fs.writeFileSync(name, fileContent, { encoding: 'utf8' });
 			}
 

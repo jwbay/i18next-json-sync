@@ -13,6 +13,8 @@ export interface IOptions {
 	primary?: string;
 	/** Language files to create if they don't exist, e.g. ['es, 'pt-BR', 'fr'] */
 	createResources?: string[];
+	/** Space value used for JSON.stringify */
+	space?: string | number;
 }
 
 export interface IDirectoryMap { [directory: string]: IFileMap; }
@@ -23,7 +25,8 @@ export default function sync({
 	check: isReportMode = false,
 	files = '**/locales/*.json',
 	primary: primaryLanguage = 'en',
-	createResources: createFiles = []
+	createResources: createFiles = [],
+	space: jsonSpacing = 4
 }: IOptions) {
 	const allFiles = glob.sync(files);
 	const directories = groupFilesByDirectory(allFiles);
@@ -49,7 +52,7 @@ export default function sync({
 			hasAnyErrors = hasAnyErrors || record.hasAnyErrors();
 		}
 
-		folder.flushToDisk();
+		folder.flushToDisk(jsonSpacing);
 	}
 
 	if (hasAnyErrors) {
