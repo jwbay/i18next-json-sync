@@ -1,0 +1,30 @@
+exports[`test already-in-sync:locales/en.json 1`] = `
+"{
+    asdf: {
+        keep_two: en
+    },
+    keep_one: en
+}"
+`;
+
+exports[`test already-in-sync:locales/pt-BR.json 1`] = `
+"{
+    asdf: {
+        keep_two: pt-BR
+    },
+    keep_one: pt-BR
+}"
+`;
+
+exports[`test already-in-sync:locales/zh-CN.json 1`] = `
+"{
+    asdf: {
+        keep_two: zh-CN
+    },
+    keep_one: zh-CN
+}"
+`;
+
+exports[`test already-in-sync:stderr.txt 1`] = `""`;
+
+exports[`test already-in-sync:stdout.txt 1`] = `""`;

@@ -1,0 +1,22 @@
+exports[`test type-mismatch:locales/en.json 1`] = `
+"{
+    add_me: add,
+    keep_me: keep
+}"
+`;
+
+exports[`test type-mismatch:locales/pt-BR.json 1`] = `
+"{
+    add_me: {
+        blow_up: 42
+    },
+    keep_me: keep
+}"
+`;
+
+exports[`test type-mismatch:stderr.txt 1`] = `""`;
+
+exports[`test type-mismatch:stdout.txt 1`] = `
+"actual/locales/pt-BR.json contains type mismatch on key add_me
+"
+`;

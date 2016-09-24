@@ -1,0 +1,37 @@
+exports[`test globs:one/en.json 1`] = `
+"{
+    add_me: add,
+    keep_me: keep
+}"
+`;
+
+exports[`test globs:one/pt-BR.json 1`] = `
+"{
+    add_me: add,
+    keep_me: don\'t change
+}"
+`;
+
+exports[`test globs:stderr.txt 1`] = `""`;
+
+exports[`test globs:stdout.txt 1`] = `
+"Pushed keys to actual/one/pt-BR.json: add_me
+Removed keys from actual/one/pt-BR.json: remove_me
+Pushed keys to actual/two/pt-BR.json: add_me
+Removed keys from actual/two/pt-BR.json: remove_me
+"
+`;
+
+exports[`test globs:two/en.json 1`] = `
+"{
+    add_me: add,
+    keep_me: keep
+}"
+`;
+
+exports[`test globs:two/pt-BR.json 1`] = `
+"{
+    add_me: add,
+    keep_me: don\'t change
+}"
+`;
