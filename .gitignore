@@ -3,3 +3,4 @@ typings/globals/
 typings/modules/
 dist
 test/**/actual/
+test/**/testRunner.ts

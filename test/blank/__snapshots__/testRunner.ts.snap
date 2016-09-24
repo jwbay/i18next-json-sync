@@ -1,0 +1,3 @@
+exports[`test blank:stderr.txt 1`] = `""`;
+
+exports[`test blank:stdout.txt 1`] = `""`;

@@ -1,0 +1,7 @@
+{
+    "moduleFileExtensions": ["js", "json", "ts"],
+    "scriptPreprocessor": "<rootDir>/testPreprocessor.js",
+    "testEnvironment": "node",
+    "testPathDirs": ["test"],
+    "testRegex": "testRunner.ts$"
+}

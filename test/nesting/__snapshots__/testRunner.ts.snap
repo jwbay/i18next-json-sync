@@ -1,0 +1,43 @@
+exports[`test nesting:locales/en.json 1`] = `
+"{
+    new_structure: {
+        asdf: {
+            qwer: qwer
+        }
+    },
+    outer: {
+        add2: add2,
+        inner: {
+            add: add,
+            keep: keep,
+            keep2: keep2
+        }
+    }
+}"
+`;
+
+exports[`test nesting:locales/pt-BR.json 1`] = `
+"{
+    new_structure: {
+        asdf: {
+            qwer: qwer
+        }
+    },
+    outer: {
+        add2: add2,
+        inner: {
+            add: add,
+            keep: changed,
+            keep2: changed2
+        }
+    }
+}"
+`;
+
+exports[`test nesting:stderr.txt 1`] = `""`;
+
+exports[`test nesting:stdout.txt 1`] = `
+"Pushed keys to actual/locales/pt-BR.json: add, add2, qwer
+Removed keys from actual/locales/pt-BR.json: remove, key
+"
+`;

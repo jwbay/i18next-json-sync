@@ -1,5 +1,6 @@
 {
   "globalDependencies": {
+    "jest": "registry:dt/jest#15.1.1+20160919141445",
     "json-stable-stringify": "registry:dt/json-stable-stringify#1.0.0+20160317120654",
     "node": "registry:dt/node#6.0.0+20160826120425",
     "shelljs": "registry:dt/shelljs#0.0.0+20160526131156"
