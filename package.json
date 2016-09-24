@@ -4,12 +4,9 @@
   "description": "keep i18next json resource files in sync",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
-  "directories": {
-    "test": "test"
-  },
   "scripts": {
     "ci": "npm run lint && npm run build && npm run test",
-    "build": "rimraf dist && tsc -p src",
+    "build": "rimraf dist && tsc -p src && tsc -p testRunner --noEmit",
     "lint": "tslint src/**/*.ts testRunner/**/*.ts",
     "pretest": "ts-node -P testRunner testRunner/testInit",
     "test": "jest --config jest.json",

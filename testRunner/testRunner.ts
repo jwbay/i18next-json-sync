@@ -19,7 +19,7 @@ try {
 withCapturedConsole('log', 'stdout.txt', () => {
 	withCapturedConsole('error', 'stderr.txt', () => {
 		try {
-			sync({ files: `actual/locales/**.json` });
+			sync(options);
 		} catch (err) {
 			if (err && err.stack) {
 				writeStacktrace(err);

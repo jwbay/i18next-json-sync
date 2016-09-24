@@ -1,21 +1,30 @@
 exports[`test primary-language:locales/en.json 1`] = `
 "{
-    add_me: add,
-    keep_me: keep
+    add_me: add from pt-BR,
+    keep_me: don\'t change en
 }"
 `;
 
 exports[`test primary-language:locales/pt-BR.json 1`] = `
 "{
-    add_me: add,
-    keep_me: don\'t change
+    add_me: add from pt-BR,
+    keep_me: don\'t change pt-BR
+}"
+`;
+
+exports[`test primary-language:locales/zh-CN.json 1`] = `
+"{
+    add_me: add from pt-BR,
+    keep_me: don\'t change zh-CN
 }"
 `;
 
 exports[`test primary-language:stderr.txt 1`] = `""`;
 
 exports[`test primary-language:stdout.txt 1`] = `
-"Pushed keys to actual/locales/pt-BR.json: add_me
-Removed keys from actual/locales/pt-BR.json: remove_me
+"Pushed keys to actual/locales/en.json: add_me
+Removed keys from actual/locales/en.json: remove_me
+Pushed keys to actual/locales/zh-CN.json: add_me
+Removed keys from actual/locales/zh-CN.json: remove_me_too
 "
 `;
