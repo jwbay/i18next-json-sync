@@ -1,0 +1,9 @@
+.vscode/
+coverage/
+src/
+testRunner/
+tests/
+typings/
+jest.json
+tslint.json
+typings.json

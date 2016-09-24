@@ -5,7 +5,7 @@ import LocalizationFolder from './LocalizationFolder';
 import pluralForms from './pluralForms';
 
 export interface IOptions {
-	/** If true, audit files in memory instead of changing them on the filesystem. Throws an error if any changes would be made */
+	/** Audit files in memory instead of changing them on the filesystem and throw an error if any changes would be made */
 	check?: boolean;
 	/** Glob pattern for the resource JSON files */
 	files?: string;

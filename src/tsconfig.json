@@ -2,7 +2,6 @@
     "compilerOptions": {
         "declaration": true,
         "forceConsistentCasingInFileNames": true,
-        "inlineSources": true,
         "lib": [
             "dom",
             "es5",
@@ -16,7 +15,6 @@
         "noImplicitReturns": true,
         "outDir": "../dist",
         "pretty": true,
-        "sourceMap": true,
         "suppressImplicitAnyIndexErrors": true,
         "target": "es5"
     },

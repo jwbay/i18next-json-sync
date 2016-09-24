@@ -3,5 +3,6 @@
     "scriptPreprocessor": "<rootDir>/testRunner/testPreprocessor.js",
     "testEnvironment": "node",
     "testPathDirs": ["tests"],
-    "testRegex": "testRunner.js$"
+    "testRegex": "testRunner.js$",
+    "coverageReporters": ["lcov", "text-summary"]
 }

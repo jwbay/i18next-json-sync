@@ -5,3 +5,5 @@ dist
 tests/**/actual/
 tests/**/testRunner.js
 npm-debug.log
+typings/index.d.ts
+coverage/
