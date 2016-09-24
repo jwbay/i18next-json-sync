@@ -2,5 +2,14 @@
 {
     "editor.detectIndentation": true,
     "editor.insertSpaces": false,
+    "files.exclude": {
+        "**/.git": true,
+        "**/.svn": true,
+        "**/.hg": true,
+        "**/.DS_Store": true,
+        "tests/**/__snapshots__": true,
+        "tests/**/actual": true,
+        "tests/**/testRunner.js": true
+    },
     "typescript.tsdk": "node_modules/typescript/lib"
 }

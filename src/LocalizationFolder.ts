@@ -1,6 +1,6 @@
 import * as fs from 'fs';
 import * as path from 'path';
-import { IFileMap } from './sync';
+import { IFileMap } from './';
 import stringify = require('json-stable-stringify');
 
 export default class LocalizationFolder {

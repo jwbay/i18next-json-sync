@@ -1,0 +1,17 @@
+{
+    "compilerOptions": {
+        "lib": [
+            "dom",
+            "es5",
+            "es2015.core"
+        ],
+        "module": "commonjs",
+        "noEmitOnError": true,
+        "pretty": true,
+        "target": "es5"
+    },
+    "include": [
+        "*.ts",
+        "../typings/**/*"
+    ]
+}

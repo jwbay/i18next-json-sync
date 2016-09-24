@@ -2,17 +2,16 @@
   "name": "i18next-json-sync",
   "version": "1.0.0",
   "description": "keep i18next json resource files in sync",
-  "main": "dist/sync.js",
-  "typings": "dist/sync.d.ts",
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
   "directories": {
     "test": "test"
   },
   "scripts": {
     "ci": "npm run lint && npm run build && npm run test",
-    "build": "rimraf dist && tsc",
-    "build:watch": "rimraf dist && tsc --watch",
-    "lint": "tslint src/**/*.ts",
-    "pretest": "ts-node testInit",
+    "build": "rimraf dist && tsc -p src",
+    "lint": "tslint src/**/*.ts testRunner/**/*.ts",
+    "pretest": "ts-node -P testRunner testRunner/testInit",
     "test": "jest --config jest.json",
     "typings": "typings install"
   },

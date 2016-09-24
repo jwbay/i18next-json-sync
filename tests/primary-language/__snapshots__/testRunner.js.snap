@@ -1,0 +1,21 @@
+exports[`test primary-language:locales/en.json 1`] = `
+"{
+    add_me: add,
+    keep_me: keep
+}"
+`;
+
+exports[`test primary-language:locales/pt-BR.json 1`] = `
+"{
+    add_me: add,
+    keep_me: don\'t change
+}"
+`;
+
+exports[`test primary-language:stderr.txt 1`] = `""`;
+
+exports[`test primary-language:stdout.txt 1`] = `
+"Pushed keys to actual/locales/pt-BR.json: add_me
+Removed keys from actual/locales/pt-BR.json: remove_me
+"
+`;

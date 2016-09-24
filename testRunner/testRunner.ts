@@ -2,12 +2,19 @@ import fs = require('fs');
 import glob = require('glob');
 import path = require('path');
 import sh = require('shelljs');
-import syncType from './src/sync';
+import syncType, { IOptions } from '../src';
 import util = require('util');
-const sync: typeof syncType = require('../../src/sync').default;
+const sync: typeof syncType = require('../../src').default;
 
 sh.config.silent = true;
 sh.pushd(__dirname);
+
+let options: IOptions = {
+	files: 'actual/locales/**.json'
+};
+try {
+	options = Object.assign(options, require('./options'));
+} catch (e) { }
 
 withCapturedConsole('log', 'stdout.txt', () => {
 	withCapturedConsole('error', 'stderr.txt', () => {
