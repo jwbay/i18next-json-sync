@@ -4,7 +4,7 @@ import LocalizationFolder from './LocalizationFolder';
 import path = require('path');
 
 export interface IOptions {
-	/** If true, audit files in memory instead of changing them on the filesystem */
+	/** If true, audit files in memory instead of changing them on the filesystem. Throws an error if any changes would be made */
 	check?: boolean;
 	/** Glob pattern for the resource JSON files */
 	files?: string;
@@ -24,6 +24,8 @@ export default function sync({
 	const allFiles = glob.sync(files);
 	const directories = groupFilesByDirectory(allFiles);
 	let record: ActionRecorder;
+	let hasAnyErrors = false;
+	let hasAnyChanges = false;
 	for (const currentDirectory of Object.keys(directories)) {
 		const folder = new LocalizationFolder(directories[currentDirectory], primary);
 		folder.populateFromDisk();
@@ -37,9 +39,19 @@ export default function sync({
 			record = new ActionRecorder(filename, isReportMode);
 			syncObjects(sourceObject, folder.getTargetObject(filename));
 			record.flushToConsole();
+			hasAnyChanges = hasAnyChanges || record.hasAnyActions();
+			hasAnyErrors = hasAnyErrors || record.hasAnyErrors();
 		}
 
 		folder.flushToDisk();
+	}
+
+	if (hasAnyErrors) {
+		throw new Error('[i18next-json-sync] found keys unsafe to synchronize');
+	}
+
+	if (isReportMode && hasAnyChanges) {
+		throw new Error('[i18next-json-sync] check failed');
 	}
 
 	function groupFilesByDirectory(allFiles: string[]) {

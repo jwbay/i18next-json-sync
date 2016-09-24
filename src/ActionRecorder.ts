@@ -20,16 +20,20 @@ export default class ActionRecorder {
 		this.errors.push(message(this.fileName));
 	}
 
+	public hasAnyActions() {
+		return this.hasAnyErrors() ||
+			this.addedKeys.length > 1 ||
+			this.removedKeys.length > 1;
+	}
+
 	public flushToConsole() {
 		const errors = this.getErrors();
 		const added = this.getMessageForAddedKeys();
 		const removed = this.getMessageForRemovedKeys();
 
-		errors && console.log(errors);
+		errors && console.error(errors);
 		added && console.log(added);
 		removed && console.log(removed);
-
-		return !!added || !!removed || !!errors;
 	}
 
 	private getErrors() {

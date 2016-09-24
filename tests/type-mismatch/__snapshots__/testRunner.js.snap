@@ -14,9 +14,13 @@ exports[`test type-mismatch:locales/pt-BR.json 1`] = `
 }"
 `;
 
-exports[`test type-mismatch:stderr.txt 1`] = `""`;
-
-exports[`test type-mismatch:stdout.txt 1`] = `
+exports[`test type-mismatch:stderr.txt 1`] = `
 "actual/locales/pt-BR.json contains type mismatch on key add_me
+
+THROWN:
+Error: [i18next-json-sync] found keys unsafe to synchronize 
+ 	...
 "
 `;
+
+exports[`test type-mismatch:stdout.txt 1`] = `""`;

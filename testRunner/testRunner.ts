@@ -21,8 +21,9 @@ withCapturedConsole('log', 'stdout.txt', () => {
 		try {
 			sync(options);
 		} catch (err) {
+			console.error('\nTHROWN:');
 			if (err && err.stack) {
-				writeStacktrace(err);
+				console.error(err.stack.split('\n')[0], '\n', '\t...');
 			} else {
 				console.error(err);
 			}
@@ -48,13 +49,6 @@ function withCapturedConsole(type: string, outFile: string, action: Function) {
 	action();
 	console[type] = original;
 	fs.writeFileSync(`actual/${outFile}`, captured, { encoding: 'utf8' });
-}
-
-function writeStacktrace(err: Error) {
-	const backslashes = /\\/g;
-	const slashesFixed = err.stack.replace(backslashes, '/');
-	const cwd = path.join(process.cwd(), '../../').replace(backslashes, '/');
-	console.log(slashesFixed.replace(new RegExp(cwd, 'g'), ''));
 }
 
 function buildFlatFileMapForDirectory(pattern: string) {

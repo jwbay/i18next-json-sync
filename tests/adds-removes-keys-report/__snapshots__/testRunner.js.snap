@@ -1,0 +1,36 @@
+exports[`test adds-removes-keys-report:locales/de.json 1`] = `
+"{
+    add_me: add,
+    keep_me: keep
+}"
+`;
+
+exports[`test adds-removes-keys-report:locales/en.json 1`] = `
+"{
+    add_me: add,
+    keep_me: keep
+}"
+`;
+
+exports[`test adds-removes-keys-report:locales/pt-BR.json 1`] = `
+"{
+    add_me: add,
+    keep_me: don\'t change
+}"
+`;
+
+exports[`test adds-removes-keys-report:stderr.txt 1`] = `
+"
+THROWN:
+Error: [i18next-json-sync] check failed 
+ 	...
+"
+`;
+
+exports[`test adds-removes-keys-report:stdout.txt 1`] = `
+"Missing keys in actual/locales/de.json: add_me, keep_me
+Orphaned keys found in actual/locales/de.json: remove_de, remove_de_too
+Missing keys in actual/locales/pt-BR.json: add_me
+Orphaned keys found in actual/locales/pt-BR.json: remove_me
+"
+`;
