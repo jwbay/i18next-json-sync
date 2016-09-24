@@ -1,0 +1,36 @@
+exports[`test creates-files:locales/en.json 1`] = `
+"{
+    add_me: add,
+    keep_me: keep
+}"
+`;
+
+exports[`test creates-files:locales/es.json 1`] = `
+"{
+    add_me: add,
+    keep_me: keep
+}"
+`;
+
+exports[`test creates-files:locales/fr.json 1`] = `
+"{
+    add_me: add,
+    keep_me: keep
+}"
+`;
+
+exports[`test creates-files:locales/pt-BR.json 1`] = `
+"{
+    add_me: add,
+    keep_me: keep
+}"
+`;
+
+exports[`test creates-files:stderr.txt 1`] = `""`;
+
+exports[`test creates-files:stdout.txt 1`] = `
+"Pushed keys to actual/locales/fr.json: add_me, keep_me
+Pushed keys to actual/locales/es.json: add_me, keep_me
+Pushed keys to actual/locales/pt-BR.json: add_me, keep_me
+"
+`;

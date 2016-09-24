@@ -11,6 +11,8 @@ export interface IOptions {
 	files?: string;
 	/** Primary localization language. Other language files will be changed to match */
 	primary?: string;
+	/** Language files to create if they don't exist, e.g. ['es, 'pt-BR', 'fr'] */
+	createResources?: string[];
 }
 
 export interface IDirectoryMap { [directory: string]: IFileMap; }
@@ -20,7 +22,8 @@ type localizationValue = { [key: string]: string } | string;
 export default function sync({
 	check: isReportMode = false,
 	files = '**/locales/*.json',
-	primary: primaryLanguage = 'en'
+	primary: primaryLanguage = 'en',
+	createResources: createFiles = []
 }: IOptions) {
 	const allFiles = glob.sync(files);
 	const directories = groupFilesByDirectory(allFiles);
@@ -30,7 +33,7 @@ export default function sync({
 	let hasAnyChanges = false;
 	for (const currentDirectory of Object.keys(directories)) {
 		const folder = new LocalizationFolder(directories[currentDirectory], primaryLanguage, isReportMode);
-		folder.populateFromDisk();
+		folder.populateFromDisk(createFiles);
 		const sourceObject = folder.getSourceObject();
 
 		if (!sourceObject) {

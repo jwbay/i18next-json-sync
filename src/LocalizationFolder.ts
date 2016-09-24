@@ -10,11 +10,25 @@ export default class LocalizationFolder {
 		private isReportMode: boolean
 	) { }
 
-	public populateFromDisk() {
-		Object.keys(this.files).forEach(name => {
+	public populateFromDisk(filesToCreate: string[]) {
+		const filesReadFromDisk = Object.keys(this.files).map(name => {
 			const fileContent = fs.readFileSync(name, 'utf8');
 			this.files[name] = JSON.parse(fileContent);
+			return path.basename(name, '.json');
 		});
+		const dirname = path.dirname(Object.keys(this.files)[0]);
+		this.registerMissingFiles(filesToCreate, filesReadFromDisk, dirname);
+	}
+
+	private registerMissingFiles(shouldExist: string[], doExist: string[], dirname: string) {
+		for (const file of shouldExist) {
+			if (doExist.indexOf(file) > -1) {
+				continue;
+			}
+
+			const filename = path.join(dirname, file + '.json').split(path.sep).join('/');
+			this.files[filename] = {};
+		}
 	}
 
 	public flushToDisk() {
