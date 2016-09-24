@@ -5,11 +5,15 @@
 			"name": "Debug Tests",
 			"type": "node",
 			"request": "launch",
-			"program": "${workspaceRoot}/dist/testRunner.js",
+			"program": "${workspaceRoot}/node_modules/jest/bin/jest.js",
 			"stopOnEntry": false,
-			"args": [],
+			"args": [
+				"-i",
+				"--config",
+				"jest.json"
+			],
 			"cwd": "${workspaceRoot}",
-			"preLaunchTask": "build",
+			"preLaunchTask": null,
 			"runtimeExecutable": null,
 			"runtimeArgs": [
 				"--nolazy"
@@ -17,7 +21,6 @@
 			"env": {
 				"NODE_ENV": "development"
 			},
-			"externalConsole": false,
 			"sourceMaps": true,
 			"outDir": null
 		}

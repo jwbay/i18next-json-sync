@@ -1,0 +1,17 @@
+{
+    "replace": {
+        "book": "book ru",
+        "book_plural": "books ru"
+    },
+    "add": {
+    },
+    "remove": {
+        "remove": "remove ru",
+        "remove_plural": "removes ru"
+    },
+    "keep": {
+        "value_0": "values ru 0",
+        "value_1": "values ru 1",
+        "value_2": "values ru 2"
+    }
+}

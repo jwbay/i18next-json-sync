@@ -1,0 +1,18 @@
+{
+    "fix": {
+        "brick_0": "bricks fr 0",
+        "brick_1": "bricks fr 1",
+        "brick_2": "bricks fr 2"
+    },
+    "add": {
+    },
+    "remove": {
+        "remove": "remove fr",
+        "remove_0": "removes fr 0",
+        "remove_plural": "removes fr"
+    },
+    "keep": {
+        "value": "value fr",
+        "value_plural": "values fr"
+    }
+}

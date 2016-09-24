@@ -1,0 +1,19 @@
+{
+    "add": {
+        "brick_0": "bricks ru 0",
+        "brick_1": "bricks ru 1",
+        "brick_2": "bricks ru 2"
+    },
+    "keep": {
+        "value_0": "values ru 0",
+        "value_1": "values ru 1",
+        "value_2": "values ru 2"
+    },
+    "remove": {
+    },
+    "fix": {
+        "book_0": "books ru 0",
+        "book_1": "books ru 1",
+        "book_2": "books ru 2"
+    }
+}

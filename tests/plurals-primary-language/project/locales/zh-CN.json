@@ -1,0 +1,17 @@
+{
+    "fix": {
+        "book_0": "book zh-CN 0",
+        "book_1": "book zh-CN 1",
+        "book_2": "book zh-CN 2"
+    },
+    "add": {
+    },
+    "remove": {
+        "remove": "remove zh-CN",
+        "remove_0": "removes zh-CN 0",
+        "remove_plural": "removes zh-CN"
+    },
+    "keep": {
+        "value_0": "values zh-CN"
+    }
+}

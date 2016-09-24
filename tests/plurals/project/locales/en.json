@@ -1,0 +1,16 @@
+{
+    "replace": {
+        "book": "book en",
+        "book_plural": "books en"
+    },
+    "add": {
+        "brick": "brick en",
+        "brick_plural": "bricks en"
+    },
+    "remove": {
+    },
+    "keep": {
+        "value": "value en",
+        "value_plural": "values en"
+    }
+}

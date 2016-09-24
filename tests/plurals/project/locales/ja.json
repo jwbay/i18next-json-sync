@@ -1,0 +1,15 @@
+{
+    "replace": {
+        "book": "book ja",
+        "book_plural": "books ja"
+    },
+    "add": {
+    },
+    "remove": {
+        "remove": "remove ja",
+        "remove_plural": "removes ja"
+    },
+    "keep": {
+        "value_0": "values ja"
+    }
+}

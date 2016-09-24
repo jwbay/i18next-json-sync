@@ -1,0 +1,15 @@
+{
+    "replace": {
+        "book": "book zh-CN",
+        "book_plural": "books zh-CN"
+    },
+    "add": {
+    },
+    "remove": {
+        "remove": "remove zh-CN",
+        "remove_plural": "removes zh-CN"
+    },
+    "keep": {
+        "value_0": "values zh-CN"
+    }
+}

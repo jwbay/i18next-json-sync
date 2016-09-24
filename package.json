@@ -8,7 +8,7 @@
     "ci": "npm run lint && npm run build && npm run test",
     "build": "rimraf dist && tsc -p src && tsc -p testRunner --noEmit",
     "lint": "tslint src/**/*.ts testRunner/**/*.ts",
-    "pretest": "ts-node -P testRunner testRunner/testInit",
+    "pretest": "rimraf tests/**/testRunner.js && ts-node -P testRunner testRunner/testInit",
     "test": "jest --config jest.json",
     "typings": "typings install"
   },

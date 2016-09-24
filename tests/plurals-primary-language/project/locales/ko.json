@@ -1,0 +1,17 @@
+{
+    "fix": {
+        "book_0": "book ko 0",
+        "book_1": "book ko 1",
+        "book_2": "book ko 2"
+    },
+    "add": {
+    },
+    "remove": {
+        "remove": "remove ko",
+        "remove_0": "removes ko 0",
+        "remove_plural": "removes ko"
+    },
+    "keep": {
+        "value_0": "values ko"
+    }
+}

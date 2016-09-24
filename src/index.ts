@@ -1,7 +1,8 @@
+import * as glob from 'glob';
+import * as path from 'path';
 import ActionRecorder from './ActionRecorder';
-import glob = require('glob');
 import LocalizationFolder from './LocalizationFolder';
-import path = require('path');
+import pluralForms from './pluralForms';
 
 export interface IOptions {
 	/** If true, audit files in memory instead of changing them on the filesystem. Throws an error if any changes would be made */
@@ -19,15 +20,16 @@ type localizationValue = { [key: string]: string } | string;
 export default function sync({
 	check: isReportMode = false,
 	files = '**/locales/*.json',
-	primary = 'en'
+	primary: primaryLanguage = 'en'
 }: IOptions) {
 	const allFiles = glob.sync(files);
 	const directories = groupFilesByDirectory(allFiles);
+	let targetLanguage: string;
 	let record: ActionRecorder;
 	let hasAnyErrors = false;
 	let hasAnyChanges = false;
 	for (const currentDirectory of Object.keys(directories)) {
-		const folder = new LocalizationFolder(directories[currentDirectory], primary);
+		const folder = new LocalizationFolder(directories[currentDirectory], primaryLanguage);
 		folder.populateFromDisk();
 		const sourceObject = folder.getSourceObject();
 
@@ -36,6 +38,7 @@ export default function sync({
 		}
 
 		for (const filename of folder.getFilenames()) {
+			targetLanguage = normalizeLanguageFromFilename(filename);
 			record = new ActionRecorder(filename, isReportMode);
 			syncObjects(sourceObject, folder.getTargetObject(filename));
 			record.flushToConsole();
@@ -64,13 +67,19 @@ export default function sync({
 		return directories;
 	}
 
+	function normalizeLanguageFromFilename(filename: string) {
+		return path.basename(filename, '.json').replace(/-/g, '_').toLowerCase();
+	}
+
 	function syncObjects(source: Object, target: Object) {
 		for (const key of Object.keys(source)) {
 			mergeKey(source, target, key);
 		}
 
 		for (const key of Object.keys(target)) {
-			removeKey(source, target, key);
+			if (!source.hasOwnProperty(key) && !isValidMappedPluralForm(key, source)) {
+				removeKey(source, target, key);
+			}
 		}
 	}
 
@@ -84,6 +93,12 @@ export default function sync({
 			if (sourceType === targetType) {
 				if (sourceType === 'Object') {
 					syncObjects(sourceValue, targetValue);
+				} else if (
+					keyMatchesPluralForLanguage(key, primaryLanguage) &&
+					!keyMatchesPluralForLanguage(key, targetLanguage)
+				) {
+					removeKey(source, target, key);
+					syncObjects(createPlurals(key, sourceValue as string), target);
 				}
 				//base case: source and target agree on key name and value is string
 			} else {
@@ -98,6 +113,11 @@ export default function sync({
 		if (getTypeName(sourceValue) === 'Object') {
 			target[key] = {};
 			syncObjects(sourceValue, target[key]);
+		} else if (
+			keyMatchesPluralForLanguage(key, primaryLanguage) &&
+			!keyMatchesPluralForLanguage(key, targetLanguage)
+		) {
+			syncObjects(createPlurals(key, sourceValue as string), target);
 		} else {
 			//base case: source contains key not present in target
 			target[key] = sourceValue;
@@ -105,16 +125,72 @@ export default function sync({
 		}
 	}
 
-	function removeKey(source: Object, target: Object, key: string) {
-		if (!source.hasOwnProperty(key)) {
-			if (getTypeName(target[key]) === 'Object') {
-				gatherKeysFor(target[key]).forEach(k => record.keyRemoved(k));
-			} else {
-				record.keyRemoved(key);
+	function keyMatchesPluralForLanguage(key: string, language: string) {
+		for (const form of getPluralsForLanguage(language)) {
+			const plural = form.replace('key', '');
+			if (plural && key.endsWith(plural)) {
+				return true;
 			}
-			//base case: key in target not found in source
-			delete target[key];
 		}
+
+		return false;
+	}
+
+	function isValidMappedPluralForm(key: string, sourceObject: Object) {
+		const singular = getSingularForm(key);
+
+		for (const key of Object.keys(sourceObject)) {
+			if (isPluralFormForSingular(key, singular)) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	function getSingularForm(key: string) {
+		return key.replace(/_(plural|\d)/, '');
+	}
+
+	function isPluralFormForSingular(key: string, singular: string) {
+		return getPluralsForLanguage(primaryLanguage)
+			.map(form => form.replace('key', singular))
+			.indexOf(key) > -1;
+	}
+
+	function getPluralsForLanguage(language: string) {
+		if (pluralForms.hasOwnProperty(language)) {
+			return pluralForms[language];
+		}
+
+		if (language.indexOf('_') > -1) {
+			const baseLanguage = language.split('_')[0];
+			if (pluralForms.hasOwnProperty(baseLanguage)) {
+				return pluralForms[baseLanguage];
+			}
+		}
+
+		return [];
+	}
+
+	function removeKey(source: Object, target: Object, key: string) {
+		if (getTypeName(target[key]) === 'Object') {
+			gatherKeysFor(target[key]).forEach(k => record.keyRemoved(k));
+		} else {
+			record.keyRemoved(key);
+		}
+
+		//base case: key in target not found in source
+		delete target[key];
+	}
+
+	function createPlurals(key: string, fillValue: string) {
+		const singular = getSingularForm(key);
+		const plurals = {};
+		for (const form of getPluralsForLanguage(targetLanguage)) {
+			plurals[form.replace('key', singular)] = fillValue;
+		}
+		return plurals;
 	}
 
 	function gatherPrimitivesForSingleKey(object: Object, key: string): string[] {
