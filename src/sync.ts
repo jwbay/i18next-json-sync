@@ -1,7 +1,7 @@
-import fs = require('fs');
+import ActionRecorder from './ActionRecorder';
 import glob = require('glob');
+import LocalizationFolder from './LocalizationFolder';
 import path = require('path');
-import stringify = require('json-stable-stringify');
 
 export interface IOptions {
 	/** If true, audit files in memory instead of changing them on the filesystem */
@@ -12,8 +12,8 @@ export interface IOptions {
 	primary?: string;
 }
 
-interface IDirectoryMap { [directory: string]: IFileMap; }
-interface IFileMap { [filename: string]: Object; }
+export interface IDirectoryMap { [directory: string]: IFileMap; }
+export interface IFileMap { [filename: string]: Object; }
 type localizationValue = { [key: string]: string } | string;
 
 export default function sync({
@@ -21,114 +21,11 @@ export default function sync({
 	files = '**/locales/*.json',
 	primary = 'en'
 }: IOptions) {
-	class LocalizationFolder {
-		private files: IFileMap;
-
-		constructor(files: IFileMap) {
-			this.files = files;
-		}
-
-		public populateFromDisk() {
-			Object.keys(this.files).forEach(name => {
-				const fileContent = fs.readFileSync(name, 'utf8');
-				this.files[name] = JSON.parse(fileContent);
-			});
-		}
-
-		public flushToDisk() {
-			Object.keys(this.files).forEach(name => {
-				const fileContent = stringify(this.files[name], { space: 4 });
-				fs.writeFileSync(name, fileContent, { encoding: 'utf8' });
-				this.files[name] = null;
-			});
-		}
-
-		public getSourceObject() {
-			let source: Object;
-			Object.keys(this.files).forEach(name => {
-				if (path.basename(name, '.json') === primary) {
-					source = this.files[name];
-				}
-			});
-			return source;
-		}
-
-		public getTargetObject(name: string) {
-			return this.files[name];
-		}
-
-		public getFilenames() {
-			return Object.keys(this.files);
-		}
-	}
-
-	class ActionRecorder {
-		private fileName: string;
-		private errors: string[] = [];
-		private addedKeys: string[] = [];
-		private removedKeys: string[] = [];
-
-		constructor(fileName: string) {
-			this.fileName = fileName;
-		}
-
-		public keyAdded(key: string) {
-			this.addedKeys.push(key);
-		}
-
-		public keyRemoved(key: string) {
-			this.removedKeys.push(key);
-		}
-
-		public error(message: (fileName: string) => string) {
-			this.errors.push(message(this.fileName));
-		}
-
-		public flushToConsole() {
-			const errors = this.getErrors();
-			const added = this.getMessageForAddedKeys();
-			const removed = this.getMessageForRemovedKeys();
-
-			errors && console.log(errors);
-			added && console.log(added);
-			removed && console.log(removed);
-
-			return !!added || !!removed || !!errors;
-		}
-
-		private getErrors() {
-			if (this.hasAnyErrors()) {
-				return this.errors.join('\n');
-			}
-			return null;
-		}
-
-		public hasAnyErrors() {
-			return this.errors.length > 0;
-		}
-
-		private getMessageForAddedKeys() {
-			if (this.addedKeys.length > 0) {
-				const prefix = isReportMode ? 'Missing keys in' : 'Pushed keys to';
-				return `${prefix} ${this.fileName}: ${this.addedKeys.join(', ')}`;
-			}
-			return null;
-		}
-
-		private getMessageForRemovedKeys() {
-			if (this.removedKeys.length > 0) {
-				const prefix = isReportMode ? 'Orphaned keys found in' : 'Removed keys from';
-				return `${prefix} ${this.fileName}: ${this.removedKeys.join(', ')}`;
-			}
-			return null;
-		}
-	}
-
 	const allFiles = glob.sync(files);
 	const directories = groupFilesByDirectory(allFiles);
 	let record: ActionRecorder;
 	for (const currentDirectory of Object.keys(directories)) {
-		const folder = new LocalizationFolder(directories[currentDirectory]);
+		const folder = new LocalizationFolder(directories[currentDirectory], primary);
 		folder.populateFromDisk();
 		const sourceObject = folder.getSourceObject();
 
@@ -137,7 +34,7 @@ export default function sync({
 		}
 
 		for (const filename of folder.getFilenames()) {
-			record = new ActionRecorder(filename);
+			record = new ActionRecorder(filename, isReportMode);
 			syncObjects(sourceObject, folder.getTargetObject(filename));
 			record.flushToConsole();
 		}
