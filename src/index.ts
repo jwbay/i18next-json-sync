@@ -29,7 +29,7 @@ export default function sync({
 	let hasAnyErrors = false;
 	let hasAnyChanges = false;
 	for (const currentDirectory of Object.keys(directories)) {
-		const folder = new LocalizationFolder(directories[currentDirectory], primaryLanguage);
+		const folder = new LocalizationFolder(directories[currentDirectory], primaryLanguage, isReportMode);
 		folder.populateFromDisk();
 		const sourceObject = folder.getSourceObject();
 

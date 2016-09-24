@@ -1,7 +1,7 @@
 exports[`test adds-removes-keys-report:locales/de.json 1`] = `
 "{
-    add_me: add,
-    keep_me: keep
+	remove_de: remove,
+	remove_de_too: remove also
 }"
 `;
 
@@ -14,8 +14,8 @@ exports[`test adds-removes-keys-report:locales/en.json 1`] = `
 
 exports[`test adds-removes-keys-report:locales/pt-BR.json 1`] = `
 "{
-    add_me: add,
-    keep_me: don\'t change
+    keep_me: don\'t change,
+    remove_me: remove
 }"
 `;
 

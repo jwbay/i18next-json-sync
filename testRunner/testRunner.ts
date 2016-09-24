@@ -57,7 +57,9 @@ function buildFlatFileMapForDirectory(pattern: string) {
 		const name = filename.slice(filename.indexOf('/') + 1);
 
 		if (path.extname(filename) === '.json') {
-			contents = contents.replace(/"/g, '');
+			contents = contents
+				.replace(/"/g, '')
+				.replace(/\r\n/g, '\n');
 		}
 
 		fileMap[name] = contents;

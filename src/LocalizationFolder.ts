@@ -6,7 +6,8 @@ import stringify = require('json-stable-stringify');
 export default class LocalizationFolder {
 	constructor(
 		private files: IFileMap,
-		private primaryLanguage: string
+		private primaryLanguage: string,
+		private isReportMode: boolean
 	) { }
 
 	public populateFromDisk() {
@@ -18,8 +19,11 @@ export default class LocalizationFolder {
 
 	public flushToDisk() {
 		Object.keys(this.files).forEach(name => {
-			const fileContent = stringify(this.files[name], { space: 4 });
-			fs.writeFileSync(name, fileContent, { encoding: 'utf8' });
+			if (!this.isReportMode) {
+				const fileContent = stringify(this.files[name], { space: 4 });
+				fs.writeFileSync(name, fileContent, { encoding: 'utf8' });
+			}
+
 			this.files[name] = null;
 		});
 	}
