@@ -1,8 +1,10 @@
 exports[`test plurals:locales/de.json 1`] = `
 "{
     add: {
+        also_not_0_x: also not a plural,
         brick: brick en,
-        brick_plural: bricks en
+        brick_plural: bricks en,
+        not_plural_x: not a plural
     },
     keep: {
         value: value de,
@@ -20,8 +22,10 @@ exports[`test plurals:locales/de.json 1`] = `
 exports[`test plurals:locales/en.json 1`] = `
 "{
     add: {
+        also_not_0_x: also not a plural,
         brick: brick en,
-        brick_plural: bricks en
+        brick_plural: bricks en,
+        not_plural_x: not a plural
     },
     keep: {
         value: value en,
@@ -39,8 +43,10 @@ exports[`test plurals:locales/en.json 1`] = `
 exports[`test plurals:locales/es.json 1`] = `
 "{
     add: {
+        also_not_0_x: also not a plural,
         brick: brick en,
-        brick_plural: bricks en
+        brick_plural: bricks en,
+        not_plural_x: not a plural
     },
     keep: {
         value: value es,
@@ -58,8 +64,10 @@ exports[`test plurals:locales/es.json 1`] = `
 exports[`test plurals:locales/fr.json 1`] = `
 "{
     add: {
+        also_not_0_x: also not a plural,
         brick: brick en,
-        brick_plural: bricks en
+        brick_plural: bricks en,
+        not_plural_x: not a plural
     },
     keep: {
         value: value fr,
@@ -77,7 +85,9 @@ exports[`test plurals:locales/fr.json 1`] = `
 exports[`test plurals:locales/ja.json 1`] = `
 "{
     add: {
-        brick_0: bricks en
+        also_not_0_x: also not a plural,
+        brick_0: bricks en,
+        not_plural_x: not a plural
     },
     keep: {
         value_0: values ja
@@ -93,7 +103,9 @@ exports[`test plurals:locales/ja.json 1`] = `
 exports[`test plurals:locales/ko.json 1`] = `
 "{
     add: {
-        brick_0: bricks en
+        also_not_0_x: also not a plural,
+        brick_0: bricks en,
+        not_plural_x: not a plural
     },
     keep: {
         value_0: values ko
@@ -109,8 +121,10 @@ exports[`test plurals:locales/ko.json 1`] = `
 exports[`test plurals:locales/nl.json 1`] = `
 "{
     add: {
+        also_not_0_x: also not a plural,
         brick: brick en,
-        brick_plural: bricks en
+        brick_plural: bricks en,
+        not_plural_x: not a plural
     },
     keep: {
         value: value nl,
@@ -128,8 +142,10 @@ exports[`test plurals:locales/nl.json 1`] = `
 exports[`test plurals:locales/pt-BR.json 1`] = `
 "{
     add: {
+        also_not_0_x: also not a plural,
         brick: brick en,
-        brick_plural: bricks en
+        brick_plural: bricks en,
+        not_plural_x: not a plural
     },
     keep: {
         value: value pt-BR,
@@ -147,9 +163,11 @@ exports[`test plurals:locales/pt-BR.json 1`] = `
 exports[`test plurals:locales/ru.json 1`] = `
 "{
     add: {
+        also_not_0_x: also not a plural,
         brick_0: bricks en,
         brick_1: bricks en,
-        brick_2: bricks en
+        brick_2: bricks en,
+        not_plural_x: not a plural
     },
     keep: {
         value_0: values ru 0,
@@ -169,7 +187,9 @@ exports[`test plurals:locales/ru.json 1`] = `
 exports[`test plurals:locales/zh-CN.json 1`] = `
 "{
     add: {
-        brick_0: bricks en
+        also_not_0_x: also not a plural,
+        brick_0: bricks en,
+        not_plural_x: not a plural
     },
     keep: {
         value_0: values zh-CN
@@ -185,23 +205,23 @@ exports[`test plurals:locales/zh-CN.json 1`] = `
 exports[`test plurals:stderr.txt 1`] = `""`;
 
 exports[`test plurals:stdout.txt 1`] = `
-"Pushed keys to actual/locales/de.json: brick, brick_plural
+"Pushed keys to actual/locales/de.json: brick, brick_plural, not_plural_x, also_not_0_x
 Removed keys from actual/locales/de.json: remove, remove_plural
-Pushed keys to actual/locales/es.json: brick, brick_plural
+Pushed keys to actual/locales/es.json: brick, brick_plural, not_plural_x, also_not_0_x
 Removed keys from actual/locales/es.json: remove, remove_plural
-Pushed keys to actual/locales/fr.json: brick, brick_plural
+Pushed keys to actual/locales/fr.json: brick, brick_plural, not_plural_x, also_not_0_x
 Removed keys from actual/locales/fr.json: remove, remove_plural
-Pushed keys to actual/locales/ja.json: book_0, brick, brick_0, value
+Pushed keys to actual/locales/ja.json: book_0, brick, brick_0, not_plural_x, also_not_0_x, value
 Removed keys from actual/locales/ja.json: book_plural, book, brick, remove, remove_plural, value
-Pushed keys to actual/locales/ko.json: book_0, brick, brick_0, value
+Pushed keys to actual/locales/ko.json: book_0, brick, brick_0, not_plural_x, also_not_0_x, value
 Removed keys from actual/locales/ko.json: book_plural, book, brick, remove, remove_plural, value
-Pushed keys to actual/locales/nl.json: brick, brick_plural
+Pushed keys to actual/locales/nl.json: brick, brick_plural, not_plural_x, also_not_0_x
 Removed keys from actual/locales/nl.json: remove, remove_plural
-Pushed keys to actual/locales/pt-BR.json: brick, brick_plural
+Pushed keys to actual/locales/pt-BR.json: brick, brick_plural, not_plural_x, also_not_0_x
 Removed keys from actual/locales/pt-BR.json: remove, remove_plural
-Pushed keys to actual/locales/ru.json: book_0, book_1, book_2, brick, brick_0, brick_1, brick_2, value
+Pushed keys to actual/locales/ru.json: book_0, book_1, book_2, brick, brick_0, brick_1, brick_2, not_plural_x, also_not_0_x, value
 Removed keys from actual/locales/ru.json: book_plural, book, brick, remove, remove_plural, value
-Pushed keys to actual/locales/zh-CN.json: book_0, brick, brick_0, value
+Pushed keys to actual/locales/zh-CN.json: book_0, brick, brick_0, not_plural_x, also_not_0_x, value
 Removed keys from actual/locales/zh-CN.json: book_plural, book, brick, remove, remove_plural, value
 "
 `;

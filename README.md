@@ -128,6 +128,7 @@ It can be installed globally, but npm's [package.json scripts](https://docs.npmj
 Then use `npm run i18n` to sync on the filesystem and `npm run check-i18n` to validate.
 
 Use `sync-i18n -h` to get help output:
+
 ```
 Options:
   -c, --check      Audit files in memory instead of changing them on the

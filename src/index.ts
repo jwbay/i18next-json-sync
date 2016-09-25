@@ -91,13 +91,11 @@ export default function sync({
 
 	function mergeKey(source: Object, target: Object, key: string) {
 		const sourceValue: localizationValue = source[key];
-		const sourceType = getTypeName(sourceValue);
 		const targetValue: localizationValue = target[key];
-		const targetType = getTypeName(targetValue);
 
 		if (target.hasOwnProperty(key)) {
-			if (sourceType === targetType) {
-				if (sourceType === 'Object') {
+			if (areSameTypes(sourceValue, targetValue)) {
+				if (isObject(sourceValue)) {
 					syncObjects(sourceValue, targetValue);
 				} else if (
 					keyMatchesPluralForLanguage(key, primaryLanguage) &&
@@ -155,7 +153,7 @@ export default function sync({
 	}
 
 	function getSingularForm(key: string) {
-		return key.replace(/_(plural|\d)/, '');
+		return key.replace(/_(plural|\d)$/, '');
 	}
 
 	function isPluralFormForSingular(key: string, singular: string) {
@@ -179,17 +177,6 @@ export default function sync({
 		return [];
 	}
 
-	function removeKey(source: Object, target: Object, key: string) {
-		if (getTypeName(target[key]) === 'Object') {
-			gatherKeysFor(target[key]).forEach(k => record.keyRemoved(k));
-		} else {
-			record.keyRemoved(key);
-		}
-
-		//base case: key in target not found in source
-		delete target[key];
-	}
-
 	function createPlurals(key: string, fillValue: string) {
 		const singular = getSingularForm(key);
 		const plurals = {};
@@ -199,12 +186,15 @@ export default function sync({
 		return plurals;
 	}
 
-	function gatherPrimitivesForSingleKey(object: Object, key: string): string[] {
-		if (getTypeName(object[key]) === 'Object') {
-			return gatherKeysFor(object[key]);
+	function removeKey(source: Object, target: Object, key: string) {
+		if (isObject(target[key])) {
+			gatherKeysFor(target[key]).forEach(k => record.keyRemoved(k));
 		} else {
-			return [key];
+			record.keyRemoved(key);
 		}
+
+		//base case: key in target not found in source
+		delete target[key];
 	}
 
 	function gatherKeysFor(object: Object) {
@@ -213,8 +203,24 @@ export default function sync({
 			.reduce((all, next) => all.concat(next), []);
 	}
 
-	function getTypeName(object: any) {
-		const fullName: string = Object.prototype.toString.call(object);
-		return fullName.split(' ')[1].slice(0, -1);
+	function gatherPrimitivesForSingleKey(object: Object, key: string): string[] {
+		if (isObject(object[key])) {
+			return gatherKeysFor(object[key]);
+		} else {
+			return [key];
+		}
 	}
+}
+
+function isObject(value: any): value is { [key: string]: string } {
+	return getTypeName(value) === 'Object';
+}
+
+function areSameTypes(value: any, otherValue: any) {
+	return getTypeName(value) === getTypeName(otherValue);
+}
+
+function getTypeName(object: any) {
+	const fullName: string = Object.prototype.toString.call(object);
+	return fullName.split(' ')[1].slice(0, -1);
 }
