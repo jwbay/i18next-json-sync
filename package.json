@@ -12,7 +12,7 @@
     "ci": "npm run lint && npm run build && npm run coverage",
     "coverage": "rimraf coverage && npm run test -- --coverage",
     "lint": "tslint src/**/*.ts testRunner/**/*.ts",
-    "pretest": "rimraf tests/**/testRunner.js && ts-node -P testRunner testRunner/testInit",
+    "pretest": "rimraf tests/**/runner.js && ts-node -P testRunner testRunner/init",
     "reset": "git clean -xdf -e\"node_modules\" && npm run typings",
     "test": "jest --config jest.json",
     "typings": "typings install"

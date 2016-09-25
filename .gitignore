@@ -3,7 +3,7 @@ typings/globals/
 typings/modules/
 dist
 tests/**/actual/
-tests/**/testRunner.js
+tests/**/runner.js
 npm-debug.log
 typings/index.d.ts
 coverage/

@@ -1,9 +1,9 @@
 import fs = require('fs');
 import path = require('path');
 import sh = require('shelljs');
-const { process: compile } = require('./testPreprocessor');
+const { process: compile } = require('./preprocessor');
 
-const runnerPath = path.join(__dirname, 'testRunner.ts');
+const runnerPath = path.join(__dirname, 'runner.ts');
 const runnerSource = fs.readFileSync(runnerPath, 'utf8');
 const runnerJS = compile(runnerSource, runnerPath);
 
@@ -16,7 +16,7 @@ sh.ls().forEach(testCase => {
 	if (!fs.existsSync('actual')) {
 		sh.mkdir('actual');
 	}
-	fs.writeFileSync('testRunner.js', runnerJS);
+	fs.writeFileSync('runner.js', runnerJS);
 	sh.popd();
 });
 sh.popd();

@@ -1,8 +1,8 @@
 {
     "moduleFileExtensions": ["js", "json", "ts"],
-    "scriptPreprocessor": "<rootDir>/testRunner/testPreprocessor.js",
+    "scriptPreprocessor": "<rootDir>/testRunner/preprocessor.js",
     "testEnvironment": "node",
     "testPathDirs": ["tests"],
-    "testRegex": "testRunner.js$",
+    "testRegex": "runner.js$",
     "coverageReporters": ["lcov", "text-summary"]
 }
