@@ -1,7 +1,9 @@
 {
     "replace": {
+        "keep_one": "one en",
         "book": "book en",
-        "book_plural": "books en"
+        "book_plural": "books en",
+        "keep_two": "two en"
     },
     "add": {
         "brick": "brick en",
@@ -12,7 +14,9 @@
     "remove": {
     },
     "keep": {
+        "other_one": "other one en",
         "value": "value en",
-        "value_plural": "values en"
+        "value_plural": "values en",
+        "other_value": "other two en"
     }
 }

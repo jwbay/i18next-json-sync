@@ -36,44 +36,6 @@ exports[`test plurals-primary-language:locales/en.json 1`] = `
 }"
 `;
 
-exports[`test plurals-primary-language:locales/es.json 1`] = `
-"{
-    add: {
-        brick: bricks ru 0,
-        brick_plural: bricks ru 0
-    },
-    fix: {
-        book: books ru 0,
-        book_plural: books ru 0
-    },
-    keep: {
-        value: value es,
-        value_plural: values es
-    },
-    remove: {
-    }
-}"
-`;
-
-exports[`test plurals-primary-language:locales/fr.json 1`] = `
-"{
-    add: {
-        brick: bricks ru 0,
-        brick_plural: bricks ru 0
-    },
-    fix: {
-        book: books ru 0,
-        book_plural: books ru 0
-    },
-    keep: {
-        value: value fr,
-        value_plural: values fr
-    },
-    remove: {
-    }
-}"
-`;
-
 exports[`test plurals-primary-language:locales/ja.json 1`] = `
 "{
     add: {
@@ -84,60 +46,6 @@ exports[`test plurals-primary-language:locales/ja.json 1`] = `
     },
     keep: {
         value_0: values ja
-    },
-    remove: {
-    }
-}"
-`;
-
-exports[`test plurals-primary-language:locales/ko.json 1`] = `
-"{
-    add: {
-        brick_0: bricks ru 0
-    },
-    fix: {
-        book_0: book ko 0
-    },
-    keep: {
-        value_0: values ko
-    },
-    remove: {
-    }
-}"
-`;
-
-exports[`test plurals-primary-language:locales/nl.json 1`] = `
-"{
-    add: {
-        brick: bricks ru 0,
-        brick_plural: bricks ru 0
-    },
-    fix: {
-        book: books ru 0,
-        book_plural: books ru 0
-    },
-    keep: {
-        value: value nl,
-        value_plural: values nl
-    },
-    remove: {
-    }
-}"
-`;
-
-exports[`test plurals-primary-language:locales/pt-BR.json 1`] = `
-"{
-    add: {
-        brick: bricks ru 0,
-        brick_plural: bricks ru 0
-    },
-    fix: {
-        book: books ru 0,
-        book_plural: books ru 0
-    },
-    keep: {
-        value: value pt-BR,
-        value_plural: values pt-BR
     },
     remove: {
     }
@@ -166,22 +74,6 @@ exports[`test plurals-primary-language:locales/ru.json 1`] = `
 }"
 `;
 
-exports[`test plurals-primary-language:locales/zh-CN.json 1`] = `
-"{
-    add: {
-        brick_0: bricks ru 0
-    },
-    fix: {
-        book_0: book zh-CN 0
-    },
-    keep: {
-        value_0: values zh-CN
-    },
-    remove: {
-    }
-}"
-`;
-
 exports[`test plurals-primary-language:stderr.txt 1`] = `""`;
 
 exports[`test plurals-primary-language:stdout.txt 1`] = `
@@ -189,19 +81,7 @@ exports[`test plurals-primary-language:stdout.txt 1`] = `
 Removed keys from actual/locales/de.json: remove, remove_0, remove_plural, brick_0, brick_1, brick_2
 Pushed keys to actual/locales/en.json: brick, brick_plural, book, book_plural
 Removed keys from actual/locales/en.json: remove, remove_0, remove_plural, brick_0, brick_1, brick_2
-Pushed keys to actual/locales/es.json: brick, brick_plural, book, book_plural
-Removed keys from actual/locales/es.json: remove, remove_0, remove_plural, brick_0, brick_1, brick_2
-Pushed keys to actual/locales/fr.json: brick, brick_plural, book, book_plural
-Removed keys from actual/locales/fr.json: remove, remove_0, remove_plural, brick_0, brick_1, brick_2
 Pushed keys to actual/locales/ja.json: brick_0
 Removed keys from actual/locales/ja.json: remove, remove_0, remove_plural, book_1, book_2
-Pushed keys to actual/locales/ko.json: brick_0
-Removed keys from actual/locales/ko.json: remove, remove_0, remove_plural, book_1, book_2
-Pushed keys to actual/locales/nl.json: brick, brick_plural, book, book_plural
-Removed keys from actual/locales/nl.json: remove, remove_0, remove_plural, brick_0, brick_1, brick_2
-Pushed keys to actual/locales/pt-BR.json: brick, brick_plural, book, book_plural
-Removed keys from actual/locales/pt-BR.json: remove, remove_0, remove_plural, brick_0, brick_1, brick_2
-Pushed keys to actual/locales/zh-CN.json: brick_0
-Removed keys from actual/locales/zh-CN.json: remove, remove_0, remove_plural, book_1, book_2
 "
 `;

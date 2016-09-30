@@ -1,7 +1,9 @@
 {
     "replace": {
+        "keep_one": "one ru",
         "book": "book ru",
-        "book_plural": "books ru"
+        "book_plural": "books ru",
+        "keep_two": "two ru"
     },
     "add": {
     },
@@ -10,8 +12,10 @@
         "remove_plural": "removes ru"
     },
     "keep": {
+        "other_one": "other one ru",
         "value_0": "values ru 0",
         "value_1": "values ru 1",
-        "value_2": "values ru 2"
+        "value_2": "values ru 2",
+        "other_value": "other two ru"
     }
 }
