@@ -56,14 +56,16 @@ exports[`test plurals:locales/ja.json 1`] = `
         not_plural_x: not a plural
     },
     keep: {
-        other_value: other two en,
+        other_one: other one ja,
+        other_value: other two ja,
         value_0: values ja
     },
     remove: {
     },
     replace: {
         book_0: books en,
-        keep_two: two en
+        keep_one: one ja,
+        keep_two: two ja
     }
 }"
 `;
@@ -78,7 +80,8 @@ exports[`test plurals:locales/ru.json 1`] = `
         not_plural_x: not a plural
     },
     keep: {
-        other_value: other two en,
+        other_one: other one ru,
+        other_value: other two ru,
         value_0: values ru 0,
         value_1: values ru 1,
         value_2: values ru 2
@@ -89,7 +92,8 @@ exports[`test plurals:locales/ru.json 1`] = `
         book_0: books en,
         book_1: books en,
         book_2: books en,
-        keep_two: two en
+        keep_one: one ru,
+        keep_two: two ru
     }
 }"
 `;
@@ -99,9 +103,9 @@ exports[`test plurals:stderr.txt 1`] = `""`;
 exports[`test plurals:stdout.txt 1`] = `
 "Pushed keys to actual/locales/de.json: brick, brick_plural, not_plural_x, also_not_0_x
 Removed keys from actual/locales/de.json: remove, remove_plural
-Pushed keys to actual/locales/ja.json: book_0, keep_two, brick, brick_0, not_plural_x, also_not_0_x, value, other_value
-Removed keys from actual/locales/ja.json: book_plural, keep_one, book, keep_two, brick, remove, remove_plural, other_one, other_value, value
-Pushed keys to actual/locales/ru.json: book_0, book_1, book_2, keep_two, brick, brick_0, brick_1, brick_2, not_plural_x, also_not_0_x, value, other_value
-Removed keys from actual/locales/ru.json: book_plural, keep_one, book, keep_two, brick, remove, remove_plural, other_one, other_value, value
+Pushed keys to actual/locales/ja.json: book_0, brick, brick_0, not_plural_x, also_not_0_x, value
+Removed keys from actual/locales/ja.json: book_plural, remove, remove_plural
+Pushed keys to actual/locales/ru.json: book_0, book_1, book_2, brick, brick_0, brick_1, brick_2, not_plural_x, also_not_0_x, value
+Removed keys from actual/locales/ru.json: book_plural, remove, remove_plural
 "
 `;

@@ -78,14 +78,18 @@ export default function sync({
 	}
 
 	function syncObjects(source: Object, target: Object) {
-		for (const key of Object.keys(source)) {
-			mergeKey(source, target, key);
-		}
+		mergeKeys(source, target);
 
 		for (const key of Object.keys(target)) {
 			if (!source.hasOwnProperty(key) && !isValidMappedPluralForm(key, source)) {
 				removeKey(source, target, key);
 			}
+		}
+	}
+
+	function mergeKeys(source: Object, target: Object) {
+		for (const key of Object.keys(source)) {
+			mergeKey(source, target, key);
 		}
 	}
 
@@ -102,7 +106,7 @@ export default function sync({
 					!keyMatchesPluralForLanguage(key, targetLanguage)
 				) {
 					removeKey(source, target, key);
-					syncObjects(createPlurals(key, sourceValue as string), target);
+					mergeKeys(createPlurals(key, sourceValue as string), target);
 				}
 				//base case: source and target agree on key name and value is string
 			} else {
@@ -121,7 +125,7 @@ export default function sync({
 			keyMatchesPluralForLanguage(key, primaryLanguage) &&
 			!keyMatchesPluralForLanguage(key, targetLanguage)
 		) {
-			syncObjects(createPlurals(key, sourceValue as string), target);
+			mergeKeys(createPlurals(key, sourceValue as string), target);
 		} else {
 			//base case: source contains key not present in target
 			target[key] = sourceValue;
