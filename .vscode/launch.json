@@ -13,7 +13,7 @@
 				"jest.json"
 			],
 			"cwd": "${workspaceRoot}",
-			"preLaunchTask": null,
+			"preLaunchTask": "pretest",
 			"runtimeExecutable": null,
 			"runtimeArgs": [
 				"--nolazy"

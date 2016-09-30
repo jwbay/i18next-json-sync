@@ -81,10 +81,43 @@ export default function sync({
 		mergeKeys(source, target);
 
 		for (const key of Object.keys(target)) {
-			if (!source.hasOwnProperty(key) && !isValidMappedPluralForm(key, source)) {
+			if (source.hasOwnProperty(key) && target.hasOwnProperty(key)) {
+				// we should remove book and book_plural if the language doesn't support singular forms
+				if (keyIsOnlyPluralForPrimary(key, Object.keys(source), Object.keys(target))) {
+					removeKey(source, target, key);
+				}
+			} else if (!isValidMappedPluralForm(key, source)) { // don't remove valid mappings from book_plural to book_0
 				removeKey(source, target, key);
 			}
 		}
+	}
+
+	function keyIsOnlyPluralForPrimary(key: string, allPimaryKeys: string[], allTargetKeys: string[]) {
+		return (
+			keyMatchesPluralForLanguageIncludingSingular(key, allPimaryKeys, primaryLanguage) &&
+			!keyMatchesPluralForLanguageIncludingSingular(key, allTargetKeys, targetLanguage)
+		);
+	}
+
+	function keyMatchesPluralForLanguageIncludingSingular(key: string, allKeys: string[], language: string) {
+		const matchesAPlural = keyMatchesPluralForLanguage(key, language);
+		if (matchesAPlural) {
+			return true;
+		}
+
+		//key is now a singular form
+		// const pluralForms = getPluralsForLanguage(language);
+		if (!languageHasSingularForm(language)) {
+			return false;
+		}
+
+		for (const _key of allKeys) {
+			if (key !== _key && isPluralFormForSingular(_key, key, language)) {
+				return true;
+			}
+		}
+
+		return false;
 	}
 
 	function mergeKeys(source: Object, target: Object) {
@@ -108,16 +141,18 @@ export default function sync({
 					removeKey(source, target, key);
 					mergeKeys(createPlurals(key, sourceValue as string), target);
 				}
+
 				//base case: source and target agree on key name and value is string
 			} else {
 				record.error(file => `${file} contains type mismatch on key ${key}`);
 			}
 		} else {
-			copyValue(sourceValue, target, key);
+			copyValue(source, target, key);
 		}
 	}
 
-	function copyValue(sourceValue: localizationValue, target: Object, key: string) {
+	function copyValue(source: Object, target: Object, key: string) {
+		const sourceValue = source[key];
 		if (getTypeName(sourceValue) === 'Object') {
 			target[key] = {};
 			syncObjects(sourceValue, target[key]);
@@ -133,10 +168,12 @@ export default function sync({
 		}
 	}
 
+	/** This doesn't handle singular forms correctly yet, so we add more keys than are strictly necessary and remove them later */
 	function keyMatchesPluralForLanguage(key: string, language: string) {
-		for (const form of getPluralsForLanguage(language)) {
-			const plural = form.replace('key', '');
-			if (plural && key.endsWith(plural)) {
+		const forms = getPluralsForLanguage(language).map(form => form.replace('key', ''));
+
+		for (const form of forms) {
+			if (form && key.endsWith(form)) {
 				return true;
 			}
 		}
@@ -144,11 +181,11 @@ export default function sync({
 		return false;
 	}
 
-	function isValidMappedPluralForm(key: string, sourceObject: Object) {
+	function isValidMappedPluralForm(key: string, sourceObject: Object, language = primaryLanguage) {
 		const singular = getSingularForm(key);
 
 		for (const key of Object.keys(sourceObject)) {
-			if (isPluralFormForSingular(key, singular)) {
+			if (isPluralFormForSingular(key, singular, language)) {
 				return true;
 			}
 		}
@@ -160,10 +197,16 @@ export default function sync({
 		return key.replace(/_(plural|\d)$/, '');
 	}
 
-	function isPluralFormForSingular(key: string, singular: string) {
-		return getPluralsForLanguage(primaryLanguage)
+	function isPluralFormForSingular(key: string, singular: string, language = primaryLanguage) {
+		return getPluralsForLanguage(language)
 			.map(form => form.replace('key', singular))
 			.indexOf(key) > -1;
+	}
+
+	function languageHasSingularForm(language: string) {
+		return getPluralsForLanguage(language)
+			.map(form => form.replace('key', ''))
+			.indexOf('') > -1;
 	}
 
 	function getPluralsForLanguage(language: string) {

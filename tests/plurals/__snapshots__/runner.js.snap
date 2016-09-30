@@ -104,8 +104,8 @@ exports[`test plurals:stdout.txt 1`] = `
 "Pushed keys to actual/locales/de.json: brick, brick_plural, not_plural_x, also_not_0_x
 Removed keys from actual/locales/de.json: remove, remove_plural
 Pushed keys to actual/locales/ja.json: book_0, brick, brick_0, not_plural_x, also_not_0_x, value
-Removed keys from actual/locales/ja.json: book_plural, remove, remove_plural
+Removed keys from actual/locales/ja.json: book_plural, book, brick, remove, remove_plural, value
 Pushed keys to actual/locales/ru.json: book_0, book_1, book_2, brick, brick_0, brick_1, brick_2, not_plural_x, also_not_0_x, value
-Removed keys from actual/locales/ru.json: book_plural, remove, remove_plural
+Removed keys from actual/locales/ru.json: book_plural, book, brick, remove, remove_plural, value
 "
 `;
