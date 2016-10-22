@@ -96,34 +96,6 @@ export default function sync({
 		}
 	}
 
-	function keyIsOnlyPluralForPrimary(key: string, allPimaryKeys: string[], allTargetKeys: string[]) {
-		return (
-			keyMatchesPluralForLanguageIncludingSingular(key, allPimaryKeys, primaryLanguage) &&
-			!keyMatchesPluralForLanguageIncludingSingular(key, allTargetKeys, targetLanguage)
-		);
-	}
-
-	function keyMatchesPluralForLanguageIncludingSingular(key: string, allKeys: string[], language: string) {
-		const matchesAPlural = keyMatchesPluralForLanguage(key, language);
-		if (matchesAPlural) {
-			return true;
-		}
-
-		//key is now a singular form
-		// const pluralForms = getPluralsForLanguage(language);
-		if (!languageHasSingularForm(language)) {
-			return false;
-		}
-
-		for (const _key of allKeys) {
-			if (key !== _key && isPluralFormForSingular(_key, key, language)) {
-				return true;
-			}
-		}
-
-		return false;
-	}
-
 	function mergeKeys(source: Object, target: Object) {
 		for (const key of Object.keys(source)) {
 			mergeKey(source, target, key);
@@ -157,7 +129,7 @@ export default function sync({
 
 	function copyValue(source: Object, target: Object, key: string) {
 		const sourceValue = source[key];
-		if (getTypeName(sourceValue) === 'Object') {
+		if (isObject(sourceValue)) {
 			target[key] = {};
 			syncObjects(sourceValue, target[key]);
 		} else if (
@@ -165,14 +137,53 @@ export default function sync({
 			!keyMatchesPluralForLanguage(key, targetLanguage)
 		) {
 			mergeKeys(createPlurals(key, sourceValue as string), target);
-		} else {
+		} else if (!keyIsOnlyPluralForPrimary(key, Object.keys(source), Object.keys(target))) {
 			//base case: source contains key not present in target
 			target[key] = sourceValue;
 			record.keyAdded(key);
 		}
 	}
 
-	/** This doesn't handle singular forms correctly yet, so we add more keys than are strictly necessary and remove them later */
+	function keyIsOnlyPluralForPrimary(key: string, allPimaryKeys: string[], allTargetKeys: string[]) {
+		if (pluralFormsMatch()) {
+			return false;
+		}
+
+		return (
+			keyMatchesPluralForLanguageIncludingSingular(key, allPimaryKeys, primaryLanguage) &&
+			!keyMatchesPluralForLanguageIncludingSingular(key, allTargetKeys, targetLanguage)
+		);
+	}
+
+	function pluralFormsMatch() {
+		const primaryForms = Object.keys(getPluralsForLanguage(primaryLanguage));
+		const targetForms = Object.keys(getPluralsForLanguage(targetLanguage));
+		return (
+			primaryForms.length === targetForms.length &&
+			primaryForms.every(form => targetForms.indexOf(form) > -1)
+		);
+	}
+
+	function keyMatchesPluralForLanguageIncludingSingular(key: string, allKeys: string[], language: string) {
+		const matchesAPlural = keyMatchesPluralForLanguage(key, language);
+		if (matchesAPlural) {
+			return true;
+		}
+
+		//key is now a singular form
+		if (!languageHasSingularForm(language)) {
+			return false;
+		}
+
+		for (const _key of allKeys) {
+			if (key !== _key && isPluralFormForSingular(_key, key, language)) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+
 	function keyMatchesPluralForLanguage(key: string, language: string) {
 		const forms = getPluralsForLanguage(language).map(form => form.replace('key', ''));
 

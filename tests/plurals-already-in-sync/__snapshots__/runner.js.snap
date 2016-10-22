@@ -1,4 +1,4 @@
-exports[`test plurals:locales/de.json 1`] = `
+exports[`test plurals-already-in-sync:locales/de.json 1`] = `
 "{
     add: {
         also_not_0_x: also not a plural,
@@ -23,7 +23,7 @@ exports[`test plurals:locales/de.json 1`] = `
 }"
 `;
 
-exports[`test plurals:locales/en.json 1`] = `
+exports[`test plurals-already-in-sync:locales/en.json 1`] = `
 "{
     add: {
         also_not_0_x: also not a plural,
@@ -48,7 +48,7 @@ exports[`test plurals:locales/en.json 1`] = `
 }"
 `;
 
-exports[`test plurals:locales/ja.json 1`] = `
+exports[`test plurals-already-in-sync:locales/ja.json 1`] = `
 "{
     add: {
         also_not_0_x: also not a plural,
@@ -70,7 +70,7 @@ exports[`test plurals:locales/ja.json 1`] = `
 }"
 `;
 
-exports[`test plurals:locales/ru.json 1`] = `
+exports[`test plurals-already-in-sync:locales/ru.json 1`] = `
 "{
     add: {
         also_not_0_x: also not a plural,
@@ -98,14 +98,6 @@ exports[`test plurals:locales/ru.json 1`] = `
 }"
 `;
 
-exports[`test plurals:stderr.txt 1`] = `""`;
+exports[`test plurals-already-in-sync:stderr.txt 1`] = `""`;
 
-exports[`test plurals:stdout.txt 1`] = `
-"Pushed keys to actual/locales/de.json: brick, brick_plural, not_plural_x, also_not_0_x
-Removed keys from actual/locales/de.json: remove, remove_plural
-Pushed keys to actual/locales/ja.json: book_0, brick_0, not_plural_x, also_not_0_x
-Removed keys from actual/locales/ja.json: book_plural, book, remove, remove_plural
-Pushed keys to actual/locales/ru.json: book_0, book_1, book_2, brick_0, brick_1, brick_2, not_plural_x, also_not_0_x
-Removed keys from actual/locales/ru.json: book_plural, book, remove, remove_plural
-"
-`;
+exports[`test plurals-already-in-sync:stdout.txt 1`] = `""`;

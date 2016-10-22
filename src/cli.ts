@@ -30,9 +30,8 @@ const {
 	.describe('s', 'Space value used for JSON.stringify when writing JSON files to disk')
 	.alias('s', 'space')
 
-	.describe('le', 'Line endings used when writing JSON files to disk')
+	.describe('le', 'Line endings used when writing JSON files to disk -- either LF or CRLF')
 	.alias('le', 'lineendings')
-	.example('-le', 'CRLF')
 
 	.help('h')
 	.alias('h', 'help')
