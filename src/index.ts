@@ -13,20 +13,24 @@ export interface IOptions {
 	primary?: string;
 	/** Language files to create if they don't exist, e.g. ['es, 'pt-BR', 'fr'] */
 	createResources?: string[];
-	/** Space value used for JSON.stringify */
+	/** Space value used for JSON.stringify when writing JSON files to disk */
 	space?: string | number;
+	/** Line endings used when writing JSON files to disk */
+	lineEndings?: 'LF' | 'CRLF';
 }
 
 export interface IDirectoryMap { [directory: string]: IFileMap; }
 export interface IFileMap { [filename: string]: Object; }
 type localizationValue = { [key: string]: string } | string;
+type lineEndings = 'LF' | 'CRLF';
 
 export default function sync({
 	check: isReportMode = false,
 	files = '**/locales/*.json',
 	primary: primaryLanguage = 'en',
 	createResources: createFiles = [],
-	space: jsonSpacing = 4
+	space: jsonSpacing = 4,
+	lineEndings = 'LF'
 }: IOptions) {
 	const allFiles = glob.sync(files);
 	const directories = groupFilesByDirectory(allFiles);
@@ -52,7 +56,7 @@ export default function sync({
 			hasAnyErrors = hasAnyErrors || record.hasAnyErrors();
 		}
 
-		folder.flushToDisk(jsonSpacing);
+		folder.flushToDisk(jsonSpacing, lineEndings.toUpperCase() as lineEndings);
 	}
 
 	if (hasAnyErrors) {

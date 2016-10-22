@@ -8,7 +8,8 @@ const {
 	files,
 	primary,
 	languages,
-	space
+	space,
+	lineendings
 } = yargs
 	.describe('c','Audit files in memory instead of changing them on the filesystem and throw an error if any changes would be made')
 	.alias('c','check')
@@ -26,8 +27,12 @@ const {
 	.alias('l', 'languages')
 	.array('l')
 
-	.describe('s', 'Space value used for JSON.stringify')
+	.describe('s', 'Space value used for JSON.stringify when writing JSON files to disk')
 	.alias('s', 'space')
+
+	.describe('le', 'Line endings used when writing JSON files to disk')
+	.alias('le', 'lineendings')
+	.example('-le', 'CRLF')
 
 	.help('h')
 	.alias('h', 'help')
@@ -39,5 +44,6 @@ sync({
 	files,
 	primary,
 	createResources: languages,
-	space
+	space,
+	lineEndings: lineendings
 });

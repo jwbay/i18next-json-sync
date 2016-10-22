@@ -31,10 +31,13 @@ export default class LocalizationFolder {
 		}
 	}
 
-	public flushToDisk(space: string | number) {
+	public flushToDisk(jsonSpacing: string | number, jsonLineEndings: 'LF' | 'CRLF') {
 		Object.keys(this.files).forEach(name => {
 			if (!this.isReportMode) {
-				const fileContent = stringify(this.files[name], { space });
+				let fileContent = stringify(this.files[name], { space: jsonSpacing });
+				if (jsonLineEndings === 'CRLF') {
+					fileContent = fileContent.replace(/\n/g, '\r\n');
+				}
 				fs.writeFileSync(name, fileContent, { encoding: 'utf8' });
 			}
 
