@@ -22,8 +22,8 @@ export default class ActionRecorder {
 
 	public hasAnyActions() {
 		return this.hasAnyErrors() ||
-			this.addedKeys.length > 1 ||
-			this.removedKeys.length > 1;
+			this.addedKeys.length > 0 ||
+			this.removedKeys.length > 0;
 	}
 
 	public flushToConsole() {
