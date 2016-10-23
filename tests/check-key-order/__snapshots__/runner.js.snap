@@ -1,0 +1,27 @@
+exports[`test check-key-order:locales/en.json 1`] = `
+"{
+    keep_one: en,
+    asdf: {
+        keep_two: en
+    }
+}"
+`;
+
+exports[`test check-key-order:locales/pt-BR.json 1`] = `
+"{
+    asdf: {
+        keep_two: pt-BR
+    },
+    keep_one: pt-BR
+}"
+`;
+
+exports[`test check-key-order:stderr.txt 1`] = `
+"
+THROWN:
+Error: [i18next-json-sync] check failed -- files have unordered keys or unexpected whitespace. Run again without check mode to correct files 
+ 	...
+"
+`;
+
+exports[`test check-key-order:stdout.txt 1`] = `""`;

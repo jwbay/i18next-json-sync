@@ -1,0 +1,27 @@
+exports[`test check-whitespace:locales/en.json 1`] = `
+"{
+    asdf: {
+        keep_two: en
+    },
+    keep_one: en
+}"
+`;
+
+exports[`test check-whitespace:locales/pt-BR.json 1`] = `
+"{
+  asdf: {
+    keep_two: pt-BR
+  },
+  keep_one: pt-BR
+}"
+`;
+
+exports[`test check-whitespace:stderr.txt 1`] = `
+"
+THROWN:
+Error: [i18next-json-sync] check failed -- files have unordered keys or unexpected whitespace. Run again without check mode to correct files 
+ 	...
+"
+`;
+
+exports[`test check-whitespace:stdout.txt 1`] = `""`;

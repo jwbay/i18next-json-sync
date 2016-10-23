@@ -1,0 +1,22 @@
+{
+    "add": {
+        "also_not_0_x": "also not a plural",
+        "brick": "brick en",
+        "brick_plural": "bricks en",
+        "not_plural_x": "not a plural"
+    },
+    "keep": {
+        "other_one": "other one en",
+        "other_value": "other two en",
+        "value": "value en",
+        "value_plural": "values en"
+    },
+    "remove": {
+    },
+    "replace": {
+        "book": "book en",
+        "book_plural": "books en",
+        "keep_one": "one en",
+        "keep_two": "two en"
+    }
+}

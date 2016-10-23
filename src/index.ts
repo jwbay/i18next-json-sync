@@ -16,13 +16,13 @@ export interface IOptions {
 	/** Space value used for JSON.stringify when writing JSON files to disk */
 	space?: string | number;
 	/** Line endings used when writing JSON files to disk */
-	lineEndings?: 'LF' | 'CRLF';
+	lineEndings?: lineEndings;
 }
 
 export interface IDirectoryMap { [directory: string]: IFileMap; }
 export interface IFileMap { [filename: string]: Object; }
+export type lineEndings = 'LF' | 'CRLF';
 type localizationValue = { [key: string]: string } | string;
-type lineEndings = 'LF' | 'CRLF';
 
 export default function sync({
 	check: isReportMode = false,
@@ -38,6 +38,7 @@ export default function sync({
 	let record: ActionRecorder;
 	let hasAnyErrors = false;
 	let hasAnyChanges = false;
+	let hasValueChanges = false;
 	for (const currentDirectory of Object.keys(directories)) {
 		const folder = new LocalizationFolder(directories[currentDirectory], primaryLanguage, isReportMode);
 		folder.populateFromDisk(createFiles);
@@ -52,19 +53,25 @@ export default function sync({
 			record = new ActionRecorder(filename, isReportMode);
 			syncObjects(sourceObject, folder.getTargetObject(filename));
 			record.flushToConsole();
-			hasAnyChanges = hasAnyChanges || record.hasAnyActions();
+			hasValueChanges = hasValueChanges || record.hasAnyActions();
 			hasAnyErrors = hasAnyErrors || record.hasAnyErrors();
 		}
 
-		folder.flushToDisk(jsonSpacing, lineEndings.toUpperCase() as lineEndings);
+		const changedFiles = folder.flushToDisk(jsonSpacing, lineEndings.toUpperCase() as lineEndings);
+		hasAnyChanges = hasAnyChanges || changedFiles.length > 0;
 	}
 
 	if (hasAnyErrors) {
 		throw new Error('[i18next-json-sync] found keys unsafe to synchronize');
 	}
 
-	if (isReportMode && hasAnyChanges) {
-		throw new Error('[i18next-json-sync] check failed');
+	if (isReportMode) {
+		if (hasValueChanges) {
+			throw new Error('[i18next-json-sync] check failed -- keys are out of sync. Run again without check mode to synchronize files');
+		}
+		if (hasAnyChanges) {
+			throw new Error('[i18next-json-sync] check failed -- files have unordered keys or unexpected whitespace. Run again without check mode to correct files');
+		}
 	}
 
 	function groupFilesByDirectory(allFiles: string[]) {

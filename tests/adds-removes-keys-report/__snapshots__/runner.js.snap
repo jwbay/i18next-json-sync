@@ -22,7 +22,7 @@ exports[`test adds-removes-keys-report:locales/pt-BR.json 1`] = `
 exports[`test adds-removes-keys-report:stderr.txt 1`] = `
 "
 THROWN:
-Error: [i18next-json-sync] check failed 
+Error: [i18next-json-sync] check failed -- keys are out of sync. Run again without check mode to synchronize files 
  	...
 "
 `;
