@@ -15,8 +15,7 @@
     "pretest": "rimraf tests/**/runner.js && ts-node -P testRunner testRunner/init",
     "reset": "git clean -xdf -e\"node_modules\" && npm run typings",
     "test": "jest --config jest.json",
-    "typings": "typings install",
-    "prepublish": "npm run ci"
+    "typings": "typings install"
   },
   "repository": {
     "type": "git",
