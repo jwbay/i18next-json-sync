@@ -24,7 +24,14 @@
   "keywords": [
     "i18next",
     "json",
-    "sync"
+    "sync",
+    "synchronize",
+    "plurals",
+    "pluralization",
+    "l10n",
+    "i18n",
+    "localization",
+    "internationalization"
   ],
   "author": "justin.bay@outlook.com",
   "license": "MIT",

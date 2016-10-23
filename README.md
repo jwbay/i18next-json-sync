@@ -48,8 +48,6 @@ sync({
 });
 ```
 
-(or via CLI: `sync-i18n --files locales/*.json --primary en`)
-
 resulting in:
 
 ```json
@@ -83,9 +81,11 @@ languages according to the [i18next suffix rules](http://i18next.com/docs/plural
 This works on one folder at a time, but can deal with whatever the files glob returns. Files are
 grouped into directories before processing starts. Folders without a 'primary' found are ignored.
 
-## Node.js Usage
+## Usage
 
 `$ npm install i18next-json-sync --save-dev`
+
+#### In node.js
 
 ```js
 import sync from 'i18next-json-sync';
@@ -103,18 +103,20 @@ sync({
   primary: 'en',
   /** Language files to create if they don't exist, e.g. ['es, 'pt-BR', 'fr'] */
   createResources: [],
-  /** Space value used for JSON.stringify */
-  space: 4
+  /** Space value used for JSON.stringify when writing JSON files to disk */
+  space: 4,
+  /** Line endings used when writing JSON files to disk. Either LF or CRLF */
+  lineEndings: 'LF'
 })
 ```
 
-## CLI Usage
+#### CLI
 
 It can be installed globally, but npm's [package.json scripts](https://docs.npmjs.com/misc/scripts) are a better fit.
 
 ```json
 {
-  "name": "foo",
+  "name": "my-app",
   "scripts": {
     "i18n": "sync-i18n --files **/locales/*.json --primary en --languages es fr ja zh ko --space 2",
     "check-i18n": "npm run i18n -- --check"
@@ -127,24 +129,7 @@ It can be installed globally, but npm's [package.json scripts](https://docs.npmj
 
 Then use `npm run i18n` to sync on the filesystem and `npm run check-i18n` to validate.
 
-Use `sync-i18n -h` to get help output:
-
-```
-Options:
-  -c, --check      Audit files in memory instead of changing them on the
-                   filesystem and throw an error if any changes would be made
-                                                                       [boolean]
-  -f, --files      Glob pattern for the resource JSON files
-  -p, --primary    Primary localization language. Other language files will be
-                   changed to match
-  -l, --languages  Language files to create if they don't exist          [array]
-  -s, --space      Space value used for JSON.stringify
-  -h, --help       Show help                                           [boolean]
-
-Examples:
-  --files      **/locales/*.json
-  --languages  es fr pt-BR ja
-```
+All options are available via CLI. Use `-h` or `--help` to get help output.
 
 ## License
 
