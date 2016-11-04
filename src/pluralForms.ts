@@ -36,7 +36,7 @@ export default {
 		'key_plural'
 	],
 	'ay': [
-		'key_0'
+		'key'
 	],
 	'az': [
 		'key',
@@ -56,7 +56,7 @@ export default {
 		'key_plural'
 	],
 	'bo': [
-		'key_0'
+		'key'
 	],
 	'br': [
 		'key',
@@ -72,7 +72,7 @@ export default {
 		'key_plural'
 	],
 	'cgg': [
-		'key_0'
+		'key'
 	],
 	'cs': [
 		'key_0',
@@ -136,7 +136,7 @@ export default {
 		'key_plural'
 	],
 	'fa': [
-		'key_0'
+		'key'
 	],
 	'fi': [
 		'key',
@@ -217,7 +217,7 @@ export default {
 		'key_plural'
 	],
 	'id': [
-		'key_0'
+		'key'
 	],
 	'is': [
 		'key',
@@ -228,30 +228,30 @@ export default {
 		'key_plural'
 	],
 	'ja': [
-		'key_0'
+		'key'
 	],
 	'jbo': [
-		'key_0'
+		'key'
 	],
 	'jv': [
 		'key',
 		'key_plural'
 	],
 	'ka': [
-		'key_0'
+		'key'
 	],
 	'kk': [
-		'key_0'
+		'key'
 	],
 	'km': [
-		'key_0'
+		'key'
 	],
 	'kn': [
 		'key',
 		'key_plural'
 	],
 	'ko': [
-		'key_0'
+		'key'
 	],
 	'ku': [
 		'key',
@@ -264,7 +264,7 @@ export default {
 		'key_3'
 	],
 	'ky': [
-		'key_0'
+		'key'
 	],
 	'lb': [
 		'key',
@@ -275,7 +275,7 @@ export default {
 		'key_plural'
 	],
 	'lo': [
-		'key_0'
+		'key'
 	],
 	'lt': [
 		'key_0',
@@ -325,7 +325,7 @@ export default {
 		'key_plural'
 	],
 	'ms': [
-		'key_0'
+		'key'
 	],
 	'mt': [
 		'key_0',
@@ -417,7 +417,7 @@ export default {
 		'key_2'
 	],
 	'sah': [
-		'key_0'
+		'key'
 	],
 	'sco': [
 		'key',
@@ -460,7 +460,7 @@ export default {
 		'key_2'
 	],
 	'su': [
-		'key_0'
+		'key'
 	],
 	'sv': [
 		'key',
@@ -483,7 +483,7 @@ export default {
 		'key_plural'
 	],
 	'th': [
-		'key_0'
+		'key'
 	],
 	'ti': [
 		'key',
@@ -498,10 +498,10 @@ export default {
 		'key_plural'
 	],
 	'tt': [
-		'key_0'
+		'key'
 	],
 	'ug': [
-		'key_0'
+		'key'
 	],
 	'uk': [
 		'key_0',
@@ -517,30 +517,30 @@ export default {
 		'key_plural'
 	],
 	'vi': [
-		'key_0'
+		'key'
 	],
 	'wa': [
 		'key',
 		'key_plural'
 	],
 	'wo': [
-		'key_0'
+		'key'
 	],
 	'yo': [
 		'key',
 		'key_plural'
 	],
 	'zh': [
-		'key_0'
+		'key'
 	]
 } as Object & { [language: string]: string[] };
 
 /*
 on http://i18next.com/docs/plurals/:
-var data = {};
-Array.from(document.querySelectorAll('tbody > tr')).forEach(row => {
-   var tds = row.querySelectorAll('td');
-   data[tds[0].innerText] = tds[tds.length - 1].innerText.split(', ')
-});
+data = Array.from(document.querySelectorAll('tbody > tr')).reduce((data, row) => {
+	var tds = row.querySelectorAll('td')
+	data[tds[0].innerText] = tds[tds.length - 1].innerText.split(', ')
+	return data
+}, {});
 console.log(JSON.stringify(data, null, '\t'))
  */
