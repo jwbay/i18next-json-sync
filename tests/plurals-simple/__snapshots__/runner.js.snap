@@ -9,7 +9,7 @@ exports[`test plurals-simple:locales/en.json 1`] = `
 
 exports[`test plurals-simple:locales/ja.json 1`] = `
 "{
-    book_0: books en,
+    book: book ja,
     keep_one: one ja,
     keep_two: two ja
 }"
@@ -28,8 +28,7 @@ exports[`test plurals-simple:locales/ru.json 1`] = `
 exports[`test plurals-simple:stderr.txt 1`] = `""`;
 
 exports[`test plurals-simple:stdout.txt 1`] = `
-"Pushed keys to actual/locales/ja.json: book_0
-Removed keys from actual/locales/ja.json: book_plural, book
+"Removed keys from actual/locales/ja.json: book_plural
 Pushed keys to actual/locales/ru.json: book_0, book_1, book_2
 Removed keys from actual/locales/ru.json: book_plural, book
 "

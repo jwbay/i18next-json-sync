@@ -19,7 +19,7 @@ exports[`test plurals-simple-add:locales/en.json 1`] = `
 exports[`test plurals-simple-add:locales/ja.json 1`] = `
 "{
     also_not_0_x: also not a plural,
-    brick_0: bricks en,
+    brick: brick en,
     not_plural_x: not a plural
 }"
 `;
@@ -38,7 +38,7 @@ exports[`test plurals-simple-add:stderr.txt 1`] = `""`;
 
 exports[`test plurals-simple-add:stdout.txt 1`] = `
 "Pushed keys to actual/locales/de.json: brick, brick_plural, not_plural_x, also_not_0_x
-Pushed keys to actual/locales/ja.json: brick_0, not_plural_x, also_not_0_x
+Pushed keys to actual/locales/ja.json: brick, not_plural_x, also_not_0_x
 Pushed keys to actual/locales/ru.json: brick_0, brick_1, brick_2, not_plural_x, also_not_0_x
 "
 `;

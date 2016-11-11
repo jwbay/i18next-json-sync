@@ -98,6 +98,15 @@ exports[`test check-plurals-already-in-sync:locales/ru.json 1`] = `
 }"
 `;
 
-exports[`test check-plurals-already-in-sync:stderr.txt 1`] = `""`;
+exports[`test check-plurals-already-in-sync:stderr.txt 1`] = `
+"
+THROWN:
+Error: [i18next-json-sync] check failed -- keys are out of sync. Run again without check mode to synchronize files 
+ 	...
+"
+`;
 
-exports[`test check-plurals-already-in-sync:stdout.txt 1`] = `""`;
+exports[`test check-plurals-already-in-sync:stdout.txt 1`] = `
+"Missing keys in actual/locales/ja.json: brick, value, book
+"
+`;
