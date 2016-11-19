@@ -1,10 +1,10 @@
 {
   "globalDependencies": {
-    "jest": "registry:dt/jest#15.1.1+20160919141445",
+    "jest": "registry:dt/jest#16.0.0+20161025131017",
     "json-stable-stringify": "registry:dt/json-stable-stringify#1.0.0+20160317120654",
-    "node": "registry:dt/node#6.0.0+20160923124626",
-    "shelljs": "registry:dt/shelljs#0.0.0+20160526131156",
-    "yargs": "registry:dt/yargs#0.0.0+20160808125142"
+    "node": "registry:dt/node#6.0.0+20161110151007",
+    "shelljs": "registry:dt/shelljs#0.0.0+20161003183410",
+    "yargs": "registry:dt/yargs#0.0.0+20161006150200"
   },
   "dependencies": {
     "glob": "registry:npm/glob#6.0.0+20160723033700"
