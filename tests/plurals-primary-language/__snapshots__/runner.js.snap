@@ -45,7 +45,7 @@ exports[`test plurals-primary-language:locales/ja.json 1`] = `
         book: books ru 0
     },
     keep: {
-        value: values ru 0
+        value: values ja
     },
     remove: {
     }
@@ -81,7 +81,7 @@ exports[`test plurals-primary-language:stdout.txt 1`] = `
 Removed keys from actual/locales/de.json: remove, remove_0, remove_plural, brick_0, brick_1, brick_2
 Pushed keys to actual/locales/en.json: brick, brick_plural, book, book_plural
 Removed keys from actual/locales/en.json: remove, remove_0, remove_plural, brick_0, brick_1, brick_2
-Pushed keys to actual/locales/ja.json: brick, value, book
-Removed keys from actual/locales/ja.json: value_0, remove, remove_0, remove_plural, book_0, book_1, book_2
+Pushed keys to actual/locales/ja.json: brick, book
+Removed keys from actual/locales/ja.json: remove, remove_0, remove_plural, book_0, book_1, book_2
 "
 `;

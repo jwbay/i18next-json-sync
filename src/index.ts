@@ -93,11 +93,11 @@ export default function sync({
 
 		for (const key of Object.keys(target)) {
 			if (source.hasOwnProperty(key) && target.hasOwnProperty(key)) {
-				// we should remove book and book_plural if the language doesn't support singular forms
+				// we should remove book_plural, book_1, etc if the language doesn't support singular forms
 				if (keyIsOnlyPluralForPrimary(key, Object.keys(source), Object.keys(target))) {
 					removeKey(source, target, key);
 				}
-			} else if (!isValidMappedPluralForm(key, source)) { // don't remove valid mappings from book_plural to book_0
+			} else if (!isValidMappedPluralForm(key, source, target)) { // don't remove valid mappings from book_plural to book_0
 				removeKey(source, target, key);
 			}
 		}
@@ -140,6 +140,7 @@ export default function sync({
 			target[key] = {};
 			syncObjects(sourceValue, target[key]);
 		} else if (
+			//do we need to transform plurals from e.g. x_plural to x_0?
 			keyMatchesPluralForLanguage(key, primaryLanguage) &&
 			!keyMatchesPluralForLanguage(key, targetLanguage)
 		) {
@@ -172,6 +173,15 @@ export default function sync({
 	}
 
 	function keyMatchesPluralForLanguageIncludingSingular(key: string, allKeys: string[], language: string) {
+		/**
+		 * It's impossible to tell whether a key is a plural for a language with one form shared between singular and plurals.
+		 * With other languages we can look for relationships between e.g. value and value_plural or value and value_0. 
+		 */
+
+		if (languageOnlyHasOneForm(language)) {
+			return true;
+		}
+
 		const matchesAPlural = keyMatchesPluralForLanguage(key, language);
 		if (matchesAPlural) {
 			return true;
@@ -203,16 +213,16 @@ export default function sync({
 		return false;
 	}
 
-	function isValidMappedPluralForm(key: string, sourceObject: Object, language = primaryLanguage) {
+	function isValidMappedPluralForm(key: string, sourceObject: Object, targetObject: Object) {
 		const singular = getSingularForm(key);
+		const isPluralForPrimaryLanguage = Object.keys(sourceObject).some(key => isPluralFormForSingular(key, singular, primaryLanguage));
 
-		for (const key of Object.keys(sourceObject)) {
-			if (isPluralFormForSingular(key, singular, language)) {
-				return true;
-			}
+		if (languageOnlyHasOneForm(targetLanguage)) {
+			return singular === key && isPluralForPrimaryLanguage;
 		}
 
-		return false;
+		const isPluralForTargetLanguage = Object.keys(targetObject).some(key => isPluralFormForSingular(key, singular, targetLanguage));
+		return isPluralForPrimaryLanguage && isPluralForTargetLanguage;
 	}
 
 	function getSingularForm(key: string) {
@@ -229,6 +239,10 @@ export default function sync({
 		return getPluralsForLanguage(language)
 			.map(form => form.replace('key', ''))
 			.indexOf('') > -1;
+	}
+
+	function languageOnlyHasOneForm(language: string) {
+		return getPluralsForLanguage(language).length === 1;
 	}
 
 	function getPluralsForLanguage(language: string) {

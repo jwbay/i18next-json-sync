@@ -52,21 +52,18 @@ exports[`test plurals-already-in-sync:locales/ja.json 1`] = `
 "{
     add: {
         also_not_0_x: also not a plural,
-        brick: brick en,
-        brick_0: bricks en,
+        brick: bricks ja,
         not_plural_x: not a plural
     },
     keep: {
         other_one: other one ja,
         other_value: other two ja,
-        value: value en,
-        value_0: values ja
+        value: values ja
     },
     remove: {
     },
     replace: {
-        book: book en,
-        book_0: books en,
+        book: books ja,
         keep_one: one ja,
         keep_two: two ja
     }
@@ -103,7 +100,4 @@ exports[`test plurals-already-in-sync:locales/ru.json 1`] = `
 
 exports[`test plurals-already-in-sync:stderr.txt 1`] = `""`;
 
-exports[`test plurals-already-in-sync:stdout.txt 1`] = `
-"Pushed keys to actual/locales/ja.json: brick, value, book
-"
-`;
+exports[`test plurals-already-in-sync:stdout.txt 1`] = `""`;
