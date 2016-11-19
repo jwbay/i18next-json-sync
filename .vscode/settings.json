@@ -7,7 +7,6 @@
         "**/.svn": true,
         "**/.hg": true,
         "**/.DS_Store": true,
-        "tests/**/__snapshots__": true,
         "tests/**/actual": true,
         "tests/**/testRunner.js": true
     },

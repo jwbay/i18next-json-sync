@@ -182,11 +182,6 @@ export default function sync({
 			return true;
 		}
 
-		const matchesAPlural = keyMatchesPluralForLanguage(key, language);
-		if (matchesAPlural) {
-			return true;
-		}
-
 		//key is now a singular form
 		if (!languageHasSingularForm(language)) {
 			return false;

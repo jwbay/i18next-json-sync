@@ -15,6 +15,7 @@
         "noImplicitReturns": true,
         "outDir": "../dist",
         "pretty": true,
+        "sourceMap": true,
         "suppressImplicitAnyIndexErrors": true,
         "target": "es5"
     },

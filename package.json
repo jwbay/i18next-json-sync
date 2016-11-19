@@ -9,11 +9,16 @@
   },
   "scripts": {
     "build": "rimraf dist && tsc -p src && tsc -p testRunner --noEmit",
-    "ci": "npm run lint && npm run build && npm run coverage",
-    "coverage": "rimraf coverage && npm run test -- --coverage",
+    "ci": "npm run lint && npm run coverage",
+    "coverage": "rimraf coverage && jest --config jest.coverage.json",
     "lint": "tslint src/**/*.ts testRunner/**/*.ts",
+    "mapcoverage:html": "npm run mapcoverage -- --output coverage  --type html",
+    "mapcoverage:lcov": "npm run mapcoverage -- --output coverage/lcov.info --type lcovonly",
+    "mapcoverage": "remap-istanbul -i coverage/coverage-final.json -e options",
+    "postcoverage": "npm run mapcoverage:html && npm run mapcoverage:lcov && rimraf coverage/lcov-report",
+    "precoverage": "npm run build && npm run pretest",
     "pretest": "rimraf tests/**/runner.js && ts-node -P testRunner testRunner/init",
-    "reset": "git clean -xdf -e\"node_modules\" && npm run typings",
+    "reset": "git clean -xdf -e \"node_modules\" && npm run typings",
     "test": "jest --config jest.json",
     "typings": "typings install"
   },
@@ -41,6 +46,7 @@
   "homepage": "https://github.com/jwbay/i18next-json-sync#readme",
   "devDependencies": {
     "jest": "^17.0.3",
+    "remap-istanbul": "^0.7.0",
     "rimraf": "^2.5.4",
     "shelljs": "^0.7.5",
     "ts-node": "^1.7.0",

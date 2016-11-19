@@ -8,7 +8,7 @@ exports[`test multifolder:one/locales/en.json 1`] = `
 exports[`test multifolder:one/locales/pt-BR.json 1`] = `
 "{
     add_me: add,
-    keep_me: don\'t change
+    keep_me: don't change
 }"
 `;
 
@@ -34,7 +34,7 @@ exports[`test multifolder:two/locales/en.json 1`] = `
 exports[`test multifolder:two/locales/pt-BR.json 1`] = `
 "{
     add_me: add,
-    keep_me: don\'t change
+    keep_me: don't change
 }"
 `;
 
@@ -48,6 +48,6 @@ exports[`test multifolder:two/three/locales/en.json 1`] = `
 exports[`test multifolder:two/three/locales/pt-BR.json 1`] = `
 "{
     add_me: add,
-    keep_me: don\'t change
+    keep_me: don't change
 }"
 `;

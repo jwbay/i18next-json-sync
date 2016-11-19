@@ -1,4 +1,7 @@
 {
+    "collectCoverage": true,
+    "coverageReporters": ["lcov", "json", "text-summary"],
+    "globals": { "COVERAGE": true },
     "moduleFileExtensions": ["js", "json", "ts"],
     "testEnvironment": "node",
     "testPathDirs": ["tests"],

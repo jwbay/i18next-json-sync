@@ -8,7 +8,7 @@ exports[`test globs:one/en.json 1`] = `
 exports[`test globs:one/pt-BR.json 1`] = `
 "{
     add_me: add,
-    keep_me: don\'t change
+    keep_me: don't change
 }"
 `;
 
@@ -32,6 +32,6 @@ exports[`test globs:two/en.json 1`] = `
 exports[`test globs:two/pt-BR.json 1`] = `
 "{
     add_me: add,
-    keep_me: don\'t change
+    keep_me: don't change
 }"
 `;

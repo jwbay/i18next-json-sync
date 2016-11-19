@@ -4,7 +4,8 @@ import path = require('path');
 import sh = require('shelljs');
 import syncType, { IOptions } from '../src';
 import util = require('util');
-const sync: typeof syncType = require('../../src').default;
+const main = (global as any).COVERAGE ? 'dist' : 'src';
+const sync: typeof syncType = require(`../../${main}`).default;
 
 sh.config.silent = true;
 sh.pushd(__dirname);
