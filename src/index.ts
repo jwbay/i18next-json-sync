@@ -122,7 +122,7 @@ export default function sync({
 					!keyMatchesPluralForLanguage(key, targetLanguage)
 				) {
 					removeKey(source, target, key);
-					mergeKeys(createPlurals(key, sourceValue as string), target);
+					mergeKeys(createPlurals(key, source), target);
 				}
 
 				//base case: source and target agree on key name and value is string
@@ -141,13 +141,25 @@ export default function sync({
 			syncObjects(sourceValue, target[key]);
 		} else if (
 			//do we need to transform plurals from e.g. x_plural to x_0?
-			keyMatchesPluralForLanguage(key, primaryLanguage) &&
-			!keyMatchesPluralForLanguage(key, targetLanguage)
+			keyMatchesPluralForLanguageIncludingSingular(key, Object.keys(source), primaryLanguage) &&
+			!keyMatchesPluralForLanguage(key, targetLanguage) &&
+			!pluralFormsMatch()
 		) {
-			mergeKeys(createPlurals(key, sourceValue as string), target);
-		} else if (!keyIsOnlyPluralForPrimary(key, Object.keys(source), Object.keys(target))) {
+			copyPlurals(createPlurals(key, source), target);
+		} else {
 			//base case: source contains key not present in target
 			target[key] = sourceValue;
+			record.keyAdded(key);
+		}
+	}
+
+	function copyPlurals(plurals: Object, target: Object) {
+		for (const key of Object.keys(plurals)) {
+			if (target.hasOwnProperty(key)) {
+				continue;
+			}
+
+			target[key] = plurals[key];
 			record.keyAdded(key);
 		}
 	}
@@ -179,6 +191,11 @@ export default function sync({
 		 */
 
 		if (languageOnlyHasOneForm(language)) {
+			return true;
+		}
+
+		const matchesAPlural = keyMatchesPluralForLanguage(key, language);
+		if (matchesAPlural) {
 			return true;
 		}
 
@@ -224,7 +241,7 @@ export default function sync({
 		return key.replace(/_(plural|\d)$/, '');
 	}
 
-	function isPluralFormForSingular(key: string, singular: string, language = primaryLanguage) {
+	function isPluralFormForSingular(key: string, singular: string, language: string) {
 		return getPluralsForLanguage(language)
 			.map(form => form.replace('key', singular))
 			.indexOf(key) > -1;
@@ -255,13 +272,32 @@ export default function sync({
 		return [];
 	}
 
-	function createPlurals(key: string, fillValue: string) {
+	function createPlurals(key: string, source: Object) {
 		const singular = getSingularForm(key);
+		const fillValue = getPluralFillValue(singular, source);
 		const plurals = {};
 		for (const form of getPluralsForLanguage(targetLanguage)) {
 			plurals[form.replace('key', singular)] = fillValue;
 		}
 		return plurals;
+	}
+
+	function getPluralFillValue(singular: string, source: Object) {
+		if (languageOnlyHasOneForm(primaryLanguage)) {
+			return source[singular];
+		}
+
+		//prefer plural fill values because they're more likely to have
+		//interpolations like {{ count }}, but fall back to singular
+		const sourceKeys = Object.keys(source).filter(k => k !== singular);
+		for (const form of getPluralsForLanguage(primaryLanguage)) {
+			const pluralKey = form.replace('key', singular);
+			if (sourceKeys.indexOf(pluralKey) > -1) {
+				return source[pluralKey];
+			}
+		}
+
+		return source[singular];
 	}
 
 	function removeKey(source: Object, target: Object, key: string) {

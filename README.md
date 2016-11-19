@@ -78,6 +78,9 @@ ru.json
 An extraneous key in ru.json was deleted and keys from en.json copied over. Plurals are mapped between
 languages according to the [i18next suffix rules](http://i18next.com/docs/plurals/).
 
+> Note: Languages with only one suffix shared for singular and plural forms will not provide plural
+mappings if they are used as the primary language. 
+
 This works on one folder at a time, but can deal with whatever the files glob returns. Files are
 grouped into directories before processing starts. Folders without a 'primary' found are ignored.
 

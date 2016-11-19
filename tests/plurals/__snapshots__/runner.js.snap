@@ -52,7 +52,7 @@ exports[`test plurals:locales/ja.json 1`] = `
 "{
     add: {
         also_not_0_x: also not a plural,
-        brick: brick en,
+        brick: bricks en,
         not_plural_x: not a plural
     },
     keep: {

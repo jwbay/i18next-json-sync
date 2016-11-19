@@ -19,7 +19,7 @@ exports[`test plurals-simple-add:locales/en.json 1`] = `
 exports[`test plurals-simple-add:locales/ja.json 1`] = `
 "{
     also_not_0_x: also not a plural,
-    brick: brick en,
+    brick: bricks en,
     not_plural_x: not a plural
 }"
 `;
