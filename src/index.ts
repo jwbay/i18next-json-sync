@@ -17,6 +17,8 @@ export interface IOptions {
 	space?: string | number;
 	/** Line endings used when writing JSON files to disk */
 	lineEndings?: lineEndings;
+	/** Insert a final newline when writing JSON files to disk */
+	finalNewline?: boolean;
 }
 
 export interface IDirectoryMap { [directory: string]: IFileMap; }
@@ -30,7 +32,8 @@ export default function sync({
 	primary: primaryLanguage = 'en',
 	createResources: createFiles = [],
 	space: jsonSpacing = 4,
-	lineEndings = 'LF'
+	lineEndings = 'LF',
+	finalNewline = false
 }: IOptions) {
 	const allFiles = glob.sync(files);
 	const directories = groupFilesByDirectory(allFiles);
@@ -57,7 +60,7 @@ export default function sync({
 			hasAnyErrors = hasAnyErrors || record.hasAnyErrors();
 		}
 
-		const changedFiles = folder.flushToDisk(jsonSpacing, lineEndings.toUpperCase() as lineEndings);
+		const changedFiles = folder.flushToDisk(jsonSpacing, lineEndings.toUpperCase() as lineEndings, finalNewline);
 		hasAnyChanges = hasAnyChanges || changedFiles.length > 0;
 	}
 

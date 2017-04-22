@@ -40,13 +40,24 @@ export default class LocalizationFolder {
 		}
 	}
 
-	public flushToDisk(jsonSpacing: string | number, jsonLineEndings: lineEndings) {
+	public flushToDisk(jsonSpacing: string | number, lineEnding: lineEndings, addFinalNewline: boolean) {
 		const changedFiles: string[] = [];
 
 		Object.keys(this.files).forEach(name => {
 			let fileContent = stringify(this.files[name], { space: jsonSpacing });
-			if (jsonLineEndings === 'CRLF') {
+			if (lineEnding === 'CRLF') {
 				fileContent = fileContent.replace(/\n/g, '\r\n');
+			}
+
+			if (addFinalNewline) {
+				switch (lineEnding) {
+					case 'LF':
+						fileContent += '\n';
+						break;
+					case 'CRLF':
+						fileContent += '\r\n';
+						break;
+				}
 			}
 
 			const hash = crypto.createHash('md5').update(fileContent).digest('hex');

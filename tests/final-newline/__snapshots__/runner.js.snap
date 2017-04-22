@@ -1,0 +1,35 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`final-newline:locales/en.json 1`] = `
+"{
+    asdf: {
+        keep_two: en
+    },
+    keep_one: en
+}
+"
+`;
+
+exports[`final-newline:locales/pt-BR.json 1`] = `
+"{
+    asdf: {
+        keep_two: pt-BR
+    },
+    keep_one: pt-BR
+}
+"
+`;
+
+exports[`final-newline:locales/zh-CN.json 1`] = `
+"{
+    asdf: {
+        keep_two: zh-CN
+    },
+    keep_one: zh-CN
+}
+"
+`;
+
+exports[`final-newline:stderr.txt 1`] = `""`;
+
+exports[`final-newline:stdout.txt 1`] = `""`;
