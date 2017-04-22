@@ -1,17 +1,17 @@
 language: node_js
 
 node_js:
+  - "7"
   - "6"
   - "5"
   - "4.2"
 
 install:
-  - npm install
-  - npm run typings
-  - npm install -g codecov
+  - yarn
+  - yarn add codecov -g 
 
 script:
-  - npm run ci
+  - yarn ci
 
 after_success:
   - codecov

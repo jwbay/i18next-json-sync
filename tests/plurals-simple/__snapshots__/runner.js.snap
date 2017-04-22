@@ -1,4 +1,6 @@
-exports[`test plurals-simple:locales/en.json 1`] = `
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`plurals-simple:locales/en.json 1`] = `
 "{
     book: book en,
     book_plural: books en,
@@ -7,7 +9,7 @@ exports[`test plurals-simple:locales/en.json 1`] = `
 }"
 `;
 
-exports[`test plurals-simple:locales/ja.json 1`] = `
+exports[`plurals-simple:locales/ja.json 1`] = `
 "{
     book: book ja,
     keep_one: one ja,
@@ -15,7 +17,7 @@ exports[`test plurals-simple:locales/ja.json 1`] = `
 }"
 `;
 
-exports[`test plurals-simple:locales/ru.json 1`] = `
+exports[`plurals-simple:locales/ru.json 1`] = `
 "{
     book_0: books en,
     book_1: books en,
@@ -25,9 +27,9 @@ exports[`test plurals-simple:locales/ru.json 1`] = `
 }"
 `;
 
-exports[`test plurals-simple:stderr.txt 1`] = `""`;
+exports[`plurals-simple:stderr.txt 1`] = `""`;
 
-exports[`test plurals-simple:stdout.txt 1`] = `
+exports[`plurals-simple:stdout.txt 1`] = `
 "Removed keys from actual/locales/ja.json: book_plural
 Pushed keys to actual/locales/ru.json: book_0, book_1, book_2
 Removed keys from actual/locales/ru.json: book_plural, book

@@ -1,4 +1,6 @@
-exports[`test plurals-primary-language:locales/de.json 1`] = `
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`plurals-primary-language:locales/de.json 1`] = `
 "{
     add: {
         brick: bricks ru 0,
@@ -17,7 +19,7 @@ exports[`test plurals-primary-language:locales/de.json 1`] = `
 }"
 `;
 
-exports[`test plurals-primary-language:locales/en.json 1`] = `
+exports[`plurals-primary-language:locales/en.json 1`] = `
 "{
     add: {
         brick: bricks ru 0,
@@ -36,7 +38,7 @@ exports[`test plurals-primary-language:locales/en.json 1`] = `
 }"
 `;
 
-exports[`test plurals-primary-language:locales/ja.json 1`] = `
+exports[`plurals-primary-language:locales/ja.json 1`] = `
 "{
     add: {
         brick: bricks ru 0
@@ -52,7 +54,7 @@ exports[`test plurals-primary-language:locales/ja.json 1`] = `
 }"
 `;
 
-exports[`test plurals-primary-language:locales/ru.json 1`] = `
+exports[`plurals-primary-language:locales/ru.json 1`] = `
 "{
     add: {
         brick_0: bricks ru 0,
@@ -74,9 +76,9 @@ exports[`test plurals-primary-language:locales/ru.json 1`] = `
 }"
 `;
 
-exports[`test plurals-primary-language:stderr.txt 1`] = `""`;
+exports[`plurals-primary-language:stderr.txt 1`] = `""`;
 
-exports[`test plurals-primary-language:stdout.txt 1`] = `
+exports[`plurals-primary-language:stdout.txt 1`] = `
 "Pushed keys to actual/locales/de.json: brick, brick_plural, book, book_plural
 Removed keys from actual/locales/de.json: remove, remove_0, remove_plural, brick_0, brick_1, brick_2
 Pushed keys to actual/locales/en.json: brick, brick_plural, book, book_plural

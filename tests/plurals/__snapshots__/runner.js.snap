@@ -1,4 +1,6 @@
-exports[`test plurals:locales/de.json 1`] = `
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`plurals:locales/de.json 1`] = `
 "{
     add: {
         also_not_0_x: also not a plural,
@@ -23,7 +25,7 @@ exports[`test plurals:locales/de.json 1`] = `
 }"
 `;
 
-exports[`test plurals:locales/en.json 1`] = `
+exports[`plurals:locales/en.json 1`] = `
 "{
     add: {
         also_not_0_x: also not a plural,
@@ -48,7 +50,7 @@ exports[`test plurals:locales/en.json 1`] = `
 }"
 `;
 
-exports[`test plurals:locales/ja.json 1`] = `
+exports[`plurals:locales/ja.json 1`] = `
 "{
     add: {
         also_not_0_x: also not a plural,
@@ -70,7 +72,7 @@ exports[`test plurals:locales/ja.json 1`] = `
 }"
 `;
 
-exports[`test plurals:locales/ru.json 1`] = `
+exports[`plurals:locales/ru.json 1`] = `
 "{
     add: {
         also_not_0_x: also not a plural,
@@ -98,9 +100,9 @@ exports[`test plurals:locales/ru.json 1`] = `
 }"
 `;
 
-exports[`test plurals:stderr.txt 1`] = `""`;
+exports[`plurals:stderr.txt 1`] = `""`;
 
-exports[`test plurals:stdout.txt 1`] = `
+exports[`plurals:stdout.txt 1`] = `
 "Pushed keys to actual/locales/de.json: brick, brick_plural, not_plural_x, also_not_0_x
 Removed keys from actual/locales/de.json: remove, remove_plural
 Pushed keys to actual/locales/ja.json: brick, not_plural_x, also_not_0_x

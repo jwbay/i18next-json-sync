@@ -2,7 +2,7 @@ import * as crypto from 'crypto';
 import * as fs from 'fs';
 import * as path from 'path';
 import { IFileMap, lineEndings } from './';
-import stringify = require('json-stable-stringify');
+const stringify = require('json-stable-stringify');
 
 interface IHashMap { [filename: string]: string; }
 

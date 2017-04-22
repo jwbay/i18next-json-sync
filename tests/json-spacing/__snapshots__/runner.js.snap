@@ -1,20 +1,22 @@
-exports[`test json-spacing:locales/en.json 1`] = `
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`json-spacing:locales/en.json 1`] = `
 "{
 	add_me: add,
 	keep_me: keep
 }"
 `;
 
-exports[`test json-spacing:locales/pt-BR.json 1`] = `
+exports[`json-spacing:locales/pt-BR.json 1`] = `
 "{
 	add_me: add,
-	keep_me: don\'t change
+	keep_me: don't change
 }"
 `;
 
-exports[`test json-spacing:stderr.txt 1`] = `""`;
+exports[`json-spacing:stderr.txt 1`] = `""`;
 
-exports[`test json-spacing:stdout.txt 1`] = `
+exports[`json-spacing:stdout.txt 1`] = `
 "Pushed keys to actual/locales/pt-BR.json: add_me
 Removed keys from actual/locales/pt-BR.json: remove_me
 "

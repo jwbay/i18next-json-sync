@@ -4,7 +4,7 @@
     "globals": { "COVERAGE": true },
     "moduleFileExtensions": ["js", "json", "ts"],
     "testEnvironment": "node",
-    "testPathDirs": ["tests"],
+    "roots": ["tests"],
     "testRegex": "runner.js$",
     "transform": {
         ".ts": "<rootDir>/testRunner/preprocessor.js"

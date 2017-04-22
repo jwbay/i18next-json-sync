@@ -1,4 +1,6 @@
-exports[`test reporting:locales/en.json 1`] = `
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`reporting:locales/en.json 1`] = `
 "{
     a: 0,
     b: 1,
@@ -32,7 +34,7 @@ exports[`test reporting:locales/en.json 1`] = `
 }"
 `;
 
-exports[`test reporting:locales/es.json 1`] = `
+exports[`reporting:locales/es.json 1`] = `
 "{
     a: 0,
     b: 1,
@@ -66,7 +68,7 @@ exports[`test reporting:locales/es.json 1`] = `
 }"
 `;
 
-exports[`test reporting:locales/pt-BR.json 1`] = `
+exports[`reporting:locales/pt-BR.json 1`] = `
 "{
     a: 0,
     b: 1,
@@ -100,7 +102,7 @@ exports[`test reporting:locales/pt-BR.json 1`] = `
 }"
 `;
 
-exports[`test reporting:locales/zh-CN.json 1`] = `
+exports[`reporting:locales/zh-CN.json 1`] = `
 "{
     a: 0,
     b: 1,
@@ -134,9 +136,9 @@ exports[`test reporting:locales/zh-CN.json 1`] = `
 }"
 `;
 
-exports[`test reporting:stderr.txt 1`] = `""`;
+exports[`reporting:stderr.txt 1`] = `""`;
 
-exports[`test reporting:stdout.txt 1`] = `
+exports[`reporting:stdout.txt 1`] = `
 "Pushed keys to actual/locales/es.json: a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q
 Removed keys from actual/locales/es.json: insert_top, after_1, after_4, after_8, a, b, c, after_c, d, e, f, g, h, i, after_i, j, k, l, m, n, o, p, q
 Pushed keys to actual/locales/pt-BR.json: a, a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q

@@ -9,9 +9,5 @@
         "noEmitOnError": true,
         "pretty": true,
         "target": "es5"
-    },
-    "include": [
-        "*.ts",
-        "../typings/**/*"
-    ]
+    }
 }

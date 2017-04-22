@@ -1,11 +1,13 @@
-exports[`test type-mismatch:locales/en.json 1`] = `
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`type-mismatch:locales/en.json 1`] = `
 "{
     add_me: add,
     keep_me: keep
 }"
 `;
 
-exports[`test type-mismatch:locales/pt-BR.json 1`] = `
+exports[`type-mismatch:locales/pt-BR.json 1`] = `
 "{
     add_me: {
         blow_up: 42
@@ -14,7 +16,7 @@ exports[`test type-mismatch:locales/pt-BR.json 1`] = `
 }"
 `;
 
-exports[`test type-mismatch:stderr.txt 1`] = `
+exports[`type-mismatch:stderr.txt 1`] = `
 "actual/locales/pt-BR.json contains type mismatch on key add_me
 
 THROWN:
@@ -23,4 +25,4 @@ Error: [i18next-json-sync] found keys unsafe to synchronize
 "
 `;
 
-exports[`test type-mismatch:stdout.txt 1`] = `""`;
+exports[`type-mismatch:stdout.txt 1`] = `""`;

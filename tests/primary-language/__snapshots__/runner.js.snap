@@ -1,27 +1,29 @@
-exports[`test primary-language:locales/en.json 1`] = `
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`primary-language:locales/en.json 1`] = `
 "{
     add_me: add from pt-BR,
-    keep_me: don\'t change en
+    keep_me: don't change en
 }"
 `;
 
-exports[`test primary-language:locales/pt-BR.json 1`] = `
+exports[`primary-language:locales/pt-BR.json 1`] = `
 "{
     add_me: add from pt-BR,
-    keep_me: don\'t change pt-BR
+    keep_me: don't change pt-BR
 }"
 `;
 
-exports[`test primary-language:locales/zh-CN.json 1`] = `
+exports[`primary-language:locales/zh-CN.json 1`] = `
 "{
     add_me: add from pt-BR,
-    keep_me: don\'t change zh-CN
+    keep_me: don't change zh-CN
 }"
 `;
 
-exports[`test primary-language:stderr.txt 1`] = `""`;
+exports[`primary-language:stderr.txt 1`] = `""`;
 
-exports[`test primary-language:stdout.txt 1`] = `
+exports[`primary-language:stdout.txt 1`] = `
 "Pushed keys to actual/locales/en.json: add_me
 Removed keys from actual/locales/en.json: remove_me
 Pushed keys to actual/locales/zh-CN.json: add_me
