@@ -76,7 +76,7 @@ ru.json
 
 `key_one` was left alone in fr.json since it's already localized, but `book` and `book_plural` were copied over.
 An extraneous key in ru.json was deleted and keys from en.json copied over. Plurals are mapped between
-languages according to the [i18next suffix rules](http://i18next.com/docs/plurals/).
+languages according to the [i18next suffix rules](https://github.com/i18next/i18next/blob/520f5dccf8edecab5fb189eb0631201a08b940c7/src/PluralResolver.js).
 
 > Note: Languages with only one suffix shared for singular and plural forms will not provide plural
 mappings if they are used as the primary language. 
