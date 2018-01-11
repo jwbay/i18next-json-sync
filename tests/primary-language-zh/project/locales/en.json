@@ -1,0 +1,12 @@
+{
+    "keep": {
+        "value": "value en",
+        "value_plural": "values en",
+        "simple_value": "simple en value"
+    },
+    "remove": {
+        "remove": "remove en",
+        "remove_0": "removes en 0",
+        "remove_plural": "removes en"
+    }
+}

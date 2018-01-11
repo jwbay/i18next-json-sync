@@ -1,0 +1,10 @@
+{
+    "add": {
+        "value": "add from zh",
+        "simple_value": "simple zh value"
+    },
+    "keep": {
+        "value": "value zh"
+    },
+    "remove": {}
+}

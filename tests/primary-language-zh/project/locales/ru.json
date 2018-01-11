@@ -1,0 +1,15 @@
+{
+    "keep": {
+        "value_0": "values ru 0",
+        "value_1": "values ru 1",
+        "value_2": "values ru 2",
+        "simple_value": "simple ru value"
+    },
+    "remove": {
+        "remove": "remove ru",
+        "remove_0": "removes ru 0",
+        "remove_1": "removes ru 0",
+        "remove_2": "removes ru 0",
+        "remove_plural": "removes ru"
+    }
+}

@@ -1,0 +1,42 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`primary-language-zh:locales/en.json 1`] = `
+"{
+}"
+`;
+
+exports[`primary-language-zh:locales/pt-BR.json 1`] = `
+"{
+}"
+`;
+
+exports[`primary-language-zh:locales/ru.json 1`] = `
+"{
+}"
+`;
+
+exports[`primary-language-zh:locales/zh.json 1`] = `
+"{
+    add: {
+        simple_value: simple zh value,
+        value: add from zh
+    },
+    keep: {
+        value: value zh
+    },
+    remove: {
+    }
+}"
+`;
+
+exports[`primary-language-zh:stderr.txt 1`] = `""`;
+
+exports[`primary-language-zh:stdout.txt 1`] = `
+"Pushed keys to actual/locales/en.json: value, value_plural, simple_value, simple_value_plural
+Removed keys from actual/locales/en.json: simple_value, remove, remove_0, remove_plural, value, value_plural, value, value_plural, simple_value, simple_value_plural
+Pushed keys to actual/locales/ru.json: value_0, value_1, value_2, simple_value_0, simple_value_1, simple_value_2
+Removed keys from actual/locales/ru.json: simple_value, remove, remove_0, remove_1, remove_2, remove_plural, value_0, value_1, value_2, value_0, value_1, value_2, simple_value_0, simple_value_1, simple_value_2
+Pushed keys to actual/locales/pt-BR.json: value, value_plural, simple_value, simple_value_plural, value, value_plural
+Removed keys from actual/locales/pt-BR.json: value, value_plural, simple_value, simple_value_plural, value, value_plural
+"
+`;
