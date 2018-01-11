@@ -115,17 +115,14 @@ sync({
 
 #### CLI
 
-It can be installed globally, but npm's [package.json scripts](https://docs.npmjs.com/misc/scripts) are a better fit.
+It can be installed globally and run with `sync-i18n`, but [package.json scripts](https://docs.npmjs.com/misc/scripts) are a better fit.
 
 ```json
 {
   "name": "my-app",
   "scripts": {
-    "i18n": "sync-i18n --files **/locales/*.json --primary en --languages es fr ja zh ko --space 2",
+    "i18n": "sync-i18n --files '**/locales/*.json' --primary en --languages es fr ja zh ko --space 2",
     "check-i18n": "npm run i18n -- --check"
-  },
-  "devDependencies": {
-    "i18next-json-sync" : "^1.0.0"
   }
 }
 ```
