@@ -109,7 +109,9 @@ sync({
   /** Space value used for JSON.stringify when writing JSON files to disk */
   space: 4,
   /** Line endings used when writing JSON files to disk. Either LF or CRLF */
-  lineEndings: 'LF'
+  lineEndings: 'LF',
+  /** Insert a final newline when writing JSON files to disk */
+  finalNewline: false
 })
 ```
 

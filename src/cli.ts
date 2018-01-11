@@ -9,14 +9,15 @@ const {
 	primary,
 	languages,
 	space,
-	lineendings
+	lineendings,
+	finalnewline
 } = yargs
 	.describe('c','Audit files in memory instead of changing them on the filesystem and throw an error if any changes would be made')
 	.alias('c','check')
 	.boolean('c')
 
 	.describe('f', 'Glob pattern for the resource JSON files')
-	.example('--files', '**/locales/*.json')
+	.example('--files', `'**/locales/*.json'`)
 	.alias('f', 'files')
 
 	.describe('p', 'Primary localization language. Other language files will be changed to match')
@@ -33,6 +34,10 @@ const {
 	.describe('le', 'Line endings used when writing JSON files to disk -- either LF or CRLF')
 	.alias('le', 'lineendings')
 
+	.describe('fn', 'Insert a final newline when writing JSON files to disk')
+	.alias('fn', 'finalnewline')
+	.boolean('fn')
+
 	.help('h')
 	.alias('h', 'help')
 
@@ -44,5 +49,6 @@ sync({
 	primary,
 	createResources: languages,
 	space,
-	lineEndings: lineendings
+	lineEndings: lineendings,
+	finalNewline: finalnewline
 });
