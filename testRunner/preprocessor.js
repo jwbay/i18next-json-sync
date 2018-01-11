@@ -8,6 +8,12 @@ module.exports = {
             return src;
         }
 
-        return tsc.transpileModule(src, config).outputText;
-    },
+        return tsc.transpileModule(src, {
+            fileName: path,
+            compilerOptions: Object.assign(config, {
+                inlineSourceMap: true,
+                inlineSources: true,
+            })
+        }).outputText;
+    }
 };
