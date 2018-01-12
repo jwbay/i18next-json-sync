@@ -12,6 +12,7 @@
         "noEmitOnError": true,
         "noFallthroughCasesInSwitch": true,
         "noImplicitAny": true,
+        "noUnusedLocals": true,
         "noImplicitReturns": true,
         "outDir": "../dist",
         "pretty": true,

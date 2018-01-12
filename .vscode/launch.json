@@ -15,6 +15,9 @@
 			],
 			"cwd": "${workspaceRoot}",
 			"preLaunchTask": "pretest",
+			"env": {
+				"NODE_ENV": "debug",
+			},
 			"runtimeArgs": [
 				"--nolazy"
 			],

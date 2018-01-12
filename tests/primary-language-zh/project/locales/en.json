@@ -2,7 +2,7 @@
     "keep": {
         "value": "value en",
         "value_plural": "values en",
-        "simple_value": "simple en value"
+        "singular_value": "singular en value"
     },
     "remove": {
         "remove": "remove en",

@@ -148,12 +148,21 @@ export default function sync({
 			!keyMatchesPluralForLanguage(key, targetLanguage) &&
 			!pluralFormsMatch()
 		) {
-			copyPlurals(createPlurals(key, source), target);
+			if (!targetPluralsPopulated(target, key)) {
+				copyPlurals(createPlurals(key, source), target);
+			}
 		} else {
-			//base case: source contains key not present in target
 			target[key] = sourceValue;
 			record.keyAdded(key);
 		}
+	}
+
+	function targetPluralsPopulated(target: object, key: string) {
+		//given 'x' for key, do we have 'x' and 'x_plural' for en?
+		const singular = getSingularForm(key);
+		const pluralKeys = getPluralsForLanguage(targetLanguage).map(p => p.replace('key', singular));
+		const targetKeys = Object.keys(target);
+		return pluralKeys.every(expectedPluralKeys => targetKeys.indexOf(expectedPluralKeys) > -1);
 	}
 
 	function copyPlurals(plurals: Object, target: Object) {
@@ -169,6 +178,10 @@ export default function sync({
 
 	function keyIsOnlyPluralForPrimary(key: string, allPimaryKeys: string[], allTargetKeys: string[]) {
 		if (pluralFormsMatch()) {
+			return false;
+		}
+
+		if (languageOnlyHasOneForm(primaryLanguage)) {
 			return false;
 		}
 
@@ -277,11 +290,17 @@ export default function sync({
 
 	function createPlurals(key: string, source: Object) {
 		const singular = getSingularForm(key);
-		const fillValue = getPluralFillValue(singular, source);
 		const plurals = {};
-		for (const form of getPluralsForLanguage(targetLanguage)) {
-			plurals[form.replace('key', singular)] = fillValue;
+
+		if (languageOnlyHasOneForm(primaryLanguage)) {
+			plurals[key] = source[key];
+		} else {
+			const fillValue = getPluralFillValue(singular, source);
+			for (const form of getPluralsForLanguage(targetLanguage)) {
+				plurals[form.replace('key', singular)] = fillValue;
+			}
 		}
+
 		return plurals;
 	}
 

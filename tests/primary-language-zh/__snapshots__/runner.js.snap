@@ -3,12 +3,10 @@
 exports[`primary-language-zh:locales/en.json 1`] = `
 "{
     add: {
-        simple_value: simple zh value,
-        simple_value_plural: simple zh value,
-        value: add from zh,
-        value_plural: add from zh
+        value: add from zh
     },
     keep: {
+        singular_value: singular en value,
         value: value en,
         value_plural: values en
     },
@@ -20,14 +18,11 @@ exports[`primary-language-zh:locales/en.json 1`] = `
 exports[`primary-language-zh:locales/pt-BR.json 1`] = `
 "{
     add: {
-        simple_value: simple zh value,
-        simple_value_plural: simple zh value,
-        value: add from zh,
-        value_plural: add from zh
+        value: add from zh
     },
     keep: {
-        value: value zh,
-        value_plural: value zh
+        singular_value: singular zh value,
+        value: value zh
     },
     remove: {
     }
@@ -37,14 +32,10 @@ exports[`primary-language-zh:locales/pt-BR.json 1`] = `
 exports[`primary-language-zh:locales/ru.json 1`] = `
 "{
     add: {
-        simple_value_0: simple zh value,
-        simple_value_1: simple zh value,
-        simple_value_2: simple zh value,
-        value_0: add from zh,
-        value_1: add from zh,
-        value_2: add from zh
+        value: add from zh
     },
     keep: {
+        singular_value: singular ru value,
         value_0: values ru 0,
         value_1: values ru 1,
         value_2: values ru 2
@@ -57,10 +48,10 @@ exports[`primary-language-zh:locales/ru.json 1`] = `
 exports[`primary-language-zh:locales/zh.json 1`] = `
 "{
     add: {
-        simple_value: simple zh value,
         value: add from zh
     },
     keep: {
+        singular_value: singular zh value,
         value: value zh
     },
     remove: {
@@ -71,10 +62,10 @@ exports[`primary-language-zh:locales/zh.json 1`] = `
 exports[`primary-language-zh:stderr.txt 1`] = `""`;
 
 exports[`primary-language-zh:stdout.txt 1`] = `
-"Pushed keys to actual/locales/en.json: value, value_plural, simple_value, simple_value_plural
-Removed keys from actual/locales/en.json: simple_value, remove, remove_0, remove_plural
-Pushed keys to actual/locales/ru.json: value_0, value_1, value_2, simple_value_0, simple_value_1, simple_value_2
-Removed keys from actual/locales/ru.json: simple_value, remove, remove_0, remove_1, remove_2, remove_plural
-Pushed keys to actual/locales/pt-BR.json: value, value_plural, simple_value, simple_value_plural, value, value_plural
+"Pushed keys to actual/locales/en.json: value
+Removed keys from actual/locales/en.json: remove, remove_0, remove_plural
+Pushed keys to actual/locales/ru.json: value
+Removed keys from actual/locales/ru.json: remove, remove_0, remove_1, remove_2, remove_plural
+Pushed keys to actual/locales/pt-BR.json: value, value, singular_value
 "
 `;

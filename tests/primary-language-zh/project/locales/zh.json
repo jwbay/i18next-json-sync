@@ -1,10 +1,10 @@
 {
     "add": {
-        "value": "add from zh",
-        "simple_value": "simple zh value"
+        "value": "add from zh"
     },
     "keep": {
-        "value": "value zh"
+        "value": "value zh",
+        "singular_value": "singular zh value"
     },
     "remove": {}
 }

@@ -13,6 +13,8 @@ module.exports = {
             compilerOptions: Object.assign(config, {
                 inlineSourceMap: true,
                 inlineSources: true,
+                target: process.env.NODE_ENV === 'debug' ? 'es2017' : 'es5',
+                module: 'commonjs'
             })
         }).outputText;
     }
