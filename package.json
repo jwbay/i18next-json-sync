@@ -1,6 +1,6 @@
 {
   "name": "i18next-json-sync",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "description": "keep i18next json resource files in sync",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
