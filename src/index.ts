@@ -97,7 +97,7 @@ export default function sync({
 		for (const key of Object.keys(target)) {
 			if (source.hasOwnProperty(key) && target.hasOwnProperty(key)) {
 				// we should remove book_plural, book_1, etc if the language doesn't support singular forms
-				if (keyIsOnlyPluralForPrimary(key, Object.keys(source), Object.keys(target))) {
+				if (typeof target[key] === 'string' && keyIsOnlyPluralForPrimary(key, Object.keys(source), Object.keys(target))) {
 					removeKey(source, target, key);
 				}
 			} else if (!isValidMappedPluralForm(key, source, target)) { // don't remove valid mappings from book_plural to book_0
