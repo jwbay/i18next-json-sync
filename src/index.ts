@@ -36,7 +36,7 @@ export default function sync({
 	space: jsonSpacing = 4,
 	lineEndings = 'LF',
 	finalNewline = false,
-    newKeysWithEmptyValue = false
+	newKeysWithEmptyValue = false
 }: IOptions) {
 	const allFiles = glob.sync(files);
 	const directories = groupFilesByDirectory(allFiles);
@@ -155,7 +155,7 @@ export default function sync({
 				copyPlurals(createPlurals(key, source), target);
 			}
 		} else {
-			target[key] = newKeysWithEmptyValue ? "" : sourceValue;
+			target[key] = newKeysWithEmptyValue ? '' : sourceValue;
 			record.keyAdded(key);
 		}
 	}
@@ -173,7 +173,7 @@ export default function sync({
 			if (target.hasOwnProperty(key)) {
 				continue;
 			}
-			target[key] = target[key] = newKeysWithEmptyValue ? "" : plurals[key];
+			target[key] = target[key] = newKeysWithEmptyValue ? '' : plurals[key];
 			record.keyAdded(key);
 		}
 	}
