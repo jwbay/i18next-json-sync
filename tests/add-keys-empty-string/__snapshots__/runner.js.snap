@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`add-keys-empty-string:locales/de.json 1`] = `
+"{
+    key1: ,
+    key2: ,
+    key3: 
+}"
+`;
+
+exports[`add-keys-empty-string:locales/en.json 1`] = `
+"{
+    key1: This will be a empty string on de.json,
+    key2: This will be a empty string on de.json,
+    key3: This will be a empty string on de.json
+}"
+`;
+
+exports[`add-keys-empty-string:stderr.txt 1`] = `""`;
+
+exports[`add-keys-empty-string:stdout.txt 1`] = `
+"Pushed keys to actual/locales/de.json: key1, key2, key3
+"
+`;
