@@ -278,8 +278,8 @@ export default function sync({
 			return pluralForms[language];
 		}
 
-		if (language.indexOf('_') > -1) {
-			const baseLanguage = language.split('_')[0];
+		if (language.indexOf('_') > -1 || language.indexOf('-') > -1) {
+			const baseLanguage = language.split(/-|_/)[0];
 			if (pluralForms.hasOwnProperty(baseLanguage)) {
 				return pluralForms[baseLanguage];
 			}
