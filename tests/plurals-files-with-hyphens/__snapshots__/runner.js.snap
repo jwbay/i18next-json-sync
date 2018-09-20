@@ -1,0 +1,38 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`plurals-files-with-hyphens:locales/de-DE.json 1`] = `
+"{
+    add: add en,
+    add_plural: add plural en,
+    keep: keep de,
+    keep_plural: keep plural de
+}"
+`;
+
+exports[`plurals-files-with-hyphens:locales/en-US.json 1`] = `
+"{
+    add: add en,
+    add_plural: add plural en,
+    keep: keep en,
+    keep_plural: keep plural en
+}"
+`;
+
+exports[`plurals-files-with-hyphens:locales/ru-RU.json 1`] = `
+"{
+    add_0: add plural en,
+    add_1: add plural en,
+    add_2: add plural en,
+    keep_0: keep ru,
+    keep_1: keep ru,
+    keep_2: keep ru
+}"
+`;
+
+exports[`plurals-files-with-hyphens:stderr.txt 1`] = `""`;
+
+exports[`plurals-files-with-hyphens:stdout.txt 1`] = `
+"Pushed keys to actual/locales/de-DE.json: add, add_plural
+Pushed keys to actual/locales/ru-RU.json: add_0, add_1, add_2
+"
+`;
