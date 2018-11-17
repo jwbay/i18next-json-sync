@@ -7,3 +7,4 @@ tests/**/runner.js
 npm-debug.log
 typings/index.d.ts
 coverage/
+yarn-error.log

@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`plurals-copy-into-existing:locales/de.json 1`] = `
+"{
+    one: one,
+    three: three,
+    three_plural: three_plural,
+    two: two,
+    two_plural: two_plural
+}"
+`;
+
+exports[`plurals-copy-into-existing:locales/en.json 1`] = `
+"{
+    one: one,
+    three: three,
+    three_plural: three_plural,
+    two: two,
+    two_plural: two_plural
+}"
+`;
+
+exports[`plurals-copy-into-existing:locales/ja.json 1`] = `
+"{
+    one: one,
+    three: three,
+    two: two
+}"
+`;
+
+exports[`plurals-copy-into-existing:stderr.txt 1`] = `""`;
+
+exports[`plurals-copy-into-existing:stdout.txt 1`] = `
+"Pushed keys to actual/locales/de.json: one
+Pushed keys to actual/locales/ja.json: one
+"
+`;
