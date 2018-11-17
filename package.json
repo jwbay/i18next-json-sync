@@ -17,7 +17,7 @@
     "mapcoverage": "remap-istanbul -i coverage/coverage-final.json -e options",
     "postcoverage": "npm run mapcoverage:html && npm run mapcoverage:lcov && rimraf coverage/lcov-report",
     "precoverage": "npm run build && npm run pretest",
-    "pretest": "rimraf tests/**/runner.js && ts-node -P testRunner testRunner/init",
+    "pretest": "rimraf tests/**/runner.js && ts-node -P testRunner/tsconfig.json testRunner/init",
     "test": "jest --config jest.json"
   },
   "repository": {
@@ -51,11 +51,11 @@
     "remap-istanbul": "^0.7.0",
     "rimraf": "^2.5.4",
     "shelljs": "^0.7.5",
-    "ts-node": "^3.0.2",
-    "tslint": "^3.15.1",
-    "tslint-microsoft-contrib": "^2.0.9",
-    "tslint-misc-rules": "^2.6.3",
-    "typescript": "^2.2.2"
+    "ts-node": "^7.0.1",
+    "tslint": "^5.11.0",
+    "tslint-microsoft-contrib": "^5.2.1",
+    "tslint-misc-rules": "^3.5.1",
+    "typescript": "^3.1.6"
   },
   "dependencies": {
     "glob": "^7.0.5",

@@ -205,7 +205,7 @@ export default function sync({
 	function keyMatchesPluralForLanguageIncludingSingular(key: string, allKeys: string[], language: string) {
 		/**
 		 * It's impossible to tell whether a key is a plural for a language with one form shared between singular and plurals.
-		 * With other languages we can look for relationships between e.g. value and value_plural or value and value_0. 
+		 * With other languages we can look for relationships between e.g. value and value_plural or value and value_0.
 		 */
 
 		if (languageOnlyHasOneForm(language)) {

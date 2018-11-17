@@ -16,7 +16,6 @@
     "jsx-no-braces-for-string-attributes": true,
     "jsx-no-closing-bracket-newline": true,
     "label-position": true,
-    "label-undefined": true,
     "no-arg": true,
     "class-method-newlines": true,
     "no-braces-for-single-line-arrow-functions": true,
@@ -31,18 +30,12 @@
     ],
     "no-construct": true,
     "no-debugger": true,
-    "no-duplicate-key": true,
     "no-duplicate-variable": true,
     "no-empty-line-after-opening-brace": true,
     "no-eval": true,
     "no-inferrable-types": true,
     "no-trailing-whitespace": true,
     "no-unnecessary-parens-for-arrow-function-arguments": true,
-    "no-unreachable": true,
-    "no-unused-variable": [
-      true,
-      "react"
-    ],
     "no-var-keyword": true,
     "one-line": [
       true,

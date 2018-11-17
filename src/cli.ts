@@ -11,7 +11,7 @@ const {
 	space,
 	lineendings,
 	finalnewline,
-	newkeysempty,
+	newkeysempty
 } = yargs
 	.describe('c','Audit files in memory instead of changing them on the filesystem and throw an error if any changes would be made')
 	.alias('c','check')
@@ -56,5 +56,5 @@ sync({
 	space,
 	lineEndings: lineendings,
 	finalNewline: finalnewline,
-	newKeysEmpty: newkeysempty,
+	newKeysEmpty: newkeysempty
 });
