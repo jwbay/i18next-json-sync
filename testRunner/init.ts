@@ -13,9 +13,7 @@ sh.ls().forEach(testCase => {
 	sh.pushd(testCase);
 	sh.rm('-rf', 'actual');
 	sh.cp('-Rf', 'project', 'actual');
-	if (!fs.existsSync('actual')) {
-		sh.mkdir('actual');
-	}
+	sh.mkdir('actual');
 	fs.writeFileSync('runner.js', runnerJS);
 	sh.popd();
 });

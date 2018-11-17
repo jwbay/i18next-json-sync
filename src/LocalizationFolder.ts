@@ -1,16 +1,14 @@
 import * as crypto from 'crypto';
 import * as fs from 'fs';
 import * as path from 'path';
-import { IFileMap, lineEndings } from './';
+import { FileMap, LineEndings } from './';
 const stringify = require('json-stable-stringify');
 
-interface IHashMap { [filename: string]: string; }
-
 export default class LocalizationFolder {
-	private hashes: IHashMap;
+	private hashes: Record<string, string> = {};
 
 	constructor(
-		private files: IFileMap,
+		private files: FileMap,
 		private primaryLanguage: string,
 		private isReportMode: boolean
 	) {
@@ -40,7 +38,7 @@ export default class LocalizationFolder {
 		}
 	}
 
-	public flushToDisk(jsonSpacing: string | number, lineEnding: lineEndings, addFinalNewline: boolean) {
+	public flushToDisk(jsonSpacing: string | number, lineEnding: LineEndings, addFinalNewline: boolean) {
 		const changedFiles: string[] = [];
 
 		Object.keys(this.files).forEach(name => {

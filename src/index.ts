@@ -4,7 +4,7 @@ import ActionRecorder from './ActionRecorder';
 import LocalizationFolder from './LocalizationFolder';
 import pluralForms from './pluralForms';
 
-export interface IOptions {
+export interface Options {
 	/** Audit files in memory instead of changing them on the filesystem and throw an error if any changes would be made */
 	check?: boolean;
 	/** Glob pattern for the resource JSON files */
@@ -16,17 +16,17 @@ export interface IOptions {
 	/** Space value used for JSON.stringify when writing JSON files to disk */
 	space?: string | number;
 	/** Line endings used when writing JSON files to disk */
-	lineEndings?: lineEndings;
+	lineEndings?: LineEndings;
 	/** Insert a final newline when writing JSON files to disk */
 	finalNewline?: boolean;
 	/** Use empty string for new keys instead of the primary language value */
 	newKeysEmpty?: boolean;
 }
 
-export interface IDirectoryMap { [directory: string]: IFileMap; }
-export interface IFileMap { [filename: string]: Object; }
-export type lineEndings = 'LF' | 'CRLF';
-type localizationValue = { [key: string]: string } | string;
+export type DirectoryMap = Record<string, FileMap>;
+export type FileMap = Record<string, object>;
+export type LineEndings = 'LF' | 'CRLF';
+type LocalizationValue = Record<string, string> | string;
 
 export default function sync({
 	check: isReportMode = false,
@@ -37,7 +37,7 @@ export default function sync({
 	lineEndings = 'LF',
 	finalNewline = false,
 	newKeysEmpty = false
-}: IOptions) {
+}: Options) {
 	const allFiles = glob.sync(files);
 	const directories = groupFilesByDirectory(allFiles);
 	let targetLanguage: string;
@@ -63,7 +63,7 @@ export default function sync({
 			hasAnyErrors = hasAnyErrors || record.hasAnyErrors();
 		}
 
-		const changedFiles = folder.flushToDisk(jsonSpacing, lineEndings.toUpperCase() as lineEndings, finalNewline);
+		const changedFiles = folder.flushToDisk(jsonSpacing, lineEndings.toUpperCase() as LineEndings, finalNewline);
 		hasAnyChanges = hasAnyChanges || changedFiles.length > 0;
 	}
 
@@ -81,7 +81,7 @@ export default function sync({
 	}
 
 	function groupFilesByDirectory(allFiles: string[]) {
-		const directories: IDirectoryMap = {};
+		const directories: DirectoryMap = {};
 		for (const filename of allFiles) {
 			const directory = path.dirname(filename);
 			directories[directory] = directories[directory] || {};
@@ -116,8 +116,8 @@ export default function sync({
 	}
 
 	function mergeKey(source: Object, target: Object, key: string) {
-		const sourceValue: localizationValue = source[key];
-		const targetValue: localizationValue = target[key];
+		const sourceValue: LocalizationValue = source[key];
+		const targetValue: LocalizationValue = target[key];
 
 		if (target.hasOwnProperty(key)) {
 			if (areSameTypes(sourceValue, targetValue)) {

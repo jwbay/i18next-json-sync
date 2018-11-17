@@ -2,6 +2,8 @@
 {
     "editor.detectIndentation": true,
     "editor.insertSpaces": false,
+    "files.eol": "\n",
+    "files.insertFinalNewline": true,
     "files.exclude": {
         "**/.git": true,
         "**/.svn": true,

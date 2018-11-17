@@ -2,7 +2,7 @@ import fs = require('fs');
 import glob = require('glob');
 import path = require('path');
 import sh = require('shelljs');
-import syncType, { IOptions } from '../src';
+import syncType, { Options } from '../src';
 import util = require('util');
 const main = (global as any).COVERAGE ? 'dist' : 'src';
 const sync: typeof syncType = require(`../../${main}`).default;
@@ -10,7 +10,7 @@ const sync: typeof syncType = require(`../../${main}`).default;
 sh.config.silent = true;
 sh.pushd(__dirname);
 
-let options: IOptions = {
+let options: Options = {
 	files: 'actual/**/locales/*.json'
 };
 try {

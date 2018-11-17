@@ -10,7 +10,7 @@
     "curly": true,
     "declare-class-methods-after-use": true,
     "indent": [ true, "tabs" ],
-    "interface-name": [ true, "always-prefix" ],
+    "interface-name": [ true, "never-prefix" ],
     "jsx-attribute-spacing": true,
     "jsx-expression-spacing": true,
     "jsx-no-braces-for-string-attributes": true,
