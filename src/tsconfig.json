@@ -15,6 +15,7 @@
         "noUnusedLocals": true,
         "noImplicitReturns": true,
         "outDir": "../dist",
+        "newLine": "LF",
         "pretty": true,
         "sourceMap": true,
         "suppressImplicitAnyIndexErrors": true,
