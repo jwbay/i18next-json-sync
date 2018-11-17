@@ -10,7 +10,8 @@ const {
 	languages,
 	space,
 	lineendings,
-	finalnewline
+	finalnewline,
+	newkeysempty,
 } = yargs
 	.describe('c','Audit files in memory instead of changing them on the filesystem and throw an error if any changes would be made')
 	.alias('c','check')
@@ -38,6 +39,10 @@ const {
 	.alias('fn', 'finalnewline')
 	.boolean('fn')
 
+	.describe('e', 'Use empty string for new keys instead of the primary language value')
+	.alias('e', 'newkeysempty')
+	.boolean('e')
+
 	.help('h')
 	.alias('h', 'help')
 
@@ -50,5 +55,6 @@ sync({
 	createResources: languages,
 	space,
 	lineEndings: lineendings,
-	finalNewline: finalnewline
+	finalNewline: finalnewline,
+	newKeysEmpty: newkeysempty,
 });

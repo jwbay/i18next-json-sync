@@ -19,8 +19,8 @@ export interface IOptions {
 	lineEndings?: lineEndings;
 	/** Insert a final newline when writing JSON files to disk */
 	finalNewline?: boolean;
-	/** Insert empty value for new keys */
-	newKeysWithEmptyValue?: boolean;
+	/** Use empty string for new keys instead of the primary language value */
+	newKeysEmpty?: boolean;
 }
 
 export interface IDirectoryMap { [directory: string]: IFileMap; }
@@ -36,7 +36,7 @@ export default function sync({
 	space: jsonSpacing = 4,
 	lineEndings = 'LF',
 	finalNewline = false,
-	newKeysWithEmptyValue = false
+	newKeysEmpty = false
 }: IOptions) {
 	const allFiles = glob.sync(files);
 	const directories = groupFilesByDirectory(allFiles);
@@ -155,7 +155,7 @@ export default function sync({
 				copyPlurals(createPlurals(key, source), target);
 			}
 		} else {
-			target[key] = newKeysWithEmptyValue ? '' : sourceValue;
+			target[key] = newKeysEmpty ? '' : sourceValue;
 			record.keyAdded(key);
 		}
 	}
@@ -173,7 +173,7 @@ export default function sync({
 			if (target.hasOwnProperty(key)) {
 				continue;
 			}
-			target[key] = target[key] = newKeysWithEmptyValue ? '' : plurals[key];
+			target[key] = target[key] = newKeysEmpty ? '' : plurals[key];
 			record.keyAdded(key);
 		}
 	}
