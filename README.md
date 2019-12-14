@@ -111,9 +111,9 @@ sync({
   /** Line endings used when writing JSON files to disk. Either LF or CRLF */
   lineEndings: 'LF',
   /** Insert a final newline when writing JSON files to disk */
-  finalNewline: false
-	/** Use empty string for new keys instead of the primary language value */
-	newKeysEmpty: false;
+  finalNewline: false,
+  /** Use empty string for new keys instead of the primary language value */
+  newKeysEmpty: false
 })
 ```
 
