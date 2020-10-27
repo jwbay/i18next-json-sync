@@ -1,5 +1,5 @@
-import { IOptions } from '../../src';
-const options: IOptions = {
+import { Options } from '../../src';
+const options: Options = {
 	primary: 'zh',
 	createResources: ['pt-BR']
 };
