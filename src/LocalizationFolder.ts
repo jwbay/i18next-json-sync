@@ -25,7 +25,7 @@ export default class LocalizationFolder {
 	public generateMissingFiles(otherLanguages: string[], primaryLanguage: string) {
 		const primaryNamespaces = this.files[primaryLanguage];
 
-		Object.entries(primaryNamespaces).forEach(([namespace, filesMap]) => {
+		Object.keys(primaryNamespaces).forEach(namespace => {
 			otherLanguages.forEach(otherLanguage => {
 				if (!this.files[otherLanguage]) {
 					this.files[otherLanguage] = {};
