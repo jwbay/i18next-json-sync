@@ -1,0 +1,118 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`namespace:locales/en.json 1`] = `
+"{
+    add_me: add,
+    keep_me: keep
+}"
+`;
+
+exports[`namespace:locales/en/namespace.json 1`] = `
+"{
+    new_structure: {
+        asdf: {
+            qwer: qwer
+        }
+    },
+    outer: {
+        add2: add2,
+        inner: {
+            add: add,
+            keep: keep,
+            keep2: keep2
+        }
+    }
+}"
+`;
+
+exports[`namespace:locales/en/nested/name-space.json 1`] = `
+"{
+    one: one,
+    three: three,
+    three_plural: three_plural,
+    two: two,
+    two_plural: two_plural
+}"
+`;
+
+exports[`namespace:locales/he.json 1`] = `
+"{
+    add_me: add,
+    keep_me: keep
+}"
+`;
+
+exports[`namespace:locales/he/namespace.json 1`] = `
+"{
+    new_structure: {
+        asdf: {
+            qwer: qwer
+        }
+    },
+    outer: {
+        add2: add2,
+        inner: {
+            add: add,
+            keep: keep,
+            keep2: keep2
+        }
+    }
+}"
+`;
+
+exports[`namespace:locales/he/nested/name-space.json 1`] = `
+"{
+    one: one,
+    three: three,
+    three_plural: three_plural,
+    two: two,
+    two_plural: two_plural
+}"
+`;
+
+exports[`namespace:locales/pt-BR.json 1`] = `
+"{
+    add_me: add,
+    keep_me: keep
+}"
+`;
+
+exports[`namespace:locales/pt-BR/namespace.json 1`] = `
+"{
+    new_structure: {
+        asdf: {
+            qwer: qwer
+        }
+    },
+    outer: {
+        add2: add2,
+        inner: {
+            add: add,
+            keep: changed,
+            keep2: changed2
+        }
+    }
+}"
+`;
+
+exports[`namespace:locales/pt-BR/nested/name-space.json 1`] = `
+"{
+    one: one,
+    three: three,
+    three_plural: three_plural,
+    two: two,
+    two_plural: two_plural
+}"
+`;
+
+exports[`namespace:stderr.txt 1`] = `""`;
+
+exports[`namespace:stdout.txt 1`] = `
+"Pushed keys to actual/locales/he.json: add_me, keep_me
+Pushed keys to actual/locales/he/namespace.json: qwer, add2, add, keep, keep2
+Pushed keys to actual/locales/he/nested/name-space.json: one, two, two_plural, three, three_plural
+Removed keys from actual/locales/he/nested/name-space.json: qwer, add2, add, keep, keep2
+Pushed keys to actual/locales/pt-BR.json: add_me, keep_me
+Pushed keys to actual/locales/pt-BR/nested/name-space.json: one, two, two_plural, three, three_plural
+"
+`;
