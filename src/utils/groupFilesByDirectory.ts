@@ -2,7 +2,8 @@ import * as path from 'path';
 import { DirectoryMap } from '../index';
 
 function extractLanguagesFromPath(filepath: string, allLanguages: string[]) {
-	return allLanguages.find(language => filepath.includes(language));
+	const pathParts = filepath.split(/[\\\/]/g);
+	return allLanguages.find(language => pathParts.some(part => part.startsWith(language)));
 }
 
 function extractNamespaceFromPath(filepath: string, language: string) {

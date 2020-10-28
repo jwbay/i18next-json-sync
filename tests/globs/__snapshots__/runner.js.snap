@@ -1,13 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`globs:one/en.json 1`] = `
+exports[`globs:one/locales/en.json 1`] = `
 "{
     add_me: add,
     keep_me: keep
 }"
 `;
 
-exports[`globs:one/pt-BR.json 1`] = `
+exports[`globs:one/locales/pt-BR.json 1`] = `
 "{
     add_me: add,
     keep_me: don't change
@@ -17,21 +17,21 @@ exports[`globs:one/pt-BR.json 1`] = `
 exports[`globs:stderr.txt 1`] = `""`;
 
 exports[`globs:stdout.txt 1`] = `
-"Pushed keys to actual/one/pt-BR.json: add_me
-Removed keys from actual/one/pt-BR.json: remove_me
-Pushed keys to actual/two/pt-BR.json: add_me
-Removed keys from actual/two/pt-BR.json: remove_me
+"Pushed keys to actual/one/locales/pt-BR.json: add_me
+Removed keys from actual/one/locales/pt-BR.json: remove_me
+Pushed keys to actual/two/locales/pt-BR.json: add_me
+Removed keys from actual/two/locales/pt-BR.json: remove_me
 "
 `;
 
-exports[`globs:two/en.json 1`] = `
+exports[`globs:two/locales/en.json 1`] = `
 "{
     add_me: add,
     keep_me: keep
 }"
 `;
 
-exports[`globs:two/pt-BR.json 1`] = `
+exports[`globs:two/locales/pt-BR.json 1`] = `
 "{
     add_me: add,
     keep_me: don't change
