@@ -1,5 +1,5 @@
 import * as glob from 'glob';
-import * as path from 'path';
+import { groupFilesByDirectory } from './utils/groupFilesByDirectory';
 import ActionRecorder from './ActionRecorder';
 import LocalizationFolder from './LocalizationFolder';
 import pluralForms from './pluralForms';
@@ -11,8 +11,10 @@ export interface Options {
 	files?: string;
 	/** Primary localization language. Other language files will be changed to match */
 	primary?: string;
-	/** Language files to create if they don't exist, e.g. ['es, 'pt-BR', 'fr'] */
-	createResources?: string[];
+	/** Other languages that should be synced, if they don't exist they will be created, e.g. ['es, 'pt-BR', 'fr'] */
+	languages?: string[];
+	/** Locales folder name, e.g 'locales' */
+	localesFolder?: string;
 	/** Space value used for JSON.stringify when writing JSON files to disk */
 	space?: string | number;
 	/** Line endings used when writing JSON files to disk */
@@ -24,46 +26,70 @@ export interface Options {
 }
 
 export type DirectoryMap = Record<string, FileMap>;
-export type FileMap = Record<string, object>;
+export type FileMap = Record<string, Record<string, { filepath: string; content: object }>>;
 export type LineEndings = 'LF' | 'CRLF';
 type LocalizationValue = Record<string, string> | string;
 
 export default function sync({
 	check: isReportMode = false,
 	files = '**/locales/*.json',
+	localesFolder = 'locales',
 	primary: primaryLanguage = 'en',
-	createResources: createFiles = [],
+	languages: otherLanguages = [],
 	space: jsonSpacing = 4,
 	lineEndings = 'LF',
 	finalNewline = false,
 	newKeysEmpty = false
 }: Options) {
 	const allFiles = glob.sync(files);
-	const directories = groupFilesByDirectory(allFiles);
+	const allLanguages = [].concat(primaryLanguage, otherLanguages);
+
+	const directories = groupFilesByDirectory(allFiles, allLanguages, localesFolder);
+
 	let targetLanguage: string;
 	let record: ActionRecorder;
 	let hasAnyErrors = false;
 	let hasAnyChanges = false;
 	let hasValueChanges = false;
-	for (const currentDirectory of Object.keys(directories)) {
-		const folder = new LocalizationFolder(directories[currentDirectory], primaryLanguage, isReportMode);
-		folder.populateFromDisk(createFiles);
-		const sourceObject = folder.getSourceObject();
 
-		if (!sourceObject) {
+	for (const currentDirectory of Object.keys(directories)) {
+		const folder = new LocalizationFolder(
+			currentDirectory,
+			directories[currentDirectory],
+			isReportMode
+		);
+
+		folder.populateFromDisk();
+		folder.generateMissingFiles(otherLanguages, primaryLanguage);
+
+		const sourceNamespaces = folder.getSourceNamespaces(primaryLanguage);
+		if (!sourceNamespaces) {
 			continue;
 		}
 
-		for (const filename of folder.getFilenames()) {
-			targetLanguage = normalizeLanguageFromFilename(filename);
-			record = new ActionRecorder(filename, isReportMode);
-			syncObjects(sourceObject, folder.getTargetObject(filename));
-			record.flushToConsole();
-			hasValueChanges = hasValueChanges || record.hasAnyActions();
-			hasAnyErrors = hasAnyErrors || record.hasAnyErrors();
+		for (const language of otherLanguages) {
+			targetLanguage = normalizeLanguage(language);
+
+			Object.keys(sourceNamespaces).forEach(sourceNamespace => {
+				const sourceFile = sourceNamespaces[sourceNamespace];
+				const otherLanguageNamespace = folder.getSourceNamespaces(language);
+				const otherLanguageFile = otherLanguageNamespace[sourceNamespace];
+
+				record = new ActionRecorder(otherLanguageFile.filepath, isReportMode);
+
+				syncObjects(sourceFile.content, otherLanguageFile.content);
+
+				record.flushToConsole();
+				hasValueChanges = hasValueChanges || record.hasAnyActions();
+				hasAnyErrors = hasAnyErrors || record.hasAnyErrors();
+			});
 		}
 
-		const changedFiles = folder.flushToDisk(jsonSpacing, lineEndings.toUpperCase() as LineEndings, finalNewline);
+		const changedFiles = folder.flushToDisk(
+			jsonSpacing,
+			lineEndings.toUpperCase() as LineEndings,
+			finalNewline
+		);
 		hasAnyChanges = hasAnyChanges || changedFiles.length > 0;
 	}
 
@@ -73,25 +99,19 @@ export default function sync({
 
 	if (isReportMode) {
 		if (hasValueChanges) {
-			throw new Error('[i18next-json-sync] check failed -- keys are out of sync. Run again without check mode to synchronize files');
+			throw new Error(
+				'[i18next-json-sync] check failed -- keys are out of sync. Run again without check mode to synchronize files'
+			);
 		}
 		if (hasAnyChanges) {
-			throw new Error('[i18next-json-sync] check failed -- files have unordered keys or unexpected whitespace. Run again without check mode to correct files');
+			throw new Error(
+				'[i18next-json-sync] check failed -- files have unordered keys or unexpected whitespace. Run again without check mode to correct files'
+			);
 		}
 	}
 
-	function groupFilesByDirectory(allFiles: string[]) {
-		const directories: DirectoryMap = {};
-		for (const filename of allFiles) {
-			const directory = path.dirname(filename);
-			directories[directory] = directories[directory] || {};
-			directories[directory][filename] = null;
-		}
-		return directories;
-	}
-
-	function normalizeLanguageFromFilename(filename: string) {
-		return path.basename(filename, '.json').replace(/-/g, '_').toLowerCase();
+	function normalizeLanguage(language: string) {
+		return language.replace(/-/g, '_').toLowerCase();
 	}
 
 	function syncObjects(source: Object, target: Object) {
@@ -100,10 +120,14 @@ export default function sync({
 		for (const key of Object.keys(target)) {
 			if (source.hasOwnProperty(key) && target.hasOwnProperty(key)) {
 				// we should remove book_plural, book_1, etc if the language doesn't support singular forms
-				if (typeof target[key] === 'string' && keyIsOnlyPluralForPrimary(key, Object.keys(source), Object.keys(target))) {
+				if (
+					typeof target[key] === 'string' &&
+					keyIsOnlyPluralForPrimary(key, Object.keys(source), Object.keys(target))
+				) {
 					removeKey(source, target, key);
 				}
-			} else if (!isValidMappedPluralForm(key, source, target)) { // don't remove valid mappings from book_plural to book_0
+			} else if (!isValidMappedPluralForm(key, source, target)) {
+				// don't remove valid mappings from book_plural to book_0
 				removeKey(source, target, key);
 			}
 		}
@@ -178,7 +202,11 @@ export default function sync({
 		}
 	}
 
-	function keyIsOnlyPluralForPrimary(key: string, allPimaryKeys: string[], allTargetKeys: string[]) {
+	function keyIsOnlyPluralForPrimary(
+		key: string,
+		allPrimaryKeys: string[],
+		allTargetKeys: string[]
+	) {
 		if (pluralFormsMatch()) {
 			return false;
 		}
@@ -188,7 +216,7 @@ export default function sync({
 		}
 
 		return (
-			keyMatchesPluralForLanguageIncludingSingular(key, allPimaryKeys, primaryLanguage) &&
+			keyMatchesPluralForLanguageIncludingSingular(key, allPrimaryKeys, primaryLanguage) &&
 			!keyMatchesPluralForLanguageIncludingSingular(key, allTargetKeys, targetLanguage)
 		);
 	}
@@ -202,7 +230,11 @@ export default function sync({
 		);
 	}
 
-	function keyMatchesPluralForLanguageIncludingSingular(key: string, allKeys: string[], language: string) {
+	function keyMatchesPluralForLanguageIncludingSingular(
+		key: string,
+		allKeys: string[],
+		language: string
+	) {
 		/**
 		 * It's impossible to tell whether a key is a plural for a language with one form shared between singular and plurals.
 		 * With other languages we can look for relationships between e.g. value and value_plural or value and value_0.
@@ -245,13 +277,17 @@ export default function sync({
 
 	function isValidMappedPluralForm(key: string, sourceObject: Object, targetObject: Object) {
 		const singular = getSingularForm(key);
-		const isPluralForPrimaryLanguage = Object.keys(sourceObject).some(key => isPluralFormForSingular(key, singular, primaryLanguage));
+		const isPluralForPrimaryLanguage = Object.keys(sourceObject).some(key =>
+			isPluralFormForSingular(key, singular, primaryLanguage)
+		);
 
 		if (languageOnlyHasOneForm(targetLanguage)) {
 			return singular === key && isPluralForPrimaryLanguage;
 		}
 
-		const isPluralForTargetLanguage = Object.keys(targetObject).some(key => isPluralFormForSingular(key, singular, targetLanguage));
+		const isPluralForTargetLanguage = Object.keys(targetObject).some(key =>
+			isPluralFormForSingular(key, singular, targetLanguage)
+		);
 		return isPluralForPrimaryLanguage && isPluralForTargetLanguage;
 	}
 
@@ -260,15 +296,19 @@ export default function sync({
 	}
 
 	function isPluralFormForSingular(key: string, singular: string, language: string) {
-		return getPluralsForLanguage(language)
-			.map(form => form.replace('key', singular))
-			.indexOf(key) > -1;
+		return (
+			getPluralsForLanguage(language)
+				.map(form => form.replace('key', singular))
+				.indexOf(key) > -1
+		);
 	}
 
 	function languageHasSingularForm(language: string) {
-		return getPluralsForLanguage(language)
-			.map(form => form.replace('key', ''))
-			.indexOf('') > -1;
+		return (
+			getPluralsForLanguage(language)
+				.map(form => form.replace('key', ''))
+				.indexOf('') > -1
+		);
 	}
 
 	function languageOnlyHasOneForm(language: string) {

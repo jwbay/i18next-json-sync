@@ -1,5 +1,5 @@
 import { Options } from '../../src';
 const options: Options = {
-	createResources: ['fr', 'es', 'pt-BR']
+	languages: ['fr', 'es', 'pt-BR']
 };
 export = options;

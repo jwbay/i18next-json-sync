@@ -3,7 +3,17 @@
 import * as yargs from 'yargs';
 import sync from './';
 
-const { check, files, primary, languages, space, lineendings, finalnewline, newkeysempty } = yargs
+const {
+	check,
+	files,
+	primary,
+	languages,
+	space,
+	lineendings,
+	finalnewline,
+	newkeysempty,
+	localesFolder
+} = yargs
 	.describe(
 		'check',
 		'Audit files in memory instead of changing them on the filesystem and throw an error if any changes would be made'
@@ -15,6 +25,10 @@ const { check, files, primary, languages, space, lineendings, finalnewline, newk
 	.example('--files', `'**/locales/*.json'`)
 	.alias('files', 'f')
 	.string('files')
+
+	.describe('localesFolder', 'Locale folder name which by it translations will be grouped')
+	.alias('localesFolder', 'lf')
+	.string('localesFolder')
 
 	.describe(
 		'primary',
@@ -30,7 +44,7 @@ const { check, files, primary, languages, space, lineendings, finalnewline, newk
 
 	.describe('space', 'Space value used for JSON.stringify when writing JSON files to disk')
 	.alias('space', 's')
-	.number('space')
+	.string('space')
 
 	.describe('lineendings', 'Line endings used when writing JSON files to disk -- either LF or CRLF')
 	.alias('lineendings', 'le')
@@ -51,9 +65,10 @@ sync({
 	check,
 	files,
 	primary,
-	createResources: languages as string[],
+	languages: languages as string[],
 	space,
 	lineEndings: lineendings as any,
 	finalNewline: finalnewline,
-	newKeysEmpty: newkeysempty
+	newKeysEmpty: newkeysempty,
+	localesFolder
 });

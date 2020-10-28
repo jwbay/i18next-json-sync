@@ -11,11 +11,12 @@ sh.config.silent = true;
 sh.pushd(__dirname);
 
 let options: Options = {
-	files: 'actual/**/locales/*.json'
+	files: 'actual/**/locales/*.json',
+	languages: ['pt-BR']
 };
 try {
 	options = Object.assign(options, require('./options'));
-} catch (e) { }
+} catch (e) {}
 
 withCapturedConsole('log', 'stdout.txt', () => {
 	withCapturedConsole('error', 'stderr.txt', () => {
@@ -46,7 +47,7 @@ sh.popd();
 function withCapturedConsole(type: string, outFile: string, action: Function) {
 	let captured = '';
 	const original = console[type];
-	console[type] = (...args: any[]) => captured += util.format.apply(null, args) + '\n';
+	console[type] = (...args: any[]) => (captured += util.format.apply(null, args) + '\n');
 	action();
 	console[type] = original;
 	fs.writeFileSync(`actual/${outFile}`, captured, { encoding: 'utf8' });
@@ -58,12 +59,10 @@ function buildFlatFileMapForDirectory(pattern: string) {
 		const name = filename.slice(filename.indexOf('/') + 1);
 
 		if (path.extname(filename) === '.json') {
-			contents = contents
-				.replace(/"/g, '')
-				.replace(/\r\n/g, '\n');
+			contents = contents.replace(/"/g, '').replace(/\r\n/g, '\n');
 		}
 
 		fileMap[name] = contents;
 		return fileMap;
-	}, {} as { [filename: string]: string; });
+	}, {} as { [filename: string]: string });
 }

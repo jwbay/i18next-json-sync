@@ -1,6 +1,7 @@
 import { Options } from '../../src';
 const options: Options = {
 	primary: 'en',
-	newKeysEmpty: true
+	newKeysEmpty: true,
+	languages: ['de']
 };
 export = options;

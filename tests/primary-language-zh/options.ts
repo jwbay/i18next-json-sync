@@ -1,6 +1,6 @@
 import { Options } from '../../src';
 const options: Options = {
 	primary: 'zh',
-	createResources: ['pt-BR']
+	languages: ['en', 'ru', 'pt-BR']
 };
 export = options;

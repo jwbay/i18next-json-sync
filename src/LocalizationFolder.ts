@@ -1,94 +1,88 @@
 import * as crypto from 'crypto';
-import * as fs from 'fs';
+import * as fs from 'fs-extra';
 import * as path from 'path';
 import { FileMap, LineEndings } from './';
+
 const stringify = require('json-stable-stringify');
 
 export default class LocalizationFolder {
-	private hashes: Record<string, string> = {};
+	private readonly hashes: Record<string, string> = {};
 
-	constructor(
-		private files: FileMap,
-		private primaryLanguage: string,
-		private isReportMode: boolean
-	) {
+	constructor(private baseDir: string, private files: FileMap, private isReportMode: boolean) {
 		this.hashes = {};
 	}
 
-	public populateFromDisk(filesToCreate: string[]) {
-		const filesReadFromDisk = Object.keys(this.files).map(name => {
-			const fileContent = fs.readFileSync(name, 'utf8');
-			this.files[name] = JSON.parse(fileContent);
-			this.hashes[name] = crypto.createHash('md5').update(fileContent).digest('hex');
-			return path.basename(name, '.json');
+	public populateFromDisk() {
+		Object.values(this.files).forEach(langValue => {
+			Object.values(langValue).forEach(file => {
+				const fileContent = fs.readFileSync(file.filepath, 'utf8');
+				file.content = JSON.parse(fileContent);
+				this.hashes[file.filepath] = crypto.createHash('md5').update(fileContent).digest('hex');
+			});
 		});
-		const dirname = path.dirname(Object.keys(this.files)[0]);
-		this.registerMissingFiles(filesToCreate, filesReadFromDisk, dirname);
 	}
 
-	private registerMissingFiles(shouldExist: string[], doExist: string[], dirname: string) {
-		for (const file of shouldExist) {
-			if (doExist.indexOf(file) > -1) {
-				continue;
-			}
+	public generateMissingFiles(otherLanguages: string[], primaryLanguage: string) {
+		const primaryNamespaces = this.files[primaryLanguage];
 
-			const filename = path.join(dirname, file + '.json').split(path.sep).join('/');
-			this.files[filename] = {};
-			this.hashes[filename] = '';
-		}
+		Object.entries(primaryNamespaces).forEach(([namespace, filesMap]) => {
+			otherLanguages.forEach(otherLanguage => {
+				if (!this.files[otherLanguage]) {
+					this.files[otherLanguage] = {};
+				}
+
+				if (!this.files[otherLanguage][namespace]) {
+					const filepath = path.join(this.baseDir, otherLanguage.concat(namespace, '.json'));
+					this.files[otherLanguage][namespace] = { filepath, content: {} };
+					this.hashes[filepath] = '';
+				}
+			});
+		});
 	}
 
-	public flushToDisk(jsonSpacing: string | number, lineEnding: LineEndings, addFinalNewline: boolean) {
+	public flushToDisk(
+		jsonSpacing: string | number,
+		lineEnding: LineEndings,
+		addFinalNewline: boolean
+	) {
 		const changedFiles: string[] = [];
 
-		Object.keys(this.files).forEach(name => {
-			let fileContent = stringify(this.files[name], { space: jsonSpacing });
-			if (lineEnding === 'CRLF') {
-				fileContent = fileContent.replace(/\n/g, '\r\n');
-			}
-
-			if (addFinalNewline) {
-				switch (lineEnding) {
-					case 'LF':
-						fileContent += '\n';
-						break;
-					case 'CRLF':
-						fileContent += '\r\n';
-						break;
+		Object.values(this.files).forEach(namespaces => {
+			Object.values(namespaces).forEach(file => {
+				let fileContent = stringify(file.content, { space: jsonSpacing });
+				if (lineEnding === 'CRLF') {
+					fileContent = fileContent.replace(/\n/g, '\r\n');
 				}
-			}
 
-			const hash = crypto.createHash('md5').update(fileContent).digest('hex');
-			if (this.hashes[name] !== hash) {
-				changedFiles.push(name);
-			}
+				if (addFinalNewline) {
+					switch (lineEnding) {
+						case 'LF':
+							fileContent += '\n';
+							break;
+						case 'CRLF':
+							fileContent += '\r\n';
+							break;
+					}
+				}
 
-			if (!this.isReportMode) {
-				fs.writeFileSync(name, fileContent, { encoding: 'utf8' });
-			}
+				const hash = crypto.createHash('md5').update(fileContent).digest('hex');
+				if (this.hashes[file.filepath] !== hash) {
+					changedFiles.push(file.filepath);
+				}
 
-			this.hashes[name] = null;
-			this.files[name] = null;
+				if (!this.isReportMode) {
+					fs.outputFileSync(file.filepath, fileContent, { encoding: 'utf8' });
+				}
+
+				this.hashes[file.filepath] = null;
+				file.content = null;
+			});
 		});
 
 		return changedFiles;
 	}
 
-	public getSourceObject() {
-		let source: Object;
-		Object.keys(this.files).forEach(name => {
-			if (path.basename(name, '.json') === this.primaryLanguage) {
-				source = this.files[name];
-			}
-		});
-		return source;
-	}
-
-	public getTargetObject(name: string) {
-		return this.files[name];
-	}
-
-	public getFilenames() {
-		return Object.keys(this.files);
+	public getSourceNamespaces(lang: string) {
+		return this.files[lang];
 	}
 }
