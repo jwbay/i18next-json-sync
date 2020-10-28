@@ -104,8 +104,10 @@ sync({
   files: '**/locales/*.json',
   /** Primary localization language. Other language files will be changed to match */
   primary: 'en',
-  /** Language files to create if they don't exist, e.g. ['es, 'pt-BR', 'fr'] */
-  createResources: [],
+  /** Other languages that should be synced, if they don't exist they will be created, e.g. ['es, 'pt-BR', 'fr'] */
+  languages: [],
+  /** Locales folder name, e.g 'locales' */
+  localesFolder: 'locales',
   /** Space value used for JSON.stringify when writing JSON files to disk */
   space: 4,
   /** Line endings used when writing JSON files to disk. Either LF or CRLF */

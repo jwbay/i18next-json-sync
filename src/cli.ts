@@ -37,7 +37,10 @@ const {
 	.alias('primary', 'p')
 	.string('primary')
 
-	.describe('languages', `Language files to create if they don't exist`)
+	.describe(
+		'languages',
+		`Other languages that should be synced, if they don't exist they will be created`
+	)
 	.example('--languages', 'es fr pt-BR ja')
 	.alias('languages', 'l')
 	.array('languages')
