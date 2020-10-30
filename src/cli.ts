@@ -47,7 +47,6 @@ const {
 
 	.describe('space', 'Space value used for JSON.stringify when writing JSON files to disk')
 	.alias('space', 's')
-	.string('space')
 
 	.describe('lineendings', 'Line endings used when writing JSON files to disk -- either LF or CRLF')
 	.alias('lineendings', 'le')
@@ -69,7 +68,7 @@ sync({
 	files,
 	primary,
 	languages: languages as string[],
-	space,
+	space: space as any,
 	lineEndings: lineendings as any,
 	finalNewline: finalnewline,
 	newKeysEmpty: newkeysempty,
