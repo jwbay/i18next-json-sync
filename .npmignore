@@ -1,9 +1,12 @@
 .vscode/
+.github/
 coverage/
 src/
 testRunner/
 tests/
 typings/
+babel.config.js
 jest.json
 tslint.json
-typings.json
+jest.*.js
+release.config.j
