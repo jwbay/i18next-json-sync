@@ -101,6 +101,8 @@ sync({
   check: false,
   /** Glob pattern for the resource JSON files */
   files: '**/locales/*.json',
+  /** An array of glob patterns to exclude from the files search */
+  excludeFiles: ['**/node_modules/**'],
   /** Primary localization language. Other language files will be changed to match */
   primary: 'en',
   /** Language files to create if they don't exist, e.g. ['es, 'pt-BR', 'fr'] */
