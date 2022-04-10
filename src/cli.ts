@@ -13,8 +13,8 @@ const {
 	finalnewline,
 	newkeysempty
 } = yargs
-	.describe('c','Audit files in memory instead of changing them on the filesystem and throw an error if any changes would be made')
-	.alias('c','check')
+	.describe('c', 'Audit files in memory instead of changing them on the filesystem and throw an error if any changes would be made')
+	.alias('c', 'check')
 	.boolean('c')
 
 	.describe('f', 'Glob pattern for the resource JSON files')
@@ -46,7 +46,7 @@ const {
 	.help('h')
 	.alias('h', 'help')
 
-	.argv;
+		.argv;
 
 sync({
 	check,

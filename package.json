@@ -9,8 +9,7 @@
   },
   "scripts": {
     "build": "rimraf dist && tsc -p src && tsc -p testRunner --noEmit",
-    "ci": "npm run lint && npm run test",
-    "coverage": "rimraf coverage && jest --config jest.coverage.json",
+    "coverage": "rimraf coverage && yarn test --coverage",
     "lint": "tslint src/**/*.ts testRunner/**/*.ts",
     "pretest": "rimraf tests/**/runner.js && ts-node -P testRunner/tsconfig.json testRunner/init",
     "test": "jest"
