@@ -9,6 +9,8 @@ export interface Options {
 	check?: boolean;
 	/** Glob pattern for the resource JSON files */
 	files?: string;
+	/** An array of glob patterns to exclude from the files search. Defaults to node_modules */
+	excludeFiles?: string[];
 	/** Primary localization language. Other language files will be changed to match */
 	primary?: string;
 	/** Language files to create if they don't exist, e.g. ['es, 'pt-BR', 'fr'] */
@@ -31,6 +33,7 @@ type LocalizationValue = Record<string, string> | string;
 export default function sync({
 	check: isReportMode = false,
 	files = '**/locales/*.json',
+	excludeFiles = ['**/node_modules/**'],
 	primary: primaryLanguage = 'en',
 	createResources: createFiles = [],
 	space: jsonSpacing = 4,
@@ -38,7 +41,7 @@ export default function sync({
 	finalNewline = false,
 	newKeysEmpty = false
 }: Options) {
-	const allFiles = glob.sync(files);
+	const allFiles = glob.sync(files, { ignore: excludeFiles });
 	const directories = groupFilesByDirectory(allFiles);
 	let targetLanguage: string;
 	let record: ActionRecorder;

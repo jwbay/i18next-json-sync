@@ -8,7 +8,7 @@ beforeEach(() => {
 });
 
 test('kitchen sink', () => {
-	callWithFlags(`--check --files '**/locales/*.json' --primary en --languages es fr pt-BR ja --space \t --lineendings LF --finalnewline --newkeysempty`);
+	callWithFlags(`--check --files '**/locales/*.json' --excludefiles '**/pattern1' 'other/*/pattern' --primary en --languages es fr pt-BR ja --space \t --lineendings LF --finalnewline --newkeysempty`);
 	expect(getParams()).toMatchInlineSnapshot(`
 Object {
   "check": true,
@@ -17,6 +17,10 @@ Object {
     "fr",
     "pt-BR",
     "ja",
+  ],
+  "excludeFiles": Array [
+    "'**/pattern1'",
+    "'other/*/pattern'",
   ],
   "files": "'**/locales/*.json'",
   "finalNewline": true,
@@ -29,7 +33,7 @@ Object {
 });
 
 test('kitchen sink shorthand aliases', () => {
-	callWithFlags(`-c --files '**/locales/*.json' -p en -l es fr pt-BR ja -s \t --le LF --fn -e`);
+	callWithFlags(`-c -f '**/locales/*.json' --ef '**/pattern1' 'other/*/pattern' -p en -l es fr pt-BR ja -s \t --le LF --fn -e`);
 	expect(getParams()).toMatchInlineSnapshot(`
 Object {
   "check": true,
@@ -38,6 +42,10 @@ Object {
     "fr",
     "pt-BR",
     "ja",
+  ],
+  "excludeFiles": Array [
+    "'**/pattern1'",
+    "'other/*/pattern'",
   ],
   "files": "'**/locales/*.json'",
   "finalNewline": true,
@@ -55,6 +63,9 @@ test('no flags passed', () => {
 Object {
   "check": false,
   "createResources": undefined,
+  "excludeFiles": Array [
+    "**/node_modules/**",
+  ],
   "files": undefined,
   "finalNewline": false,
   "lineEndings": undefined,
@@ -68,6 +79,11 @@ Object {
 test('single language', () => {
 	callWithFlags('--languages fr');
 	expect(getParams('createResources')).toEqual(['fr']);
+});
+
+test('single files exclusion', () => {
+	callWithFlags('--excludefiles "my/**/pattern"');
+	expect(getParams('excludeFiles')).toEqual(['"my/**/pattern"']);
 });
 
 test('glob pattern double quotes', () => {

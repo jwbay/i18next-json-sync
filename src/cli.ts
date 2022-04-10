@@ -15,6 +15,12 @@ const params = yargs
 			alias: 'f',
 			description: 'Glob pattern for the resource JSON files'
 		},
+		excludefiles: {
+			type: 'array',
+			alias: 'ef',
+			description: 'array of glob patterns to exclude from the files search. Defaults to node_modules',
+			default: ['**/node_modules/**']
+		},
 		primary: {
 			type: 'string',
 			alias: 'p',
@@ -54,6 +60,7 @@ const params = yargs
 sync({
 	check: Boolean(params.check),
 	files: params.files,
+	excludeFiles: params.excludefiles,
 	primary: params.primary,
 	createResources: params.languages as string[],
 	space: params.space,
