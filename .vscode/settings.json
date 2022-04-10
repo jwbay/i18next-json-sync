@@ -9,8 +9,6 @@
         "**/.svn": true,
         "**/.hg": true,
         "**/.DS_Store": true,
-        "tests/**/actual": true,
-        "tests/**/testRunner.js": true
     },
     "typescript.tsdk": "node_modules/typescript/lib"
 }

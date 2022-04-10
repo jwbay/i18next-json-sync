@@ -1,0 +1,42 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`glob-excludes:locales/de.json 1`] = `
+"{
+    add: {
+        should add: value
+    }
+}"
+`;
+
+exports[`glob-excludes:locales/en.json 1`] = `
+"{
+    add: {
+        should add: value
+    }
+}"
+`;
+
+exports[`glob-excludes:other_folder/locales/de.json 1`] = `
+"{
+    add: {
+        should ignore: value
+    }
+}"
+`;
+
+exports[`glob-excludes:other_folder/locales/en.json 1`] = `
+"{
+    add: {
+        should ignore: value
+    }
+}"
+`;
+
+exports[`glob-excludes:stderr.txt 1`] = `""`;
+
+exports[`glob-excludes:stdout.txt 1`] = `
+"Pushed keys to actual/locales/de.json: should add
+Pushed keys to actual/other_folder/locales/de.json: should ignore
+Removed keys from actual/other_folder/locales/de.json: ignored
+"
+`;
