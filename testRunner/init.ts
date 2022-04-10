@@ -1,11 +1,12 @@
-import fs = require('fs');
-import path = require('path');
-import sh = require('shelljs');
-const { process: compile } = require('./preprocessor');
+import * as fs from 'fs';
+import * as path from 'path';
+import * as sh from 'shelljs';
+import * as ts from 'typescript';
 
 const runnerPath = path.join(__dirname, 'runner.ts');
 const runnerSource = fs.readFileSync(runnerPath, 'utf8');
-const runnerJS = compile(runnerSource, runnerPath);
+const { compilerOptions } = require('./tsconfig.json');
+const runnerJS = ts.transpileModule(runnerSource, { compilerOptions }).outputText;
 
 sh.config.silent = true;
 sh.pushd('./tests');

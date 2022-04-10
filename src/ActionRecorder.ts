@@ -2,11 +2,16 @@ export default class ActionRecorder {
 	private errors: string[] = [];
 	private addedKeys: string[] = [];
 	private removedKeys: string[] = [];
+	private fileName: string;
+	private isReportMode: boolean;
 
 	constructor(
-		private fileName: string,
-		private isReportMode: boolean
-	) { }
+		fileName: string,
+		isReportMode: boolean
+	) {
+		this.fileName = fileName;
+		this.isReportMode = isReportMode;
+	}
 
 	public keyAdded(key: string) {
 		this.addedKeys.push(key);

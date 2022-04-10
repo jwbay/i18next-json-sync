@@ -8,6 +8,7 @@
         "module": "commonjs",
         "noEmitOnError": true,
         "pretty": true,
+        "skipLibCheck": true,
         "target": "es5"
     }
 }

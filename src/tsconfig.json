@@ -19,6 +19,7 @@
         "pretty": true,
         "sourceMap": true,
         "suppressImplicitAnyIndexErrors": true,
+        "skipLibCheck": true,
         "target": "es5"
     },
     "include": [

@@ -6,12 +6,18 @@ const stringify = require('json-stable-stringify');
 
 export default class LocalizationFolder {
 	private hashes: Record<string, string> = {};
+	private files: FileMap;
+	private primaryLanguage: string;
+	private isReportMode: boolean;
 
 	constructor(
-		private files: FileMap,
-		private primaryLanguage: string,
-		private isReportMode: boolean
+		files: FileMap,
+		primaryLanguage: string,
+		isReportMode: boolean
 	) {
+		this.files = files;
+		this.primaryLanguage = primaryLanguage;
+		this.isReportMode = isReportMode;
 		this.hashes = {};
 	}
 

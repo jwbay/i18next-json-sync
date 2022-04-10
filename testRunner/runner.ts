@@ -14,7 +14,7 @@ let options: Options = {
 	files: 'actual/**/locales/*.json'
 };
 try {
-	options = Object.assign(options, require('./options'));
+	options = Object.assign(options, require('./options').default);
 } catch (e) { }
 
 withCapturedConsole('log', 'stdout.txt', () => {

@@ -3,4 +3,4 @@ const options: IOptions = {
 	primary: 'en',
 	newKeysEmpty: true
 };
-export = options;
+export default options;

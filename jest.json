@@ -1,9 +1,0 @@
-{
-    "moduleFileExtensions": ["js", "json", "ts"],
-    "testEnvironment": "node",
-    "roots": ["tests"],
-    "testRegex": "runner.js$",
-    "transform": {
-        ".ts": "<rootDir>/testRunner/preprocessor.js"
-    }
-}

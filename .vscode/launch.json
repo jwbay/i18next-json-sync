@@ -10,11 +10,8 @@
 			"args": [
 				"-i",
 				"--no-cache",
-				"--config",
-				"jest.json"
 			],
 			"cwd": "${workspaceRoot}",
-			"preLaunchTask": "pretest",
 			"env": {
 				"NODE_ENV": "debug",
 			},

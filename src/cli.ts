@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
+import * as yargs from 'yargs';
 import sync from './';
-import yargs = require('yargs');
 
 const {
 	check,

@@ -3,4 +3,4 @@ const options: IOptions = {
 	primary: 'zh',
 	createResources: ['pt-BR']
 };
-export = options;
+export default options;
