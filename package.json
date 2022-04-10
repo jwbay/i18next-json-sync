@@ -50,6 +50,7 @@
     "jest": "^19.0.2",
     "remap-istanbul": "^0.7.0",
     "rimraf": "^2.5.4",
+    "semantic-release": "18.0.0",
     "shelljs": "^0.7.5",
     "ts-node": "^7.0.1",
     "tslint": "^5.11.0",
