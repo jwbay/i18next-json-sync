@@ -1,0 +1,51 @@
+name: CI
+
+on: [push]
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+
+        strategy:
+            matrix:
+                node-version: [12.x, 14.x, 16.x]
+
+        steps:
+            - uses: actions/checkout@v2
+            - name: Use Node.js ${{ matrix.node-version }}
+              uses: actions/setup-node@v1
+              with:
+                  node-version: ${{ matrix.node-version }}
+            - name: Install dependencies
+              run: yarn install --frozen-lockfile
+            - name: Build
+              run: yarn build
+            - name: Lint
+              run: yarn lint
+            - name: Test
+              run: yarn coverage
+
+#    release:
+#        name: Release
+#        if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+#        needs: [build]
+#        runs-on: ubuntu-latest
+#
+#        steps:
+#            - name: Checkout
+#              uses: actions/checkout@v2
+#              with:
+#                  fetch-depth: 0
+#            - name: Setup Node.js
+#              uses: actions/setup-node@v1
+#              with:
+#                  node-version: 16
+#            - name: Install dependencies
+#              run: yarn install --frozen-lockfile
+#            - name: Build
+#              run: yarn build
+#            - name: Release
+#              env:
+#                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#                  NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+#              run: yarn semantic-release

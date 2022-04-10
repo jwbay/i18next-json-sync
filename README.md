@@ -1,5 +1,4 @@
 [![Build Status](https://travis-ci.org/jwbay/i18next-json-sync.svg?branch=master)](https://travis-ci.org/jwbay/i18next-json-sync)
-[![codecov](https://codecov.io/gh/jwbay/i18next-json-sync/branch/master/graph/badge.svg)](https://codecov.io/gh/jwbay/i18next-json-sync)
 [![npm](https://img.shields.io/npm/v/i18next-json-sync.svg)](https://www.npmjs.com/package/i18next-json-sync)
 [![BADGINATOR](https://badginator.herokuapp.com/jwbay/i18next-json-sync.svg)](https://github.com/defunctzombie/badginator)
 # i18next-json-sync
