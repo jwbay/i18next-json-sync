@@ -47,8 +47,16 @@ export default class LocalizationFolder {
 	public flushToDisk(jsonSpacing: string | number, lineEnding: LineEndings, addFinalNewline: boolean) {
 		const changedFiles: string[] = [];
 
+		let space = jsonSpacing;
+		if (typeof space === 'string') {
+			const numericSpace = parseInt(space, 10);
+			if (!isNaN(numericSpace)) {
+				space = numericSpace;
+			}
+		}
+
 		Object.keys(this.files).forEach(name => {
-			let fileContent = stringify(this.files[name], { space: jsonSpacing });
+			let fileContent = stringify(this.files[name], { space });
 			if (lineEnding === 'CRLF') {
 				fileContent = fileContent.replace(/\n/g, '\r\n');
 			}
