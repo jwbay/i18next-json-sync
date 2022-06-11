@@ -1498,7 +1498,7 @@
     p-retry "^4.0.0"
     url-join "^4.0.0"
 
-"@semantic-release/npm@^9.0.0-beta.1":
+"@semantic-release/npm@^9.0.0":
   version "9.0.1"
   resolved "https://registry.yarnpkg.com/@semantic-release/npm/-/npm-9.0.1.tgz#d81828eb1fb771e2767b3a8ee989915e1af27075"
   integrity sha512-I5nVZklxBzfMFwemhRNbSrkiN/dsH3c7K9+KSk6jUnq0rdLFUuJt7EBsysq4Ir3moajQgFkfEryEHPqiKJj20g==
@@ -5320,15 +5320,15 @@ saxes@^5.0.1:
   dependencies:
     xmlchars "^2.2.0"
 
-semantic-release@19.0.0:
-  version "19.0.0"
-  resolved "https://registry.yarnpkg.com/semantic-release/-/semantic-release-19.0.0.tgz#7c91b07fa62a05c160419edad202ebd0a8fa0995"
-  integrity sha512-5wq2uWde+LoI976p80TzDM0V+UEZVzgPbi377b4rdtKhp3gsxGoeTlSKE198acdr4tco19YRH7jQ3XoADq5OQA==
+semantic-release@19.0.3:
+  version "19.0.3"
+  resolved "https://registry.yarnpkg.com/semantic-release/-/semantic-release-19.0.3.tgz#9291053ad9890052f28e7c5921d4741530d516fd"
+  integrity sha512-HaFbydST1cDKZHuFZxB8DTrBLJVK/AnDExpK0s3EqLIAAUAHUgnd+VSJCUtTYQKkAkauL8G9CucODrVCc7BuAA==
   dependencies:
     "@semantic-release/commit-analyzer" "^9.0.2"
     "@semantic-release/error" "^3.0.0"
     "@semantic-release/github" "^8.0.0"
-    "@semantic-release/npm" "^9.0.0-beta.1"
+    "@semantic-release/npm" "^9.0.0"
     "@semantic-release/release-notes-generator" "^10.0.0"
     aggregate-error "^3.0.0"
     cosmiconfig "^7.0.0"
