@@ -1,6 +1,5 @@
 [![Build Status](https://travis-ci.org/jwbay/i18next-json-sync.svg?branch=master)](https://travis-ci.org/jwbay/i18next-json-sync)
 [![npm](https://img.shields.io/npm/v/i18next-json-sync.svg)](https://www.npmjs.com/package/i18next-json-sync)
-[![BADGINATOR](https://badginator.herokuapp.com/jwbay/i18next-json-sync.svg)](https://github.com/defunctzombie/badginator)
 # i18next-json-sync
 
 Keeps [i18next](https://github.com/i18next/i18next) JSON resource files in sync against a primary
