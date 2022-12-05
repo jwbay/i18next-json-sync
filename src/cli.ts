@@ -55,6 +55,7 @@ const params = yargs
 	.example([
 		[`$0 --check --files '**/locales/*.json' --primary en --languages es fr pt-BR ja --space \t --lineendings LF --finalnewline --newkeysempty`]
 	])
+	.alias('h', 'help')
 	.parseSync();
 
 sync({
